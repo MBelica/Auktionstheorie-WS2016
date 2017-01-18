@@ -1,0 +1,1404 @@
+\documentclass[12pt]{extreport} % Schriftgröße: 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt oder 20pt
+
+% Language Setup (Deutsch)
+\usepackage[utf8]{inputenc} 
+\usepackage[ngerman]{babel}
+
+%% Packages
+\usepackage{scrextend}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage[inline]{enumitem}
+\usepackage{changes}
+\usepackage{chngcntr}
+\usepackage{cmap}
+\usepackage{color}
+\usepackage{csquotes}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{footnote}
+
+\usepackage{lmodern}
+\usepackage{makeidx}
+\usepackage{mathtools} 
+\usepackage{xpatch}
+\usepackage{pgfplots}
+\usepackage{stmaryrd}
+\usepackage{pbox}
+\usepackage{apptools}
+\usepackage{booktabs}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage{mathrsfs}
+\usepackage[square,numbers]{natbib}
+\usepackage{nicefrac}
+\usepackage{pgf}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{tocloft}
+\usepackage{url}
+\usepackage{xpatch}
+\usepackage{microtype}
+\usepackage{pgfplots}
+\usepackage{minibox}
+\usepackage{xcolor}
+\usepackage{sgame} % Game theory packages
+\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
+
+\makesavenoteenv{tabular}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{patterns}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{calc, intersections}
+\usetikzlibrary{trees, calc} % For extensive form games
+\pgfplotsset{compat=1.7}
+\usetikzlibrary{calc}	
+\usetikzlibrary{matrix}	
+
+
+
+% Options
+\makeatletter%%  
+  % Linkfarbe, {0,0.35,0.35} für Türkis, {0,0,0} für Schwarz 
+  \definecolor{linkcolor}{rgb}{0,0.35,0.35}
+  % Zeilenabstand für bessere Leserlichkeit
+  \def\mystretch{1.5} 
+  % Publisher definieren
+  \newcommand\publishers[1]{\newcommand\@publishers{#1}} 
+  % Enumerate im 1. Level: \alph für a), b), ...
+  \renewcommand{\labelenumi}{\alph{enumi})} 
+  % Enumerate im 2. Level: \roman für (i), (ii), ...
+  \renewcommand{\labelenumii}{(\roman{enumii})}
+  % Zeileneinrückung am Anfang des Absatzes
+  \setlength{\parindent}{0pt} 
+  % Verweise auf Enumerate, z.B.: 3.2 a)
+  \setlist[enumerate,1]{ref={\thesatz ~ \alph*)}}
+  % Für das Proof-Environment: 'Beweis:' anstatt 'Beweis.'
+  \xpatchcmd{\proof}{\@addpunct{.}}{\@addpunct{:}}{}{} 
+  % Nummerierung der Bilder, z.B.: Abbildung 4.1
+  \@ifundefined{thechapter}{}{\def\thefigure{\thechapter.\arabic{figure}}} 
+\makeatother%
+
+% Meta Setup (Für Titelblatt und Metadaten im PDF)
+\title{Auktionstheorie}
+\author{Prof. Dr. Karl-Martin Ehrhart}
+\date{(inoffizielles Skript) ~\vspace{0.2cm} \\ Wintersemester 2016/17}
+\publishers{Karlsruher Institut für Technologie}
+
+%% Math. Definitions
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+
+%% Theorems (unnamedtheorem = Theorem ohne Namen)
+\newtheoremstyle{named}{}{}{\normalfont}{}{\bfseries}{:}{0.25em}{#2 \thmnote{#3}}
+\newtheoremstyle{itshape}{}{}{\itshape}{}{\bfseries}{:}{ }{}
+\newtheoremstyle{normal}{}{}{\normalfont}{}{\bfseries}{:}{ }{}
+\renewcommand*{\qed}{\hfill\ensuremath{\square}}
+
+\theoremstyle{named}
+\newtheorem{unnamedtheorem}{Theorem} \counterwithin{unnamedtheorem}{chapter}
+\newtheorem*{unnamedtheorem*}{Theorem} 
+
+\theoremstyle{itshape}
+\newtheorem{satz}[unnamedtheorem]{Satz}	
+\newtheorem*{definition}{Definition}
+
+\theoremstyle{normal}
+\newtheorem{beispiel}[unnamedtheorem]{Beispiel}
+\newtheorem{folgerung}[unnamedtheorem]{Folgerung}
+\newtheorem{hilfssatz}[unnamedtheorem]{Hilfssatz}
+\newtheorem{anwendung}[unnamedtheorem]{Anwendung}
+\newtheorem{anwendungen}[unnamedtheorem]{Anwendungen}
+\newtheorem*{beispiel*}{Beispiel}
+\newtheorem*{beispiele}{Beispiele}
+\newtheorem*{bemerkung}{Bemerkung} 
+\newtheorem*{bemerkungen}{Bemerkungen}
+\newtheorem*{bezeichnung}{Bezeichnung}
+\newtheorem*{eigenschaften}{Eigenschaften}
+\newtheorem*{erinnerung}{Erinnerung}
+\newtheorem*{folgerung*}{Folgerung}
+\newtheorem*{folgerungen}{Folgerungen}
+\newtheorem*{hilfssatz*}{Hilfssatz}
+\newtheorem*{regeln}{Regeln}
+\newtheorem*{schreibweise}{Schreibweise}
+\newtheorem*{schreibweisen}{Schreibweisen}
+\newtheorem*{uebung}{Übung}
+\newtheorem*{vereinbarung}{Vereinbarung}
+
+%% Template
+\makeatletter%
+\DeclareUnicodeCharacter{00A0}{ } \pgfplotsset{compat=1.7} \hypersetup{colorlinks,breaklinks, urlcolor=linkcolor, linkcolor=linkcolor, pdftitle=\@title, pdfauthor=\@author, pdfsubject=\@title, pdfcreator=\@publishers}\DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}} \ProcessOptions \def\baselinestretch{\mystretch} \setlength{\oddsidemargin}{0.125in} \setlength{\evensidemargin}{0.125in} \setlength{\topmargin}{0.5in} \setlength{\textwidth}{6.25in} \setlength{\textheight}{8in} \addtolength{\topmargin}{-\headheight} \addtolength{\topmargin}{-\headsep} \def\pulldownheader{ \addtolength{\topmargin}{\headheight} \addtolength{\topmargin}{\headsep} \addtolength{\textheight}{-\headheight} \addtolength{\textheight}{-\headsep} } \def\pullupfooter{ \addtolength{\textheight}{-\footskip} } \def\ps@headings{\let\@mkboth\markboth \def\@oddfoot{} \def\@evenfoot{} \def\@oddhead{\hbox {}\sl \rightmark \hfil \rm\thepage} \def\chaptermark##1{\markright {\uppercase{\ifnum \c@secnumdepth >\m@ne \@chapapp\ \thechapter. \ \fi ##1}}} \pulldownheader } \def\ps@myheadings{\let\@mkboth\@gobbletwo \def\@oddfoot{} \def\@evenfoot{} \def\sectionmark##1{} \def\subsectionmark##1{}  \def\@evenhead{\rm \thepage\hfil\sl\leftmark\hbox {}} \def\@oddhead{\hbox{}\sl\rightmark \hfil \rm\thepage} \pulldownheader }	\def\chapter{\cleardoublepage  \thispagestyle{plain} \global\@topnum\z@ \@afterindentfalse \secdef\@chapter\@schapter} \def\@makeschapterhead#1{ {\parindent \z@ \raggedright \normalfont \interlinepenalty\@M \Huge \bfseries  #1\par\nobreak \vskip 40\p@ }} \newcommand{\indexsection}{chapter} \patchcmd{\@makechapterhead}{\vspace*{50\p@}}{}{}{}
+	% Titlepage
+	\def\maketitle{ \begin{titlepage} 
+			~\vspace{3cm} 
+		\begin{center} {\Huge \@title} \end{center} 
+	 		\vspace*{1cm} 
+	 	\begin{center} {\large \@author} \end{center} 
+	 	\begin{center} \@date \end{center} 
+	 		\vspace*{7cm} 
+	 	\begin{center} \@publishers \end{center} 
+	 		\vfill 
+	\end{titlepage} }
+\makeatother%
+
+% Indexdatei erstellen
+\makeindex 
+
+\begin{document}
+
+\pagenumbering{Alph}
+\begin{titlepage}
+	\maketitle
+	\thispagestyle{empty}
+\end{titlepage}
+\pagenumbering{arabic}
+	
+% Inhaltsverzeichnis
+\tableofcontents
+\thispagestyle{empty} 
+  
+% Skript - Anfang 
+\chapter{Grundlagen}
+
+Der Begriff \enquote{Auktion} kommt vermutlich vom lat. augere $\hat=$ vergrößern/vermehren
+
+\index{Auktion!Definition} 
+\begin{definition}
+	Eine Auktion ist ein \textbf{Marktmechanismus} (Marktinstitution) mit dem innerhalb von \textbf{fest vorgegebenen Regeln} auf der Basis von \textbf{Geboten der Bieter} einerseits \textbf{Güter} und andererseits \textbf{Zahlungen} von, oder an die Bieter festgelegt werden.
+\end{definition}
+
+Das Auktionsdesign ist das durch den Auktionator festgelegte Regelwerk. Zusätzlich nehmen wir an, dass es keine Intermediäre gibt, d.h. jeder Bieter ersteigert das Gut für sich selbst.
+
+\index{zulässig} \index{Auktion!zulässige}
+\begin{definition}
+	Eine Auktion heißt \textbf{zulässig} genau dann, wenn das \enquote{beste} oder höchste Gebot die Auktion gewinnt.
+\end{definition}
+
+\index{Akteure} \index{Auktion!Akteure in einer}
+\begin{unnamedtheorem*}[Akteure in Aktionen] ~\
+	\begin{itemize}
+		\item Auktionator/Versteigerer
+			\begin{itemize}
+				\item Legt das Auktionsdesign fest (wird in dieser Vorlesung thematisiert)
+				\item Bekanntgabe des Auktionsdesigns
+			\end{itemize}
+		\item Bieter
+			\begin{itemize}
+				\item Akzeptanz des Auktionsdesigns (bei Teilnahme an Auktion)
+				\item Festlegung einer Bietstrategie (wird in dieser Vorlesung thematisiert)
+			\end{itemize}
+	\end{itemize} 
+\end{unnamedtheorem*}
+
+\newpage
+
+\index{Auktion!Kategorisierung von}
+\begin{unnamedtheorem*}[Kategorisierung von Auktionen] ~\
+	\begin{itemize}
+		\item Richtung des Güter- und Geldstroms
+			\begin{itemize}
+				\item Einkaufsauktionen (z.B. Ausschreibung $\dotsc$)
+				\item Verkaufsauktion (was auch das Hauptgebiet dieser Vorlesung ausmachen wird, allerdings lassen sich die Ergebnisse durch Vorzeichenwechsel im Grunde übertragen)
+			\end{itemize}
+			Hauptunterschied: Bei Einkaufsauktionen bieten meist viele Teilnehmer mit unterschiedlichen Gütern um die Gunst des Auktionators.
+			Bei Einkaufsauktionen bieten viele Teilnehmer um ein und das gleiche Gut (bzw. ein Angebot).
+		\item Anzahl der Güter
+			\begin{itemize}
+				\item Eingutauktion
+				\item Mehrgüterauktion
+			\end{itemize}
+		\item Rollenverteilung
+			\begin{itemize}
+				\item Einseitige Auktion
+				\item Zweiseitige Auktion (z.B. Börse)
+			\end{itemize}
+	\end{itemize}
+\end{unnamedtheorem*}
+
+\index{Auktion!notwendige Kriterien}
+\begin{anwendung}
+	notwendige Kriterien:
+	\begin{itemize}
+		\item Wettbewerb
+		\item Güter ohne (sichtbaren) Marktpreis
+		\item Informationsasymmetrie (Auktionator kennt nicht alle Zahlungsbereitschaften der Bieter, denn sonst würde er einfach zu dem einen Bieter mit der höchsten Zahlungsbereitschaft gehen).
+	\end{itemize}
+\end{anwendung}
+
+\newpage
+
+\index{Ziele des Auktionators} \index{Effizienz}
+\begin{unnamedtheorem*}[Ziele des Auktionators] ~\
+	\begin{enumerate}
+		\item Minimierung der Einkaufsausgaben / \textbf{Maximierung des Verkaufserlöses}
+		\item \textbf{Effizienz} (= wenn der Bieter mit der höchsten Zahlungsbereitschaft den Zuschlag bekommen)
+		\item \textbf{Informationsgewinn}
+		\item Markträumung (z.B. Blumen- oder Fischhandel)
+		\item Signalgenerierung (z.B. Mindestpreis vorgeben)
+		\item Innovationsanreize
+		\item Qualitäts- und Versorgungssicherheit
+	\end{enumerate}	
+\end{unnamedtheorem*}
+
+\index{common value} \index{independent private value} \index{individual value}
+\begin{unnamedtheorem*}[Informationsverteilung/Unsicherheiten] ~\
+	\begin{enumerate}
+		\item Unabhängige individuelle Wertschätzungen (\textbf{IPV} = independent private value)
+			\begin{itemize}
+				\item Jeder Bieter besitzt eine ihm bekannte, individuelle monetäre Wertschätzung für das Gut $v_{i}$.
+				\item Die $v_{i}$'s können sich unterscheiden.
+				\item Die $v_{i}$'s sind private Informationen
+			\end{itemize}
+		\item allgemeiner Wert (\textbf{CV} = common value)
+			\begin{itemize}
+				\item Der Wert des Gutes ist für jeden Bieter gleich, aber zum Zeitpunkt der Auktion unbekannt $\Rightarrow$ Unsicherheit.
+			\end{itemize}
+		\item Abhängiger, individueller Wert (\textbf{IV} = individual value)
+			\begin{itemize}
+				\item Mischung aus IPV und CV. Individuelle Werte mit Unsicherheit
+			\end{itemize}
+	\end{enumerate}	
+\end{unnamedtheorem*}
+
+\newpage
+
+\index{Eingutauktionen}\index{Wertschätzung}
+\begin{unnamedtheorem*}[Eingutauktionen]
+	IPV (bieter mit bekannter Wertschätzung für das Gut. Die Wertschätzung $\hat=$ maximaler Zahlungsbereitschaft; bei diesem Preis ist man indifferent zwischen Erwerb und Nichterwerb des Gutes)
+	
+	\begin{enumerate}
+		\item Simultane Erstpreisauktion (First Price Sealed Bid Auction, FA)  \index{Eingutauktionen!Simultane Erstpreisauktion} 
+			\begin{itemize}
+				\item Jeder Bieter gibt verdeckt ein Gebot ab. Auktion endet nach fest vorgegebener Zeit
+				\item Zuschlagsregel: Höchstes Gebot gewinne
+				\item Preisregel: Zuschlagspreis ist höchstes Gebot (Pay as bid)
+			\end{itemize}
+		\item Simlutane Zweitpreisauktion (Second Price Sealed Bid Auction, SA)  \index{Eingutauktionen!Simultane Zweitpreisauktion} 
+			\begin{itemize}
+				\item Wie in der FA, allerdings entspricht der Preis dem zweithöchsten Gebot
+			\end{itemize}
+		\item Englische Auktion (English Auction, EA) [Saalversion]  \index{Eingutauktionen!Englische Auktion} 
+			\begin{itemize}
+				\item Bieter überbieten sich, bis kein Gebot mehr eingeht
+				\item Preisregel: Zuschlagspreis letztem Gebot
+			\end{itemize}
+		\item Englische Auktion (English Auction, EA) [Clock-Version]
+			\begin{itemize}
+				\item Bieter können Konkurrenz besser abschätzen aufgrund einer Aktivitätsregel
+					$$ \Rightarrow \text{Auktionator kennt die Nachfrage auch besser} $$
+				\item Bietregel: Preis steigt kontinuierlich, Bieter müssen Preis ablehnen oder zustimmen. Nur wer zustimmt bleibt drin.
+				\item Durchführung: Auktion endet wenn höchstens 1 Bieter zustimmt.
+				\item Preis: Vorletzter Preis ist Kaufpreis.
+			\end{itemize}
+		\item Holländische Auktion (Dutch Auction, DA)  \index{Eingutauktionen!Dutch Auction} 
+			\begin{itemize}
+				\item Uhr läuft Rückwärts und der erste Bieter der zustimmt, erhält den Zuschlag zu dem Preis zu dem er zugestimmt hat.
+				\item Beispiel: Blumenverkauf aufgrund der Notwendigkeit von Markträumung
+			\end{itemize}
+	\end{enumerate}
+\end{unnamedtheorem*}
+
+\index{bid shading}
+\begin{definition}
+	Es kann sich lohnen, unter der wahren Zahlungsbereitschaft zu bieten, also beim Gebot einen Abschlag von der Zahlungsbereitschaft zu tätigen, da sich dadurch der Gewinn erhöht; dieses Verhalten wird als \textbf{bid shading} bezeichnet.
+\end{definition}
+
+\begin{satz} ~\
+	\begin{enumerate}
+		\item Die Holländische und Simultane Erstpreisauktion sind von der Bietstrategie äquivalent, allerdings existiert keine dominante Strategie.
+		\item Die Englische Clock Version und Simultane Zweitpreisauktionen sind insofern äquivalent, dass die Bieter dieselbe dominante Strategie spielen sollten. Der Bietpreis entspricht in diesem Fall der Zahlungsbereitschaft.
+	\end{enumerate}
+\end{satz}
+
+\begin{bemerkung}
+	Informationsgewinnung des Auktionators:	
+	$$ SA ~ > ~ EA ~ > ~ FA ~ > ~ DA  $$
+\end{bemerkung}
+
+
+\chapter{Theoretische Modellierung}
+
+\begin{itemize}
+	\item Spielermenge: Bieter $N = \{1, 2, \dotsc, n \}$, $n \in \mathbb{N}$
+	
+		~\hspace{2.3cm}~ Auktionator ($i = 0$)
+	\item Signal (von Spieler $i$): $x_{i} \in \mathbb{R}$, $i \in N$ (Information über den Wert des Gutes für Spieler $i$. Kann genau der Wert sein (vgl. IPV-Modell) oder nur eine Schätzung)
+	\item Bietstrategie: vollständiger Verhaltensplan für die Auktion (vgl. Spieltheorie)
+	\item Darstellung der Bietstrategie:
+		\begin{align*}
+			\beta^{FA} & \colon \mathbb{R} \rightarrow \mathbb{R} \\
+			\beta^{SA} & \colon \mathbb{R} \rightarrow \mathbb{R} \\
+			\beta^{DA} & \colon \mathbb{R} \rightarrow \mathbb{R} 
+		\end{align*}
+		Der dynamische Charakter spielt keine Rolle. Die Strategy wird vor der Auktion in Abhängigkeit von den Wertschätzungen festgelegt. \\
+		
+		Bei der Englischen Auktion (EA) muss man unterscheiden, ob die Signale unsicher oder sicher sind! Denn bei Unsicherheit kann während der Auktion noch dazugelernt werden (Informationsmenge vergrößert sich).	
+\end{itemize}
+
+\begin{bemerkung}
+	Unter der Einschränkung eines maximalen Gebots für die FA sind die FA und DA spieltheoretisch äquivalent.
+\end{bemerkung}
+\newpage
+\index{individuelle Werte}
+\begin{unnamedtheorem}[Modellierung der individuellen Wert] ~\
+	\begin{itemize}
+		\item Vektor der Signale: $x = (x_1, \dotsc, x_{n}) \in \mathbb{R}^{n}$, $x_{-i} \coloneqq (x_1, \dotsc, x_{i-1}, x_{i+1}, \dotsc, x_{n})$
+		\item unbeobachtbare Signale: $s = (s_{0}, s_{1}, s_{m})$ (den Bietern unbekannt
+			\begin{itemize}
+				\item $s_0$ stellt die Kenntnis des Auktionators über das Gut dar
+				\item $s_1, \dotsc, s_n$ Zukunftsinformationen (Wertentwicklung, etc.) für die $n$ Bieter
+			\end{itemize}
+		\item Wert des Spielers $i$: $v_{i}(x_{i}, x_{-i}, s)$, $v_{i} \colon \mathbb{R} \times \mathbb{R}^{n-1} \times \mathbb{R}^{m+1} \rightarrow \mathbb{R}$
+	\end{itemize}
+\end{unnamedtheorem}
+
+\begin{beispiele}
+	Betrachten wir zwei der Grundmodelle, so gilt jeweils für alle $i \in N$:
+	\begin{enumerate}
+		\item CV: $v_{i} = v(s_{i})$
+		\item IPV-Modell: $v_{i} = v_{i}(x_{i}) = x_{i}$
+	\end{enumerate}	
+\end{beispiele}
+
+\begin{unnamedtheorem}[Modellierung der Unsicherheiten über Zufallsvariablen]
+	Wir müssen zuerst zwischen verschiedenen Sichtweisen unterscheiden:
+	\begin{itemize}
+		\item Externe Sicht: $X_{1}, \dotsc, X_{n}, S_{0}, S_{n}, \dotsc, S_{m}$
+		\item Sicht des Auktionators: $X_{1}, \dotsc, X_{n}, s_{0}, S_{n}, \dotsc, S_{m}$
+		\item Sicht des Bieters $i$:  $X_{1}, \dotsc, X_{i-1}, x_{i}, X_{i}, \dotsc, X_{n}, S_{0}, S_{n}, \dotsc, S_{m}$
+	\end{itemize}
+	Grundannahme: Alle Bieter haben den gleichen Informationsstand (bis auf die eigene, private Wertschätzung).
+\end{unnamedtheorem}
+
+\newpage
+
+\begin{unnamedtheorem}[Ziele der Bieter] ~\
+		Maximierung der Bieterrente:
+		$$ \pi_{i} = \begin{cases} v_{i} - p, & \text{Bieter $i$ erhält Zuschlag} \\ 0, & \text{sonst} \end{cases},$$
+		wobei die  Risikoneigung über Risikonutzenfunktion modelliert wird (vgl. Entscheidungstheorie):
+		$$ u_{i}(x_{i}) = \begin{cases} u_{i}(v_{i}-p), & \text{Bieter $i$ erhält Zuschlag} \\ u_{i}(0), & \text{sonst} \end{cases} $$ 
+\end{unnamedtheorem}
+
+
+\chapter{IPV-Modell}
+
+	Wir nehmen zuerst \textbf{Bewertungssymmetrie} an, d.h.
+	$$ v_{i} = v(x_{i}) = x_{i}, \quad \forall i \in \{1, \dotsc, n\}. $$
+	Die Wertschätzung des Gutes leitet sich also für alle Bieter gleichermaßen aus dem Signal ab und ist für das IPV-Modell gleich dem Signal. \\
+	
+	Weiterhin gehen wir von einer \textbf{Informationssymmetrie} aus, d.h.
+	$$ X_{1}, \dotsc, X_{n} \text{ wird modelliert durch eine Zufallsvariable } X \sim F $$
+	$x_{1}, \dotsc, x_{n}$ sind alles Realisierungen von $X$.
+
+\index{Auktion!symmetrische} \index{symmetrisch}
+\begin{definition}
+	Eine Auktion heißt \textbf{symmetrisch} genau dann, wenn ein externer Beobachter die Bieter nicht unterscheiden kann.
+\end{definition}
+
+\index{Ordnungsstatistik}
+\begin{definition}
+	Wir modellieren die geordnete Stichprobe mit Umfang $n$ durch:
+		$$ X_{{1}} > X_{(2)} > \dotsc > X_{(n)}, $$
+		und nennen $X_{(k)}$ die $k$-te \textbf{Ordnungsstatistik} bzw. $X_{(k, n)}$ wenn der Stichprobenumfang nicht klar ist.
+\end{definition}
+
+Der Erwartungswert für das größte Gebot steigt hier mit der Anzahl der Bieter!
+	$$ \mathbb{E}[X_{(1,n)}] = \frac{n}{n+1} $$
+
+\index{Bayes-Nash-Gleichgewicht}
+\begin{definition}
+	Unter der Annahme von risiko-neutralen Bietern heißt eine Kombination von Bietstrategien $\beta^{*}$ \textbf{Bayes-Nash-Gleichgewicht} (BNE) des IPV-Modells, wenn für jeden Bieter $i \in N$, für alle seine möglichen Signale (Wertschätzungen für das Gut) und für alle $\beta_{i}$ gilt:
+	$$ \mathbb{E}\left[u_{i}\left(\pi_{i}\left(\beta^{*}(X), X_{i}\right) \right) \big| X_{i} = x_{i}\right] \geq \mathbb{E}\left[u_{i}\left(\pi_{i}\left(\beta_{-i}^{*}(X_{-i}), \beta_{i}(X_{i}), X_{i}\right) \right) \big| X_{i} = x_{i}\right] $$
+\end{definition}
+
+
+\begin{satz}
+	Im IPV-Modell (siehe A2 unten) der EA und SA besitzt jeder Bieter $i \in N$ die dominante Strategie seine Bietgrenze (EA) bzw. sein Gebot (SA) gleich seinem Signal (individuelle Wertschätzung zu setzen.
+	$$ \beta_{i}^{EA}(x_{i}) = \beta_{i}^{SA}(x_{i}) = x_{i} \coloneqq v_{i} $$
+\end{satz}
+
+\begin{satz}
+	In der EA und der SA bildet die Kombination der dominanten Strategien $\left(\beta_{1}^{k}(x_{1}), \dotsc, \beta_{n}^{k}(x_{n}) \right)$ mit $\beta_{i}^{k}(x_{i}) = x_{i}$ für alle $i \in N$ und $k \in \{ EA, SA \}$ ein Bayes-Nash-Gleichgewicht im IPV-Modell (also unter der nachfolgenden Annahme A2)
+\end{satz}
+
+\begin{bemerkung}
+	Bei schwach dominanten Strategien (in Auktionstheorie vorherrschend) kann er mehrere solche BNE's geben. Bei dominanten Strategien ist das BNE eindeutig.	
+\end{bemerkung}
+
+\index{IPV-Grundmodell} \index{IPV-Modell} \index{symmetrische Bieter}
+\begin{unnamedtheorem}[IPV-Grundmodell] ~\
+	\begin{enumerate}
+		\item[\hspace{0.5cm}A1:] Die Bieter sind risikoneutral, $u_{i}(\pi_{i}) = \pi$
+		\item[\hspace{0.5cm}A2:] IPV-Modell, $v_{i} = x_{i} ~\forall i \in N$
+		\item[\hspace{0.5cm}A3:] Die Bieter sind a priori symmetrisch, d.h.
+			$$ X_{1} = X_{2} = \dotsc = X_{n} = X, ~F_{i} = F \quad \forall i \in N $$
+		\item[\hspace{0.25cm}A4:] Der Zuschlagspreis wird ausschließlich über die Gebote bestimmt. D.h. der vom Auktionator gesetzte Reservationspreis $r = 0$.
+	\end{enumerate}
+	Die Annahme A3 ist sinnvoll, denn man kann in den seltensten Fällen die Bieter schon im Vorhinein klassifizieren; ein Gegenbeispiel wären allerdings die Telekommunikationsauktionen.
+\end{unnamedtheorem}
+
+\begin{vereinbarung}
+	Die folgenden Aussagen werden für $EA$ und $SA$ mit $A2$, $A3$, $A4$ getroffen!
+\end{vereinbarung}
+
+Wir definieren
+\begin{itemize}
+	\item $p$ = der Zuschlagspreis der Auktion
+	\item $\rho$ = die Zahlung der Bieter an den Auktionator
+\end{itemize}
+
+$\beta^{k} = \left(\beta_{1}^{k}, \dotsc, \beta_{n}^{k} \right)$ mit $\beta_{i}^{k}(x_{i}) = x_{i} ~\forall i \in N$ die dominanten Strategien der $n$ Bieter für $k \in \{ EA, SA \}$. \\
+
+Der erwartete Zuschlagspreis (erwartete Auktionserlös):
+	$$ \mathbb{E}\left[ p\left(\beta^{k}(X) \right) \right] = \mathbb{E}[X_{(2,n)}] $$
+	
+Erwartete Zahlung von Bieter $i$:
+	\begin{align*}
+		\mathbb{E}\left[ \rho\left( \beta^{k}(X) \right) \big| X_{i} = x_{i} \right] & = \mathbb{E}\left[ X_{(2,n)} \big| X_{(1, n)} = x_{i} \right] \cdot \mathbb{P}\left( \max_{j\neq i} X_{j} \leq x_{i} \right) \\
+			& = \mathbb{E}\left[ X_{(1,n-1)} \big| X_{(1, n-1)} \leq x_{i} \right] \cdot \mathbb{P}\left( X_{(1, n-1)} \leq x_{i} \right)
+	\end{align*}
+	
+Erwartete Rente von Bieter $i$:
+$$ \mathbb{E}\left[ \pi\left( \beta^{k}(X) \right) \big| X_{i} = x_{i} \right] = \left( x_{i} - \mathbb{E} \left[ X_{(1, n-1)} \big| X_{(1, n-1)} \leq x_{i} \right] \cdot \mathbb{P}\left( X_{(1,n-1)} \leq x_{i} \right) \right) $$
+
+\begin{vereinbarung}
+	Die folgenden Aussagen werden für $FA$ und $DA$ mit $A1$, $A2$, $A3$, $A4$ getroffen!
+\end{vereinbarung}
+
+Der Gebotsvektor der Konkurenten besteht aus Zufallsvariablen:
+	$$ B_{-i} \coloneqq \left(B_{1}, \dotsc, B_{i-1}, B_{i+1}, \dotsc, B_{n} \right) $$
+
+Betrachten wir nun den erwarteten Gewinn von Bieter $i$:
+$$ \mathbb{E}[\pi\left( x_{i}, b_{i}, B_{-i} \right)] = (x_{i} - b_{i}) \cdot \mathbb{P}\left( \max B_{-i} < b_{i} \right) \longrightarrow \max_{b_{i}} $$
+
+$G$ sei die Verteilung der Zufallsvariable des höchsten Gebots der anderen (beachte: $G$ ist nicht gleich $X_{(1, n-1)}$, da nicht jeder sein Signal bietet).
+
+$$ \mathbb{E}[\pi\left( x_{i}, b_{i}, B_{-i} \right)] = (x_{i} - b_{i}) \cdot G(b_{i}) \longrightarrow \max_{b_{i}} $$
+
+FOC: ~$\frac{\partial}{\partial b_{i}} \mathbb{E}\left[ \pi(x_{i}, b_{i} ) \right]$ ~ (Vor.: $G$ differenzierbar)
+$$ \iff ~ - G(b_{i}) + (x_{i} - b_{i}) \cdot g(b_{i}) \overset{!}{=} 0 \quad $$
+$$ \iff ~ b_{i}^{*} = x_{i} - \frac{G(b_{i}^{*})}{g(b_{i})} < x_{i} $$
+
+Was zeigt, dass das optimale Gebot bid shading enthält! Zeigt aber auch, dass diejenigen Bieter, die sich als besonders stark einschätzen auch mehr bid shading betreiben und umgekehrt.
+
+Wir wollen jetzt das Bayes-Nash-Gleichgewicht über einen spieltheoretischen Ansatz finden.  \\
+
+Ableitung eines $\underbrace{\text{symmetrischen}}_{\iff \beta_{1} = \dotsc = \beta_{n} \eqqcolon \beta}$ Bietgleichgewichts (BNE), $\beta_{i} \colon \mathbb{R} \rightarrow \mathbb{R}$, $b_{i} = \beta_{i}(x_{i})$
+
+Annahme: $\beta$ ist monoton in $x$, in dem Sinne, dass $\beta(x) > \beta(y)$ für $x > y$.
+
+Nach vorherigen Untersuchungen muss dann gelten:
+$$ \beta(x_i) \cdot g(\beta(x_{i})) + G(\beta(x_{i})) - x_{i} g(\beta_{i}(x_{i})) = 0 \quad \forall i \in N $$
+
+Bemerke: $G(b_{i}) = G(\beta(x_{i})) = F_{(1,n-1)}(x_{i})$
+
+$$ \frac{D G(\beta(x_{i}))}{d x_{i}} = g(\beta_{i})) \cdot \beta'(x_{i}) = \frac{d F_{(1:n-1)}(x_{i})}{dx_{i}}, \quad \tilde{f}(x_{i}) \coloneqq f_{(1, n-1)}(x_{i}) $$
+$$ \iff g(\beta(x_{i})) = \frac{\tilde{f}(\beta(x_{i}))}{\beta'(x_{i})} $$
+
+Insgesamt ist nun die BNE-Bedingung: $(\beta(x_{i}) - x_{i}) \frac{\tilde{f}(x_{i})}{\beta'(x_{i})} + F_{(1,n-1)}(x_{i}) \overset{!}{=} 0$
+$$ \iff F_{(1, n-1)}(x_{i}) \beta'(x_{i}) + \tilde{f}(x_{i}) \beta(x_{i}) - f_{(1, n-1)}(x_{i}) x_{i} \overset{!}{=} 0. $$
+Dies ist eine Differentialgleichung, betrachten wir allerdings
+$$ \frac{d F_{(1,n-1)}(x_{i}) \beta(x_{i})}{d x_{i}} = \tilde{f}(x_{i}) \beta(x_{i}) + F_{(1, n-1)}(x_{i}) \beta'(x_{i}) $$
+und setzen das in die Differentialgleichung ein, so ergibt das:
+$$ \Rightarrow \frac{d}{dx_{i}} F_{(1,n-1)}(x_{i}) \cdot \beta(x_{i}) = \tilde{f}(x_{i}) x_{i} \text{ mit der Randbedingung } \beta(0) = 0. $$
+Dies können wir durch Integration lösen:
+$$ F_{(1, n-1)}(x_{i}) \beta(x_{i}) = \int_{0}^{x_{i}} \tilde{f}(s) s ds. $$
+Damit ergibt sich
+\begin{align*}
+	\beta(x_{i}) & = \frac{\int_{0}^{x_{i}} s \tilde{f}(s) ds}{\tilde{F}(x_{i})} \qquad \Rightarrow \beta'(x_{i}) \geq 0 \\
+	& = x_{i} - \frac{\int_{0}^{x_{i}} F_{(1, n-1)}(s) ds}{F_{(1,n-1)}(x_{i})} \\
+	& = x_{i} - \frac{\int_{0}^{x_{i}} F_{(1,n-1)}(s) ds}{F^{n-1}(x_{i})} 
+\end{align*}
+
+Damit haben wir das symmetrische BNE: $(b_{1}^{k}, \dotsc, \beta_{n}^{k})$ für $k \in \{ FA, DA \}$ mit $b_{i}(x_{i}) = \beta(x_{i}) ~\forall i \in N$, wobei
+$$ \beta(x_{i}) = x_{i} - \frac{\int_{0}^{x_{i}}F^{n}(t) dt}{F^{n-1}(x_{i})} $$
+
+\begin{folgerung}
+	$\beta(x_{i}) < x_{i}$, $\beta(x_{i}) > \beta(x_{j})$ für $x_{i} > x_{j}$
+\end{folgerung}
+
+\begin{satz}
+	Im symmetrischen BNE der FA/DA folgen die Bieter der Regel, dass: 
+	$$ \text{{\glqq}Biete den Erwartungswert des höchsten Signals der anderen, unter der Annahme} $$
+	$$ \text{(Bedingung), dass dieses Signal nicht größer als das eigene Signal ist.\grqq} $$
+\end{satz}
+
+\index{revenue equivalence theorem}
+\begin{folgerung}
+	Für alle vier Auktionen ist die erwartete Zahlung an den Auktionator gleich hoch (\textbf{revenue equivalence theorem} (RET))
+\end{folgerung}
+
+\begin{unnamedtheorem}[Limitpreis] (Reservationspreis, Mindestpreis, $\dotsc$) 
+\begin{description}
+	\item $v_{0} = x_{0} \geq 0$ sei die Wertschätzung des Auktionators.
+	\item $r \geq 0$ sei der Reservationspreis.
+\end{description}
+
+Wir nehmen (realistischer Weise) an, dass: $r \geq v_{0}$		
+\end{unnamedtheorem}
+
+Betrachten wir einen Reservationspreis $r$ in der FA:
+
+\begin{align*}
+	\mathbb{E}\left[ \pi\left(v_{i}, v_{i}, r \right) \right] & = \left( v_{i} - v_{i} \right) \cdot \mathbb{P}\left( b_{i} > \max \{ B_{-i}^{r} \} \right) \\
+	& \rightarrow \max_{b_{i}}
+\end{align*}
+wobei $B_{-i}^{r} \subseteq B_{-i}$, sodass $\forall b_{j} \in B_{-i}^{r}: b_{j} \geq r$. Das heißt, wir nehmen an, dass die Bieter mit $v_{j} < r$ nicht an der Auktion teilnehmen und damit $B_{-i}^{r}$ die Menge der Gebote der der teilnehmen Bieter bezeichnet. Somit gilt für das Optimierungsproblem
+\begin{align*}
+	\mathbb{E}\left[ \pi\left(v_{i}, v_{i}, r \right) \right] \leq v - r.
+\end{align*}
+
+Wir definieren $\tilde{F}(x) \coloneqq F^{n-1}(x)$, damit gilt
+$$ \frac{d}{dx} \tilde{F}(x) \beta(x) = x \cdot \tilde{f}(x) \text{ unter der Nebenbedingung } \beta(r) = r $$
+$$ \Rightarrow ~ \tilde{F}(x) \beta(x) \big|^{v}_{r} = \int_{r}^{v} x \tilde{f}(x) dx $$
+$$ \Rightarrow \beta^{r}(v) = \frac{\tilde{F}(r)r + \int_{r}^{v} x \tilde{f}(x) dx}{\tilde{F}(v)} = v - \frac{\int_{r}^{v} \tilde{F}(x) dx}{\tilde{F}(v)} $$
+wobei $\tilde{F}(x) = F^{n-1}(x)$. \\
+
+Für den Fall, dass der Auktionator einen höheren Reservationspreis wählt, als seine eigene Wertschätzung, ist das Ergebnis der Auktion mit positiver Wahrscheinlichkeit ineffizient. Außerdem gilt:
+$$ \beta_{r=0}(v) < \beta_{r > 0} \leq v $$
+und Gleichheit gilt nur für die Wertschätzung $v = r$.
+
+\begin{beispiel}
+	Für $X_{i} \sim U[0,1]$:
+		$$ r^{*} = x_{0} + \frac{1 - F(r^{*})}{f(r^{*})} \overset{x_{0}=0}{=} \frac{1-r^{*}}{1} \Rightarrow r^{*} = \frac{1}{2} $$
+	\begin{align*}
+		p^{FA} & = x_{i} - \int_{r}^{x_{i}} \frac{F^{n-1}(s)}{F^{n-1}(x_{i})} ds \overset{n=2}{n} x_{i} - \int_{r}^{x_{i}} \frac{s}{x_{i}} ds \\
+		& = \frac{x_{i}^{2} + r^{2}}{2 x_{i}} = \frac{x_{i}}{2} + \frac{r^{2}}{2 x_{i}}
+	\end{align*} ~\newline
+
+\begin{figure*}[h!]
+    \begin{center}
+		\begin{tikzpicture}[scale=1,
+  					declare function={ funcA(\x)= 
+  						(\x<=1) * (0.5*(\x));
+  					},
+  					declare function={ funcB(\x)= 
+  						(\x<=1) * (0.5+((1/24)*(3*((\x)-0.5)))*(4*((\x)-0.5))));
+  					},
+  					declare function={ funcC(\x)= 
+  						(\x<=1) * (0.625);
+  					},
+  					declare function={ funcC2(\x)= 
+  						(\x<=1) * (0.5);
+  					},
+				]
+			\begin{axis}[
+  						 axis x line=middle, 
+  						 axis y line=middle,
+  						 xmin=-0.075, xmax=1.05, 
+  						 xtick={0.5,1}, xlabel=$x_{i}$,
+ 						 yticklabels={$\frac{1}{2}$, $\frac{5}{8}$},
+   						 ymin=-0.05, ymax=0.75, 
+  						 ytick={0.5,0.625}, ylabel=$\beta(x_{i})$,
+  						 xticklabels={$r^{*} = \frac{1}{2}$, $1$}
+						]
+				\addplot[black, solid, domain=0:1,name path=A]{funcA(x)};
+				\addplot[blue, solid, domain=0.5:1,name path=B]{funcB(x)};
+				\addplot[black, dashed, domain=0:1,name path=C]{funcC(x)};
+				\addplot[black, dotted, domain=0:1,name path=C2]{funcC2(x)};
+				\addplot +[red, solid, mark=none] coordinates {(0.5, 0) (0.5, 0.7)};	
+				 \node[anchor=south] at (axis cs:0.85,0.3) {\footnotesize $\beta\left( x_{i}, 0 \right)$};
+				 \node[anchor=south] at (axis cs:0.675,0.5275) {\footnotesize \color{blue} $\beta\left( x_{i}, \frac{1}{2} \right)$};
+			\end{axis}
+		\end{tikzpicture}
+	  \end{center}
+\end{figure*}
+
+	Um so näher das Signal am Reservationspreis ist, desto höher wird das Bid-Shading auf das normale Gebot ohne Reservation.
+\end{beispiel}
+
+\begin{bemerkung}
+	RAT gilt trotz der Einführung eines Reservationspreises.
+\end{bemerkung}
+
+\index{Stochastische Dominanz 1. Ordnung}
+\begin{definition}
+	Gegeben zwei Verteilungen $F_{I}, F_{II}$, so sagen wir $F_{II}$ \textbf{dominiert} $F_{I}$ \textbf{stochastisch 1. Ordnung}, falls $F_{I}(x) < F_{II}(x) \quad \forall x$.
+\end{definition}
+
+\begin{unnamedtheorem}[Fall von asymmetrischen Bietern] ~\\
+	Gegeben seien 2 Klassen von Bietern mit jeweils unterschiedlichen Verteilungen $F_{I}$ und $F_{II}$, $F_{I} \neq F_{II}$. Betrachten wir die Strategien der Bieter unter stochastische Dominanz 1. Ordnung, so ergibt sich:
+	\begin{itemize}
+		\item Für Auktionen mit dominanten Strategien (wie in EA und SA) ändert sich nichts! 
+		\item Für EA und DA gibt es keine allgemeine Theorie mehr für optimale Strategie und Gleichgewichte $\rightarrow$ Einzelfallunterscheidung.
+	\end{itemize}	
+\end{unnamedtheorem}
+
+\begin{beispiel}[FA/DA]
+	Sei $n=2$, $X_{1} \sim U\left[0, \frac{4}{3}\right]$, $X_{2} \sim U\left[0, \frac{4}{5} \right]$ ~\newline
+	
+\begin{figure*}[h!]
+    \begin{center}
+		\begin{tikzpicture}[scale=1,
+  					declare function={ funcC(\x)= 
+  						(\x<=1.4) * (0.75);
+  					},
+  					declare function={ funcC2(\x)= 
+  						(\x<=0.8) * (1.25);
+  					},
+				]
+			\begin{axis}[
+  						 axis x line=middle, 
+  						 axis y line=middle,
+  						 xmin=-0.075, xmax=1.75, 
+  						 xtick={0.8,1.33333333}, xlabel=$x$,
+ 						 xticklabels={$\frac{4}{5}$, $\frac{4}{3}$},
+   						 ymin=-0.1, ymax=1.75, 
+  						 ytick={1}, ylabel=$f(x)$,
+						]
+				\addplot[black, solid, domain=0:1.33333333,name path=C]{funcC(x)};
+				\addplot[blue, solid, domain=0:0.8,name path=C2]{funcC2(x)};
+				\addplot +[black, solid, mark=none] coordinates {(1.33333333, 0) (1.33333333, 0.75)};	
+				\addplot +[blue, solid, mark=none] coordinates {(0.8, 0) (0.8, 1.25)};
+				 \node[anchor=south] at (axis cs:1.475,0.55) {\footnotesize $f_{1}(x)$};
+				 \node[anchor=south] at (axis cs:0.95,1.04) {\footnotesize \color{blue} $f_{2}(x)$};
+			\end{axis}
+		\end{tikzpicture}
+	  \end{center}
+\end{figure*}	
+~\newpage
+Im Skript wird das Gleichgewichtspaar bestimmt für stärkere/schwächere Bieter. Hier nur das Ergebnis:
+
+\begin{align*}
+	\beta_{1}(x_{1}) & = - \frac{1}{x_1} \left( 1 - \sqrt{1+x_{1}^{2}} \right), ~x_{1} \neq 0 \\
+	\beta_{2}(x_{2}) & = \frac{1}{x_2} \left( 1 - \sqrt{1-x_{2}^{2}} \right), ~x_{2} \neq 0
+\end{align*}
+
+\begin{figure*}[h!]
+    \begin{center}
+		\begin{tikzpicture}[scale=1,
+  					declare function={ funcA(\x)= 
+  						(\x<=1.333333333) * (1.305*(sqrt(((\x)+0.25)*0.25))-0.325);
+  					},
+  					declare function={ funcB(\x)= 
+  						(\x<=1) * (0.5975*(\x));
+  					},
+  					declare function={ funcB2(\x)= 
+  						(\x<=1) * ( 0.088 * ( (\x + 3.09489) * (\x + 3.09489) ) - 0.834975);
+  					},
+  					declare function={ funcC(\x)= 
+  						(\x<=2) * (0.425);
+  					},
+  					declare function={ funcC2(\x)= 
+  						(\x<=1.333333333) * (0.5);
+  					},
+  					declare function={ funcD(\x)= 
+  						(\x<=1.333333333) * (0.5);
+  					},
+				]
+			\begin{axis}[
+  						 axis x line=middle, 
+  						 axis y line=middle,
+  						 xmin=-0.075, xmax=1.5, 
+  						 xtick={0.8,1.333333333}, xlabel=$x_{i}$,
+ 						 yticklabels={$\frac{1}{2}$},
+   						 ymin=-0.05, ymax=0.65, 
+  						 ytick={0.5}, ylabel=$\beta(x_{i})$,
+  						 xticklabels={$\frac{4}{5}$, $\frac{4}{3}$}
+						]
+				\addplot[black, solid, domain=0:1.333333333,name path=A]{funcA(x)};
+				\addplot[blue, solid, domain=0:0.3,name path=B]{funcB(x)};
+				\addplot[blue, solid, domain=0.3:0.8,name path=B2]{funcB2(x)};
+				\addplot[red, dotted, domain=0:1.075,name path=C]{funcC(x)};
+				\addplot[red, dotted, domain=0:0.8,name path=C2]{funcC2(x)};		
+				\addplot +[red, dotted, mark=none] coordinates {(0.8, 0) (0.8, 0.5)};	
+				\addplot +[red, dotted, mark=none] coordinates {(1.075, 0) (1.075, 0.425)};	
+				 \node[anchor=south] at (axis cs:1.15,0.371) {\scriptsize $\beta_{1}$};
+				 \node[anchor=south] at (axis cs:0.66,0.43) {\scriptsize \color{blue} $\beta_{2}$};
+			\end{axis}
+		\end{tikzpicture}
+	  \end{center}
+\end{figure*}
+
+Wir haben hier unterschiedliche Bietfunktionen, also ein \textbf{asymmetrisches Gleichgewicht}. Zusätzlich liegt hier keine Effizienz mehr vor, denn $\beta_{2}$ ist an den markierten Stellen trotz niedrigerem Signal höher! $\Rightarrow$ RAT gilt nicht mehr.
+\end{beispiel}
+
+\index{Ex-post-Gleichgewichte}
+
+\begin{definition}
+	Eine Kombination von Bietstrategien $\beta^** = \left( \beta^{**}_1, \dotsc, \beta^{**}_n \right)$ hei{\ss}t \textbf{ex-post-Gleichgewicht}, genau dann wenn für \underline{alle möglichen Kombinationen} von Signalen $(x_1, \dotsc, x_n)$ und für alle Bieter gilt:
+	$$ \pi\left( \beta^{**}(x), x_i \right) \geq \pi \left( \left( \beta_{-i}^{**}(x_{-i}), \beta(x_{i}) \right), x_i \right) $$
+	für alle $\beta_{i}$.
+\end{definition}
+
+\begin{erinnerung}
+	Gerade die Definition des Nash-Gleichgewichts... % todo anpassen	
+	Demnach ist jedes ex-post-Gleichgewicht ein Bayes-Nash-Gleichgewicht.
+\end{erinnerung}
+
+\begin{bemerkung}
+	Das Bayes-Nash-Gleichgewicht der SA und EA bildet auch ein ex-post Gleichgewicht (aufgrund der Eigenschaft der dominanten Strategie). Für FA und DA gilt das nicht. Gegenbeispiel: $x = (0, \dotsc, 0, 1)$, denn erhält der letzte Bieter zwar den Zuschlag, allerdings könnte er sich im Nachhinein besser stellen durch eine Verringerung seines Gebots.
+\end{bemerkung}
+
+\begin{figure*}[h!]
+    \begin{center}
+		\begin{tikzpicture}[scale=1,
+  					declare function={ funcA(\x)= 
+  						(\x<=10) * (1.7*(\x));
+  					},
+  					declare function={ funcA2(\x)= 
+  						(\x<=10) * (0.875*(\x));
+  					},
+ 					declare function={ funcA3(\x)= 
+  						(\x<=10) * (0.875*(\x));
+  					},  					
+  					declare function={ funcB(\x)= 
+  						(\x<=10) * (0.5*((\x)^(2.1/4)));
+  					},
+  					declare function={ funcC(\x)= 
+  						(\x<=10) * (0.7*(\x)^(2.7/4)));
+  					},
+  					declare function={ funcC2(\x)= 
+  						(\x<=1.333333333) * (0.425);
+  					},
+  					declare function={ funcD(\x)= 
+  						(\x<=10) * (0.7*(\x)^(2.7/4)));
+  					},
+				]
+			\begin{axis}[
+  						 axis x line=middle, 
+  						 axis y line=middle,
+  						 xmin=-0.075, xmax=0.8, 
+  						 xtick={0.25}, xlabel=$v$,
+ 						 yticklabels={$r$},
+   						 ymin=-0.075, ymax=1, 
+  						 ytick={0.425}, ylabel=$\beta$,
+  						 xticklabels={$r$}
+						]
+				\addplot[black, dashed, domain=0:1,name path=A]{funcA(x)};
+				\addplot[blue, solid, domain=0.08:1,name path=B]{funcB(x)};
+				\addplot[blue, solid, domain=0:0.08,name path=B]{funcD(x)};
+				\addplot[red, solid, smooth, domain=0:1,name path=C]{funcC(x)};
+				\addplot[black, dotted, domain=0:0.25,name path=C2]{funcC2(x)};
+				\addplot +[black, dotted, mark=none] coordinates {(0.25, 0) (0.25, 0.425)};	
+				 \node[anchor=south] at (axis cs:0.65,0.5) {\scriptsize \color{red}  $\beta^{r>0}$};
+				 \node[anchor=south] at (axis cs:0.65,0.375) {\scriptsize \color{blue} $\beta^{r=0}$};
+			\end{axis}
+		\end{tikzpicture}
+	  \end{center}
+\end{figure*}
+
+\begin{unnamedtheorem}[Reservationspreis r in SA]
+	$$ \beta^{r, SA}(v) = \begin{cases} v, & v \geq r \\ \text{keine Teilnahme}, & \text{sonst} \end{cases} $$
+	Es entstehen 3 disjunkte Fälle:
+	\begin{enumerate}
+		\item $r > X_{(1, n)}$: $\mathbb{P}\left( X_{(1,n)} < r \right) = F^{n}(r)$
+		\item $X_{(1,n)} \geq r \geq X_{(2,n)}$: $\mathbb{P}\left( X_{(1,n)} \geq r \geq X_{(2, n)} \right) = n\left(1-F(r) \right) F^{n-1}(r) \Rightarrow ~ \text{ Verkauf zu } r$
+		\item $X_{(2,n)} \geq r$: (Normalfall)
+			\begin{align*}
+				\mathbb{P}\left( X_{(2,n)} > r \right) & = 1 - \mathbb{P}\left( X_{(1,n)} \geq r \geq X_{(2,n)} \right) - \mathbb{P} \left( X_{(1,n)} < r \right) \\
+				& = 1 - F^{n}(r) - n \cdot \left( 1 - F(r) \right) \cdot F^{n-1}(r)
+			\end{align*}
+	\end{enumerate}
+	Nur die ersten beiden Fälle sind für den Auktionator relevant, da sich nur diese zum Normalfall der Zweitpreisauktion ohne Reservationspreis unterscheiden. ~\\
+	
+	Bestimmung von $r^{*}$ als optimaler Reservationspreis der den erwarteten Erlös maximiert:
+\end{unnamedtheorem}
+
+Tatsächlich ist das RET ziemlich praxisrelevant $\Rightarrow$ Form der Auktion ist nicht so entscheidend, aber man muss für guten Wettbewerb sorgen. \\ 
+
+Was ändert eine nicht neutrale Risikoeinstellung? ~\\
+
+\begin{description}
+	\item Für risikoneutrale Bieter gilt:
+		$$ \mathbb{E} \left[ p\left( \beta^{FA/DA}(X) \right) \right] = \mathbb{E} \left[ p\left( \beta^{SA}(X) \right) \right] = \mathbb{E} \left[ p\left( \beta^{EA}(X) \right) \right] = \mathbb{E} \left[ X_{(2,n)} \right]  $$
+	\item Für risikoaverse Bieter gilt:
+		$$ \begin{rcases} x_{i} > \beta_{ra}^{FA/DA}(x_{i}) > \beta_{rn}^{FA/DA}(x_{i}) \end{rcases} \longrightarrow \underbrace{\mathbb{E}\left[ p \left( \beta^{FA/DA}(X) \right) \right]}_{< \mathbb{E}\left[ X_{(1,n)} \right]} > \underbrace{\mathbb{E}\left[ p \left( \beta^{SA/EA}(X) \right) \right]}_{= \mathbb{E}\left[ X_{(2,n)} \right]} $$
+\end{description} 
+
+Nur bei risikofreudigen Bietern kommt man unter $\mathbb{E}\left[ X_{(2,n)} \right]$
+
+\begin{bemerkung}
+	Gelten (A1) - (A4), gewinnt der Auktionator, falls er die höchste Wertschätzung hat und kein anderer muss etwas zahlen, so gilt auch bei allen anderen Auktionsformen das RET
+\end{bemerkung}
+
+Notwendiges Kriterium für Anreizkompatibilität: Mein Gebot bestimmt im Falle des Zuschlags nicht die Zahlung, sondern nur die Gewinnwahrscheinlichkeit. Allerdings ist diese Bedingung nicht hinreichen, Gegenbeispiel wäre dafür z.B.: 3. Preisauktion, denn da hat ein Bieter den Anreiz seine Wertschätzung zu überbietet; man bietet nämlich die erwartete höchste Wertschätzung unter der Annahme, dass man selbst die 2. höchste hat. ~\\
+
+$$r^{*} = x_{0} + \frac{1}{\lambda(r^{*})}, ~ \lambda(r^{*}) = \frac{f(r^{*})}{1 - F(r^{*})}$$
+Interessanterweise ist dies nicht von der Zahl der Bieter abhängig. ~\\
+
+Das gilt für FA und SA! Das heißt man nimmt in Kauf, dass die Auktion ineffizient ist. ~\\
+
+\index{optimal auction}
+\begin{folgerung}[optimal auction] ~\
+	Maximaler Erlös und Effizienz sind nicht gleichzeitig erreichbar. % todo optimal auction mit reinbringen
+\end{folgerung}
+
+\begin{unnamedtheorem}[Modell der interdependenten Wertschätzungen] ~\
+	\begin{itemize}
+		\item Bieter sind unsicher bezüglich des Wertes des Guts für sie. Somit modellieren wir den Wert des Gutes durch eine Zufallsvariable $V_{i}$
+		\item Das Signal des Bieters (private Information) $x_{i}$ ist die Information des Bieters bezüglich $V_{i}$
+	\end{itemize}
+\textit{$V_{i}$ hängt nicht nur von $x_{i}$ ab, sondern auch von $x_{j}$, allerdings ist deren Einfluss schwächer.}
+\end{unnamedtheorem}
+
+\index{komponentenweise!Maximum} \index{komponentenweise!Minimum}
+\begin{definition}
+	Seien $x = \left( 1, 5, 4 \right)^{T}$, $y = \left( 2, 3, 2 \right)^{T}$.
+	\begin{itemize}
+		\item $x \wedge y$ \textbf{komponentenweise Minimum}
+		\item $x \vee y$ \textbf{komponentenweise Maximum}
+	\end{itemize}
+	damit gilt: $~$ $x \wedge y = \left(\begin{array}{c} 1 \\ 3 \\ 2 \end{array}\right)$, ~ $x \vee y = \left(\begin{array}{c} 2 \\ 3 \\ 4 \end{array}\right) $
+\end{definition}
+
+\index{Affiliation}
+\begin{definition}[Affiliation]
+	Sei $X = (X_{1}, \dotsc, X_{n})$ eine $n$-dimensionale Zufallsvariable mit der Dichte $f$. $X$ hei{\ss}t \textbf{affiliert} genau dann, wenn für alle $x, y \in \mathbb{R}^{n}$ gilt:
+		$$ f(x \wedge y ) \cdot f(x \vee y) \geq f(x) f(y) $$	
+\end{definition}
+
+\begin{vereinbarung}
+	Sei $X$ eine $n$-dimensionale affilierte Zufallsvariable mit Verteilung $F$ und Dichte $f$. Die bedingte Dichte und Verteilung der i-ten Komponente $X_{i}$ unter der Bedingung $X_{k} = x_{k}$ werden als
+	$$ ~ f_{i|k}(x_{i}|x_{k}) ~ \text{ bzw. } ~ F_{i|k}(x_{i}|x_{k}) $$
+	bezeichnet. 
+\end{vereinbarung}
+
+
+\begin{satz}
+	Sei $X$ eine $n$-dimensionale affilierte Zufallsvariable mit Verteilung $F$ und Dichte $f$. Ferner sei $h \colon \mathbb{R} \rightarrow \mathbb{R}$ eine monoton wachsende Funktion. Dann gilt für alle $x_{i}'$, $x{i}''$, $x_{k}'$, $x_{k}''$ mit $x_{i}' \geq x_{i}''$, $x_{k}' \geq x_{k}''$:
+	\begin{enumerate}
+		\item Wir können eine Aussage über das Verhältnis der Dichten treffen, nämlich:
+			$$\frac{f_{i|k}(x_{i}'|x_{k}')}{f_{i|k}(x_{i}''|x_{k}')} \geq \frac{f_{i|k}(x_{i}'|x_{k}'')}{f_{i|k}(x_{i}''|x_{k}'')}$$
+		\item Für die Verteilungen können wir sagen, dass
+			$$ F_{i|k}(x_{i}|x_{k}'') \geq F_{i|k}(x_{i}|x_{k}') $$
+	\end{enumerate}	
+\end{satz}
+
+Aus den Verteilungen können wir für die bedingten Erwartungswerte herleiten, dass
+	$$ \mathbb{E}\left[ X_{i} \big| X_{k} = x_{k}' \right] \geq \mathbb{E}\left[ X_{i} \big| X_{k} = x_{k}'' \right] $$
+und dafür auch für die Rangstatistiken
+	$$ \mathbb{E}\left[ X_{(i,n)} \big| X_{k} = x_{k}' \right] \geq \mathbb{E}\left[ X_{(i,n)} \big| X_{k} = x_{k}'' \right]. $$
+	\begin{enumerate} \setcounter{enumi}{2}
+		\item \textit{Für eine monoton wachsende Funktion folgt damit}
+		 $$\mathbb{E}\left[ h\left(X_{(i,n)} \right) \big| X_{k} = x_{k}' \right] \geq \mathbb{E}\left[ h\left(X_{(i,n)} \right)\big| X_{k} = x_{k}'' \right]$$
+	\end{enumerate}
+
+\chapter{IV-Modell (Interdependent Value)}
+
+Wir definieren für das Kapitel
+
+\begin{description}
+	\item $X_{i}$: Zufallsvariable des privaten Signals von Bieter $i$,
+	\item $X_{i} = x_{i}$, $X = (X_{1}, \dotsc, X_{n})$ ist affiliert (Die Signale der Bieter sind affiliert)
+	\item $F(x), f(x), x = (x_1, \dotsc, x_n)$, $X_{(j,n)}$ Zufallsvariable der j-ten Rangstatistik
+	\item $G(y)$, $g(y)$: Verteilung und Dichter der Zufallsvariable $Y$, die das höchste Signal der $n-1$ Konkurrenten aus Sicht von Biter $i$ darstellt
+\end{description}
+
+\begin{definition}
+	Wir definieren 
+	$$ v_{i}(x_1, \dotsc, x_{n}) = \mathbb{E}\left[ V_{i} ~\big|~ X_1 = x_1, \dotsc, X_n = x_n \right]$$
+	als die am genauesten mögliche Schätzung für den Wert des Gutes, da $s_{0}, s_{1}, \dotsc, s_{n}$ unbekannt bleiben.
+\end{definition}
+
+\begin{erinnerung} ~\
+	\begin{enumerate}
+		\item IPV: $V_{i} = v_{i}(X_1, \dotsc, x_{n}) = X_{i} \Rightarrow v_i = x_i$
+		\item CV: $V_1 = \dotsc = V_n = V$
+			$$v_1(X_1, \dotsc, X_n) = v_2(X_1, \dotsc, X_n) = \dotsc = v_n(X_1, \dotsc, X_n) = v(X_1, \dotsc, X_n)$$
+			$v(x_1, \dotsc, x_n) = \mathbb{E}\left[ V |~X_1 = x_1, \dotsc, X_n = x_n \right]$
+	\end{enumerate}		
+\end{erinnerung}
+~\newline
+\begin{satz}
+	Sei $X = (X_1, \dotsc, X_n)$ affiliert, $i \in N$, $h$ eine monoton wachsende Funktion und $x'$, $x''$ mit $x' > x''$. ~\\
+	
+	Für Bieter $i$ hat die erste Ordnungsstatistik $Y$ von $X_{-i}$ die folgende Eigenschaft:
+	\begin{enumerate}
+		\item Die Zufallsvariablen $X_{i}$ und $Y$ sind affiliert.
+		\item Für die bedingte Verteilung von $Y$ gegeben eine Realisierung von $X_i$ gilt
+			$$ \frac{g(y|x')}{G(y|x')} \geq \frac{g(y|x'')}{G(y|x'')}, \text{ wobei } G(~\cdot ~ | ~ x) = G(~\cdot ~ | ~ X_{i} = x) $$
+		\item Für den bedingten Erwartungswert $Y$ gegeben eine Realisierung von $X_i$ gilt
+			$$  \mathbb{E}\left[ h(Y) \big| ~ X_{i} = x' \right] \geq \mathbb{E}\left[ h(Y) \big| ~ X_{i} = x'' \right] $$
+	\end{enumerate}
+\end{satz}
+
+\section{Das symmetrische Modell}
+
+\begin{enumerate}[label=\alph*\upshape)]
+	\item Zwei Aspekte der Symmetrie
+		\begin{enumerate}[label=\arabic*.]
+			\item Symmetrie der Signale, gemeinsame Verteilung $F(x)$, $f(x)$
+			\item Symmetrie der Bewertung ~\\
+				Bewertungsfunktion: $v \colon [0, \overline{x}]^{n} \rightarrow \R$, $v_{i}(x) = v(x)$. $x_{i} \in [0, \overline{x}]$. ~\\
+				
+				Wir nehmen Weiterhin an, dass: $v_{i}(x_{i}, \rho(x_{-i})) = v_{i}(x_{i}, x_{-i})$ (wobei $\rho$ eine Permutation darstellt - d.h. es ist unabhängig von der Identität der anderen Bieter. ~\\
+				
+				Außerdem gilt: 
+				$$ \frac{\partial v_{i}(\cdot)}{\partial x_{i}} > 0, ~\frac{\partial v_{i}(\cdot)}{\partial x_{j}} \geq 0 $$		
+		\end{enumerate}
+\end{enumerate}
+
+
+\begin{beispiel} Sei
+	$$ v_{i}(x_{i}, x_{-i}) = \frac{x_{i}}{2} + \frac{\frac{1}{n-1} \sum_{j \neq i} x_{j}}{2}$$
+	Dann gilt: $\frac{\partial v_{i}(\cdot)}{\partial x_{i}} = \frac{1}{2}$, $\frac{\partial v_{i}(\cdot)}{\partial x_{j}} = \frac{1}{2(n-1)}$ ~\\
+					
+	Im common value-Modell muss gelten: $v_{i}(x_{i}, x_{-i}) = \frac{1}{n} \sum_{j=1}^{n} x_{j}$, wobei $w$ die Wertefunktion nur abhängig vom eigenen Signal und vom höchsten Signal der restlichen $n-1$ Bieter.
+\end{beispiel}	
+
+
+Der beste Informationsstand den Bieter $i$ haben kann am Anfang einer symmetrischen Auktion ist:
+	$$ v_{i} = v(x_{i}, x_{-i}) = \mathds{E}\left[V_{i} \big| X_1 = x_1, \dotsc, X_n = x_n \right]. $$
+Symmetrisches Modell bedeute allerdings nicht, dass alle dem Gut den gleichen Wert zuweisen; jeder könnte dem eigenen Signal mehr Gewicht geben, z.B.:
+$$ v(x_i, x_{-i}) = \frac{x_{i}}{2} + \frac{\frac{1}{n+1}\sum_{j \neq i} x_{j}}{2} $$
+$\Rightarrow v(x_{i}, x_{-i}) \geq v(x_{j}, x_{-j}) \iff x_{i} > x_{j}$. 
+
+\begin{bemerkung}
+	Beim CV-Modell müsste bei obigen Beispiel jedes Signal gleich gewichtet werden.	
+\end{bemerkung}
+
+\begin{definition}
+	Wir definieren die Funktion $w \colon [0, \overline{x}]^{2} \rightarrow \R$ mit
+	$$ w(x,y) = \mathds{E}\left[ V_{i} \big| X_{i} = x_{i}, Y = y \right] $$
+	wobei $Y$ die erste (und dadurch höchste) Rangstatistik der anderen $n-1$ Bieter.
+\end{definition}
+
+Es gilt: 
+\begin{eqnarray*}
+	& \mathds{E}[w(X_{i}, Y)]  =  \mathds{E}[v(X_{i}, X_{-i})] \\
+	& \mathds{E}[w(w_{i}, Y)]  =  \mathds{E}[v(w_{i}, X_{-i})] 
+\end{eqnarray*}
+d.h. in Erwartung werden beide Funktionen die gleiche Bewertung geben 
+
+Es sei gesagt: zum Zeitpunkt der Auktion betrachtet der Bieter $\mathds{E}\left[ w(x_i, Y) \right]$. ~\\
+
+
+Die Verhaltenssymmetrie unterstellt zwei Bedingungen, nämlich
+\begin{enumerate}
+	\item Informationssymmetrie: alle wissen über die Verteilungen gleich viel.
+	\item  Bewertungssymmetrie: alle bewerten das Gut über die Gleiche Funktion bzw. Bietstrategie
+\end{enumerate}
+damit gilt dann:
+$$ \text{ Verhaltenssymmetrie } \Rightarrow \text{ Sym. Bayes-Gleichgewichte } \beta \colon [0, \overline{x}] \rightarrow \R $$ 
+Wir erhalten ein solches symmetrisches Bayes-Gleichgewicht, indem wir für einen Bieter $i$ annehmen, dass alle anderen dieselbe optimale Strategie spielen, von der wir nur wissen, dass sie monoton ist und suchen nach der besten Antwort für den Bieter $i$. ~\\
+
+\textbf{Zweitpreisauktion} 
+\begin{equation*}
+	\mathds{E} \left[ \pi (b, X) \big| X_{i} = x_{i} \right] = \int_{0}^{\beta^{-1}(b)} \left( w(x,y) - \beta(y) \right) g\left(y | x \right) dy \tag*{$(*)$}
+\end{equation*} 
+Beachte: im IPV-Modell würde gelten, dass $w(x,y) = x_{i}$ und $ g\left(y | x \right) =  g\left(y \right)$. Die obere Integrationsgrenze zeigt das höchste $\overline{y}$ bei dem man das Gut gewinnt, also irgendeine Rente erzielt und damit in den Erwartungswert einfließt. ~\\
+
+Die Wahrscheinlichkeit dass man die Auktion gewinnt ist damit
+$$ G \left(\overline{y} | x \right) = \int_{0}^{y} g \left(y | x \right) dy \longrightarrow \max_{b} $$
+und wird maximiert bei $y = x$, denn der vordere Teil im Integranten ist positiv für $y < x$ und negativ für $y > x$.
+
+Maximieren von $(*)$ liefert
+$$ \frac{\partial}{\partial b} \mathds{E} \left[ \pi(\cdot) \right] = \left( w(x, \beta^{-1}(b)) \right) - \beta \left( \beta^{-1}(b) \right) g\left( \beta^{-1}(b) | x \right)  \frac{d\beta^{-1}(b)}{db} \overset{!}{=} 0 $$
+$$ \Rightarrow b = w\left( x, \beta^{-1}(b) \right), ~b = \beta(x) ~\Rightarrow~ \beta^{SA}(x) = w(x,x) $$
+d.h. ich nehme an, dass der höchste Bieter der restlichen $n-1$ Bieter das gleiche Signal bekommt wie man selbst. Bei zwei Bietern bietet man dadurch das eigene Signal, bei drei sinkt das Signal und je mehr Bieter dazukommen desto stärker sinkt das eigene Gebot, um dem Winners-Curse entgegenzuwirken.
+
+\begin{bemerkung}
+	Im IV-Modell gibt es keine dominante Strategie, nicht einmal im Zwei-Bieter-Fall und die obige Strategie stellt ein ex-post Gleichgewicht dar..	
+\end{bemerkung} ~\\
+\textbf{Englische Auktion} ~\\
+Die Bietfunktion in der Englischen Auktion sieht wie folgt aus:
+	$$ \beta^{EA} = \left( \beta^{EA}_{n}, \beta^{EA}_{n-1}, \dotsc, \beta^{EA}_{2} \right) $$
+mit $\beta^{EA}_{k} \colon [0, \overline{x}] \times \R^{n-k}_{+} \rightarrow \R_{+}$ für alle $2 \leq k \leq n$. Es gilt
+\begin{align*}
+	\beta^{EA}_{n}(x) & = v(x, \dotsc, x) \\
+	\beta^{EA}_{n-1}(x) & = v(x, \dotsc, x, x_{(n,n)}), \\ 
+	& \qquad p_{n-1} = v(x_{(n,n)}, \dotsc, x_{(n,n)}) \rightarrow v(n,n) \\
+	\beta^{EA}_{n-2}(x) & = v(x, \dotsc, x_{(n-1,n)}, x_{(n,n)}), \\
+	& \vdots \qquad p_{n-2} = v(x_{(n-1,n)}, \dotsc, x_{(n-1,n)}, x_{(n,n)}) \rightarrow v(n,n) \\	
+	& \vdots \\
+		\beta^{EA}_{2}(x) & = v(x, x, x_{(3, n)}, \dotsc, x_{(n,n)}),
+\end{align*}
+wobei $v$ jeweils eine Funktion von $n$ Variablen ist und $p_{k}$ den $k$-ten Ausstiegspreis darstellt. Wir wissen auch, dass $\beta_{l}^{EA}(x) \leq \beta_{m}^{EA}(x)$ für $l < m$. ~\\
+
+Vergleicht man die Bietfunktion bei der Zweitpreisauktion und der Englischen Auktion, so sieht man bei zwei Bietern sind die Funktionen identisch, bei mehr als zwei in EA kennen die ersten beiden Bieter die $n-2$ anderen Bieter und bei der Zweitpreisauktion muss er diese schätzen. ~\\
+
+
+\textbf{Erwarteter Auktionserlös der SA und EA} ~\\
+Mit $x_{k} = \mathds{E}\left[ X_{(k, 3)} \right], ~ k =1,2,3,$;  $v = x_1 + x_2 + x_3$ gilt:
+$$ \underbrace{\left[ \quad \underset{x_3}{\Big|} \quad \underset{x_2}{\Big|} \quad \underset{x_1}{\Big|} \quad \right]}_{I},  $$ ~\\
+
+\begin{itemize}
+	\item SA: $b_2 = x_2 + \underbrace{y_{(1,2)}}_{=x_2} + \mathds{E}\left[ Y_{(2,2)} \big| Y_{(1,2)} = x_{2} \right] = 2 x_{2} + \mathds{E}\left[ Y_{(2,2)} \big| Y_{(1,2)}= x_{2} \right]$:
+		$$ \Bigg[ \qquad \underset{\mathds{E}\left[Y_{(2,2)} \Big| Y_{(1,2)} = x_{2} \right]}{\Big|} \quad \underset{y_{(1,2)} = x_2}{\underset{~}{\Big|}} \qquad \quad \Bigg] $$
+		\begin{description}
+			\item Beachte, dass das Intervall hier größer ist als $I$, man kennt die Realisierungen nicht.
+		\end{description}
+	\item EA: $b_2 = x_2 + y_{(1,2)} + x_{3} = 2x_{2} + x_{3} \geq b^{SA}$
+		$$  \underset{x_{3}}{\Big|} \qquad \underset{y_{(1,2)}=x_2}{\Big|} $$
+\end{itemize}
+
+Es gilt das Ranking:
+$$ \mathds{E}\left[ p^{EA} \right] \geq \mathds{E}\left[ p^{SA} \right] \geq \mathds{E}\left[ p^{FA} \right] $$
+Gleichheit gilt bei Unabhängigkeit, dieses Ranking ist eine Folge der Affiliiertheit - dies ist eine Folge des Fluch des Gewinners. ~\\
+
+In diesem Modellrahmen, tritt der Fluch des Gewinners im Erwartungswert nicht auf. Allerdings im Einzelfall kann der Fluch des Gewinners in der EA nie auftreten. und ex post ist er in der SA möglich.
+
+
+\chapter{Mehrgüterauktionen}
+
+
+Der Fluch des Gewinners bleibt erhalten und analog viele der Analysen die wir bislang gemacht haben. Ein Vorteil der Englischen Auktion liegt darin, dass jeder Bieter selbst bestimmen kann, ob er das Gut ersteigert oder nicht. ~\\
+
+\textbf{Wertabhängigkeiten} ~\\
+Wir betrachten 2 Güter $X$ und $Y$ und unterscheiden Güter nach
+\begin{itemize}
+	\item Substitute  $:\iff v_{i}(X + y) \leq v_{i}(X) + v_{i}(Y)$  (man nennt die Güter bei \enquote{=} auch neutrale Güter)  
+	\item Komplemente $:\iff v_{i}(X + y)   >  v_{i}(X) + v_{i}(Y)$ - hier treten Synergien auf.
+\end{itemize}
+
+
+\textbf{Sequentielle Auktion} ~\\
+Wir betrachten 2 homogene Güter, in einer sequentiellen Auktion in der zuerst Gut 1, dann Gut 2 versteigert wird und nehmen vorerst an, dass jeder Bieter nur ein Gut ersteigern will. Im IPV Kontext betrachten wir $n$ Bieter mit jeweils $v_{i} = x_{i}$. 
+
+
+\begin{itemize}
+	\item In der Zweitpreisauktion ist in der 2. Auktion wie üblich die dominante Strategie seine Wertschätzung zu bieten. 
+	\item In der Erstpreisauktion ist in der 2. Auktion die Gleiche Bietstrategie zu wählen wie bei der Eingutauktion, allerdings wird jeder Bieter mehr bid-shading betreiben, da bereits einer der $n$ Bieter das 1. Gut ersteigert hat und somit nur noch $n-1$ Bieter um das 2. Gut konkurrieren.
+\end{itemize}
+
+Da allerdings in der Zweitpreisauktion, falls jeder auch in der ersten Runde seine Wertschätzung bietet, die erste Runde teurer ist als die zweite, geht die Anreizkompatibilität verloren. Die Bieter haben hier dadurch einen Anreiz ihre Wertschätzung zu unterbieten. ~\\
+
+Ein Gleichgewicht in der Zweitpreisauktion müsste dadurch in beiden Runden den gleichen Zuschlagspreis haben. Da wir oben bereits ausgerechnet haben, dass in der zweiten Runde die Wertschätzung des 3. (Knappheitspreis) geboten wird, ist das auch der Preis in der 1. Runde. Analoges gilt für die Erstpreisauktion. ~\\
+
+\begin{bemerkung}
+	Allgemein gilt, dass der Knappheitspreis bei Mehrgüterauktionen mit homogenen Gütern der Knappheitspreis ein erster Indikator auf den Erlös ist.
+\end{bemerkung}
+
+Die Gleichgewichts-Bietstrategien lauten damit
+\begin{itemize}
+	\item Erstpreisauktion: u nter der Annahme man habe das höchste Gebot bietet man das 3. höchste Gebot
+	\item Zweitpreisauktion: unter der Annahme man habe das höchste Gebot bietet man das 2. höchste Gebot.
+\end{itemize}
+
+In der Praxis gibt es allerdings Beobachtungen, dass Preise fallend, wenn ein und das selbe Gut mehrfach verkauft wird. ~\newpage
+
+\section{Simultane Mehrgüterauktion}
+
+Das Angebot bestehe aus 16 homogenen Gütern.
+
+\begin{itemize}
+	\item Bieter $A$ (24 Euro, 4 EH), (22 Euro, 3 EH), (21 Euro, 5 EH)
+	\item Bieter $B$ (25 Euro, 3 EH), (24 Euro, 2 EH), (22 Euro, 3 EH)
+	\item Bieter $C$ (23 Euro, 5 EH), (22.50 Euro, 2 EH), (20 Euro, 2 EH)
+\end{itemize}
+Hier kommt ein abnehmender Grenznutzen ins Spiel, Bieter $A$ ist bereit für die ersten 4 Einheiten zwar pro Einheit 24 Euro zu zahlen, für die nächsten 3 Einheiten allerdings nur noch 22 Euro, etc.
+
+Verkauft werden an die 16 Einheiten mit höchsten Gebotspreisen: ~
+\begin{tabular}{c|c}
+  EH & Bieter  \\
+  \hline
+  3 & B \\
+  4 & A \\
+  2 & B \\
+  5 & C \\
+  2 & C \\
+  \hline
+  $\Sigma ~$16 & ~
+\end{tabular} ~\\
+
+Mögliche Preisregeln für diese Auktionsform:
+\begin{itemize}
+	\item Preisdiskriminierende Auktion (Pay-as-bid, Gebotspreisauktion)
+	\item Einheitspreisauktion (Pay-as-cleared, Uniform pricing)
+		\begin{itemize}
+			\item LAB (lowest accepted bid): preisbestimmend ist das niedrigste bezuschlagte Gebot. Im obigen Beispiel: 22.50 Euro. Diese Form ist in der Praxis häufiger zu finden.
+			\item HRB (highest rejected bid): preisbestimmend ist das höchste nicht bezuschlagte Gebot. Im obigen Beispiel: 22 Euro. Diese Form ist theoretisch interssanter und wünschenswerter.
+		\end{itemize} 
+	\item Vickrey-Auktion
+\end{itemize}
+
+\newpage
+
+% todo Bookmark Vorlesung / Übung
+\phantomsection \appendix \pagenumbering{Roman}  \cftaddtitleline{toc}{chapter}{Appendix}{}
+\cftaddtitleline{toc}{section}{Übungen}{I}
+
+\chapter*{Übungen}
+
+
+\section*{1. Übung}
+
+\subsection*{Statistische Grundlagen}
+
+\begin{itemize}
+	\item Zufallsvariablen sind die unbekannten Wertschätzung der Bieter $X$
+	\item $\mathbb{R}(X = x) =$ Wahrscheinlichkeit, dass die Zufallsvariable $X$ den Wert $x$ annimmt
+	\item Dichte- und Verteilungsfunktion (einer Zufallsvariable $X$)
+\end{itemize}
+
+todo
+
+\newpage
+
+\section*{2. Übung}
+ todo
+
+\newpage
+
+\section*{3. Übung}
+
+\subsection*{Aufgabe 7}
+
+\begin{enumerate} \setcounter{enumi}{5}
+	\item Der optimale Limitpreis in der FA steigt mit der Anzahl der an der Auktion teilnehmenden Bieter 
+		\begin{proof}
+			Falsch, der optimale Limitpreis ist unabhängig von der Anzahl der Bieter.	
+		\end{proof} \setcounter{enumi}{7}
+	\item Bei symmetrischen und risikoneutralen Bietern ist der optimale Limitpreis von der Auktionsform EA, DA, FA oder SA unabhängig.
+		\begin{proof}
+			Wahr; im einfachen IPV-Modell ist das für alle Auktionsformen identisch.
+		\end{proof}
+	\item Bei symmetrischen und risikoneutralen Bietern ist der optimale Limitpreis von der Anzahl der Bieter unabhängig.
+		\begin{proof}
+			Wahr (Neuformulierung der anderen Frage).
+		\end{proof}
+	\item Bei symmetrischen und risikoneutralen Bietern ist der optimale Limitpreis von der Wertschätzung des Auktionators für das Gut unabhängig.
+		\begin{proof}
+			Falsch; $x_{0}$ taucht in der Formel des optimalen Reservationspreises auf.
+		\end{proof}
+	\item Bei symmetrischen und risikoneutralen Bietern erzielt der Auktionator in jeder der vier Auktionsformen durch Setzen des optimalen Limitpreises einen Erlös, der nicht niedriger als in der unlimitierten Auktion ist.
+		\begin{proof}
+			Falsch, wir betrachten nur den Erwarteten Erlös, der tatsächliche realisierte Preis kann in einzelnen Beobachtungen niedriger sein.
+		\end{proof}
+	\item Selbst bei symmetrischen und risikoneutralen Bietern kann das Setzen des optimalen Limitpreises in jeder der vier Auktionsformen zu einem ineffizienten Ergebnis führen.
+		\begin{proof}
+			Wahr; wenn wegen $r^{*} - x_{0}$ das Gut nicht verkauft wird, also wegen dem Zuschlag des Reservationspreises, ergibt sich ein ineffizientes Ergebnis.
+		\end{proof}\setcounter{enumi}{15}
+	\item Das Revenue-Equivalence-Theorem (in Bezug auf ie vier Auktionsformen ohne Limitpreis) gilt auch im Falle von symmetrischen und risikoaversen Bietern.
+		\begin{proof}
+			Falsch;
+		\end{proof}
+	\item Sind die Bieter risikoavers und symmetrisch (was dieselbe Nutzenfunktion für alle Bieter beinhaltet), dann stellt sich im symmetrischen Bayes-Gleichgewicht einer jeder der vier Auktionsformen ohne Limitpreis ein effizientes Ergebnis ein.
+		\begin{proof}
+			 Wahr. In SA, EA ist weiterhin schwach-dominant, also ist die Frage ob bei DA, FA das auch gilt. Aber bei gleicher Risikoaversion, betreibt jeder gleichviel Bid-Shading, d.h. die Höchste Wertschätzung bietet immer noch am meisten - natürlich falls die risikoaversion unterschiedlich ist, gilt das nicht mehr.
+		\end{proof}
+	\item Sind die Bieter risikofreudig und symmetrisch, dann kann der Auktionator in der FA ohne Limitpreis einen höheren Auktionserlös als in der SA ohne Limitpreis erwarten.
+		\begin{proof}
+			Falsch; 
+		\end{proof}
+	\item Im IVP-Modell mit asymmetrischen Bietern stellt das Bayes-Nashgleichgewicht einer FA ein effizientes Auktionsergebnis sicher. (asymmetrische Bieter = unterschiedliche Verteilungen liegen zugrunde)
+		\begin{proof}
+			Falsch;
+		\end{proof}
+\end{enumerate}
+
+\subsection*{Aufgabe 7}
+
+Ein Auktionator beabsichtigt ein Gut mittels einer Simultanen Zweitpreisauktion (SA) zu verkaufen, in der er einen Limitpreis $r > 0$ setzt. An der Auktion nehmen zwei risikoneutrale Bieter teil, für die der IPV-Ansatz gilt. Die Signale der Bieter entstammen aus der Gleichverteilung über dem Intervall $[0, 1]$, sind private Information und stimmen mit der Wertschätzung der Bieter für das Gut überein.
+
+\begin{enumerate}
+	\item Welche Gefahr setzt sich der Versteigerer durch das Setzen einen positiven Limitpreis $r > 0$ aus?
+		\begin{proof}
+			Unter Umständen wird der Auktionator das Gut nicht versteigern, nämlich im Fall dass der Reservationspreis über den beiden Wertschätzungen liegt. Dies passiert mit der Wahrscheinlichkeit (W'keit):
+			$$ P(X_{(1, 2)} \leq r) = F^{2}(r). $$
+		\end{proof}
+	\item Formulieren Sie den Optimierungsansatz zur Bestimmung des Limitpreis $r^{*}$, der den erwarteten Erlös des Versteigerers maximiert. Berechnen Sie $r^{*}$ unter der Annahme, dass der Versteigerer dem Gut keinen Wert beimisst, d.h. $v_{0} = 0$.
+		\begin{proof}
+			Bei einer SA haben die Bieter eine schwach-dominante Strategie, nämlich ihre Wertschätzung zu bieten, falls $v_{i} > r$.
+			\begin{center}
+    \begin{tabular}{| l | l | l |}
+    \hline
+    Fall & W'keit & Erwarteter Erlös  \\ \hline
+    $x_{(1,2)} < r$ & $r^{2}$ & $0$  \\ \hline
+    $x_{(1, 2)} > r > x_{(1, 2)} $ & $2 \cdot r (1 - r)$ & $r - v_{0}$  \\ \hline
+    $x_{(2, 2)} > r$ & $(1-r)^{2} $  &  \pbox{20cm}{$\mathbb{E}[X_{(2,2)} - v_{0} \big| X_{(2,2)} > r] =$ \\ ~\hspace{0.25cm} $r + \frac{1}{3} (1-r) = \frac{2}{3} r + \frac{1}{3}$} \footnote{Wir wissen nämlich aus der 2. Übung: $\mathbb{E}[X_{(k, n)}] = \frac{n - k +1}{n+1} \xRightarrow[n=2]{k=2} \mathbb{E}[X_{(2,2)}] = \frac{1}{3}$}  \\ 
+    \hline
+    \end{tabular}
+    \end{center}
+   
+    Für unsere Aufgabe also für $v_{0} = 0$ gilt:
+    
+    \begin{align*}
+    	\mathbb{E}[\pi_{0}(\beta^{SA}(X), x_{0}, r)] & = r\left(2r (1-r)\right) + (1-r)^{2} \cdot \left( \frac{2}{3} + \frac{1}{3} \right) \\
+    		& = \frac{1}{3}  \left( 1 + 3 r^{2} - 4 r^{2} \right) \longrightarrow \max_{r}
+    \end{align*}
+
+	Aus der FOC folgt demnach:
+	 $$ \frac{\partial \mathbb{E}[\pi_{0}]}{\partial r} = 2 r - 4 r^{2} = 2r(1 - 2r) \overset{!}{=} = 0 ~ \Longrightarrow ~ r_{1} = 0, r_{2} = \frac{1}{2} $$
+	Um aus diesen Extremwertstellen das Maximum zu finden, benutzten wir die SOC:
+	$$ \frac{\partial^{2} \mathbb{E}[\pi_{0}]}{\partial r^{2}} = 2 - 8 r  ~\Longrightarrow ~r^{*} = \frac{1}{2} $$
+			Nun wissen wir aus der Vorlesung: 
+				$$ r^{*} = x_{0} + \underbrace{\frac{1}{\lambda(r^{*})}}_{\lambda(r^{*}) = \frac{f(r^{*})}{1 - F(r^{*})}} = x_{0} + \frac{1 - F(r^{*})}{f(r^{*})} \xRightarrow[]{A7)} r^{*} - \frac{1 - r}{1} \overset{!}{=} 0 \Rightarrow r^{*} = \frac{1}{2} $$ 
+		\end{proof}
+	\item Bestimmen Sie den erwarteten Erlös des Versteigerers für den Fall, dass er einem Limitpreis in Höhe von $r^{*}$ setzt. Zeigen Sie, dass dies zu einem höheren erwarteten Erlös des Versteigerers führt als als die klassische Zweitpreisauktion ohne Limitpreis.
+		\begin{proof}
+			Wenn wir die beiden erwarteten Erlöse (mit und ohne Reservationspreis) vergleichen, erhalten wir:
+			\begin{itemize}
+				\item $\mathbb{E}[\pi_{0}(\beta^{SA}(X), x_{0} = 0, r^{*} = \frac{1}{2}] = \dotsc = \frac{5}{12}$ und
+				\item $\mathbb{E}[\pi_{0}(\beta^{SA}(X), x_{0} = 0, r^{*} = 0] = E[X_{(2, 1)}] = \frac{1}{3}$,
+			\end{itemize}
+			da aber $\frac{1}{3} < \frac{5}{12}$, hat sich der Reservationspreis für den Auktionator gelohnt.
+		\end{proof}
+\end{enumerate}
+
+\subsection*{Aufgabe 8}
+
+Ein Auktionator beabsichtigt ein Gut mittels einer Simultanen Erstpreisauktion (FA) zu verkaufen, in der er keinen Limitpreis setzt (r = 0). An der Auktion nehmen $n$ risikoaverse Bieter teil, die alle dieselbe Nutzenfunktion besitzen. Für die Wertschätzungen der Bieter für das Gut gilt der IPV-Ansatz, wobei die Signale der Bieter aus der Gleichverteilung über dem Intervall $[0, 1]$ stammen und mit den Wertschätzungen übereinstimmen.
+
+\begin{enumerate}
+	\item Worin besteht das Risiko eines Bieters in einer FA und auf welche Weise kann er dieses Risiko vermindern? Macht Ihre Argumentation für die FA auch für die Simultane Zweitpreisauktion (SA) Sinn?
+		\begin{proof}
+			Das Risiko eines Bieters in der FA besteht darin, den Zuschlag nicht zu erhalten, obwohl das Zuschlagsgebot unter seiner Wertschätzung liegt. Reduktion dieses Risikos durch Erhöhung des Gebots im Vergleich zu einem risikoneutralen Bieter (= Risikoprämie). \\
+			
+			In der SA besitzt jeder Bieter eine schwach dominante Strategie seine Wertschätzung zu bieten, d.h. die Argumentation macht hier keinen Sinn.
+		\end{proof}
+	\item In welchem Intervall liegt das Gebot eines Bieters im symmetrischen Bayes-Gleichgewicht der FA?
+		\begin{proof} ~\
+			\begin{itemize}
+				\item risikoneutraler Bieter:
+					$$ \beta_{RN}^{FA}(x_{i}) = \frac{n-1}{n} \cdot x_{i} $$ ~\\
+					
+				Beispiel (für $n = 4$):
+					 \tikz[baseline=-0.5ex]{  
+					 	\draw(0,0)--(10,0);
+   						\foreach \x/\xtext in {0/$0$,2/$$,4/$$,6/{},8/$x_{i}$,10/$1$}
+      				\draw(\x,3pt)--(\x,-3pt) node[below] {\xtext};
+    				\draw[decorate,decoration={brace},yshift=2ex]  (0,0) -- node[above=0.4ex] {\small $\frac{x_{i}}{4}$}  (2,0);
+    				\draw[decorate,decoration={brace},yshift=2ex]  (6,0) -- node[above=0.4ex] {\small {\color{red} $RA$ }}  (8,0);
+    				\draw[yshift=2ex]  (5.5,0) node[above=0ex] {\small {\color{green} $\xleftarrow[]{~RF~}$ }}  (6,0);
+    				\draw[decorate,decoration={brace},yshift=-4ex] (6,0) -- node[below=0.3ex] {\small $\frac{3x_{i}}{4}$} (0,0);}
+    			und es gilt:
+    			$$ \frac{n-1}{n} \cdot x_{i} = \beta_{RN}^{FA} < \beta_{RA}^{FA} < x_{i} $$
+			\end{itemize}
+		\end{proof}
+	\item In welchem Intervall liegt der erwartete Verkaufserlös des Versteigerers im symmetrischen Bayes-Gleichgewicht der FA mit risikoaversen Bietern? Vergleichen Sie diesen Wert mit dem entsprechenden erwarteten Verkaufserlös in einer SA.
+		\begin{proof}
+			$$ \mathbb{E}\left[p\left(\beta_{RA}^{FA}\right)\right] \in \left( \frac{n-1}{n} \cdot \mathbb{E}\left[X_{(1,n)}\right], \mathbb{E}\left[x_{(1,n)}\right] \right) $$
+			$$ \mathbb{E}\left[p(\beta^{SA}_{RN,RA,RF}\right] = \mathbb{E}\left[X_{(2,n)} \right], $$
+			d.h. mit risikoaversen Nutzern lohnt es sich die Erstpreisauktion durchzuführen, da der erwartete Erlös höher ist.
+		\end{proof}
+\end{enumerate}
+
+\subsection*{Aufgabe 9}
+
+An einer simultanen Erstpreisauktion (FA) nehmen zwei asymmetrische Bieter teil, wobei für die Verteilungen der Signale der beiden Bieter $X_{i} \sim U[0, \frac{4}{3}]$ bzw. $x_{2} \sim U[0, \frac{4}{5}]$ gelte. Ansonsten gelten die Annahmen des IPV-Grundmodells.
+
+\begin{enumerate}
+	\item Zeigen Sie, dass die folgende Strategienkombination ein Bayes-Nash-Gleichgewicht dieser FA konstituiert \textit{(detaillierte Lösung dieser Aufgabe ist im Skript auf Seite 44 \& 45, Fabian hat sich hier kurz gehalten)}.
+		\begin{align*}
+			\beta_{1}(x_{1}) & = \begin{cases} \frac{1}{x_{1}} \left( \sqrt{1+x_{1}^{2}} - 1 \right) & x_{1} \neq 0 \\ 0 & x_{1} = 0 \end{cases} \\
+			\beta_{2}(x_{2}) & = \begin{cases} \frac{1}{x_{2}} \left( 1 - \sqrt{1-x_{2}^{2}}  \right) & x_{2} \neq 0 \\ 0 & x_{2} = 0 \end{cases} \\
+		\end{align*}
+		\begin{proof}
+			Wir wollen also überprüfen, ob das die gegenseitig beste Antwort ist.
+				\begin{figure*}[h] \centering
+				\begin{tikzpicture}[
+  					declare function={ funcDE(\x)= 
+  							(\x<=0.8)      * 1.25 * \x +
+                			(\x>0.8)       * (1);
+  					},
+  					declare function={ funcDZ(\x)= 
+  							(\x<=1.33333)      * 0.75 * \x +
+                			(\x>1.33333)       * (1);
+  					},
+				]
+					\begin{axis}[axis x line=middle, axis y line=middle,
+  								 ymin=-0.25, ymax=1.25, 
+  								 ytick={}, ylabel=$$,
+  								 xmin=-0.25, xmax=1.75, 
+  								  xtick={}, xlabel=$$,
+								]
+						\addplot[blue, domain=0:1.75]{funcDE(x)};
+						\addplot[green, domain=0:1.75]{funcDZ(x)};
+
+					\end{axis}
+				\end{tikzpicture}
+			  \end{figure*}
+		  	$$ F_{1}(x) = \begin{cases} 0, & x < 0, \\ \frac{3}8{4} x, & x \in [0, \frac{4}{3}] \\ 1, & x > \frac{4}{3} \end{cases}, \quad F_{2}(x) = \begin{cases} 0, & x < 0, \\ \frac{5}{4} x, & x \in [0, \frac{4}{5}] \\ 1, & x > \frac{4}{5} \end{cases},  $$ ~\newpage
+		  	Damit gilt (Zeichnung der Bietfunktionen ist im Skript auf Seite 45):
+		  	\begin{itemize}
+		  		\item $\beta_{1}(0) = \beta_{2}(0) = 0$
+		  		\item $\beta(\frac{4}{3}) = \dotsc = \frac{1}{2}$
+		  		\item $\beta_{2}(\frac{4}{5}) = \dotsc = \frac{1}{2}$
+		  	\end{itemize} 
+		  	Nachrechnen: $\beta_{1}(\cdot), \beta_{2}(\cdot)$ sind streng monoton steigend, d.h. $\beta_{1}'(\cdot) > 0, \beta_{2}'(\cdot) > 0$.
+		  	$$ \Rightarrow \beta_{1}^{-1}(b), \beta_{2}^{-1}(b) \text{ existieren und es gilt:} $$
+		  	$\beta_{1}^{-1}(b) = \frac{2b}{1 - b^{2}}$, $\beta_{2}^{-1}(b) = \frac{2b}{1+b^{2}}$. \\ \\
+		  	
+		  	Wir wollen nun das Bayes-Nash-Gleichgewicht untersuchen: \\
+		  	
+		  	\textbf{Annahme}: Bieter 2 wählt $\beta_{2}(\cdot) \longrightarrow$ Wie sollte Bieter 1 antworten? \\
+		  	
+		  	\textbf{Bieter 1}:
+		  		\begin{description}
+		  			\item $x_{1} = 0 \Longrightarrow \beta_{1}(x_{1}) = 0$
+		  			\item $x_{1} \neq 0$: $\max_{b_{1}} \mathbb{E}\left[ \pi_{1} \left(x_{1}, b_{1}, \beta_{2}(X_{2}) \right) \right] = \max_{b_{1}} \left( x_{1} - b_{1} \right) \cdot \mathbb{P}\left( b_{1} \geq \beta_{2}\left( x_{2} \right) \right)$
+		  				\begin{align*}
+		  					~ ~\qquad ~\qquad ~\qquad ~\quad  & = \max_{b_{1}} \left( x_{1} - b_{1} \right) \mathbb{P}\left( \beta_{2}^{-1} \left( \beta_{1}\right) \geq X_{2} \right) \\
+		  					& = \max_{b_{1}} \left( x_{1} - b_{1} \right) F_{2}\left( \beta^{-1} \left( b_{1} \right) \right) \\
+		  					& = \max_{b_{1}} \left( x_{1} - b_{1} \right) \frac{5}{4} \beta_{2}^{-1} \left( b_{1} \right) \\
+		  					& = \max_{b_{1}} \frac{5}{4} \cdot \frac{2 b_{1}}{1 + b_{1}^{2}} \cdot (x_{1} - b_{1}) \\
+		  					& = \max_{b_{1}} \left( x_{1} - b_{1} \right) \cdot \frac{5}{2} \cdot \frac{b_{1}}{1 + b_{1}^{2}}
+		  				\end{align*}
+		  			FOC: $\frac{\partial \mathbb{E}[\pi_{1}]}{\partial b_{1}} = \dotsc \overset{!}{=} 0$ 
+		  			$$ \Longrightarrow b_{1} = \left\{ \frac{1 + \sqrt{1 + x_{1}^{2}}}{- x_{1}}, \frac{\sqrt{1 + x_{1}^{2}}}{x_{1}} \right\}, \quad \Longrightarrow b_{1} = \frac{\sqrt{1 + x_{1}^{2}} - 1}{x_{1}} $$
+		  		\end{description}
+		\end{proof}
+	\item Zeigen Sie, dass das obige Gleichgewicht ineffiziente Auktionsergebnisse ermöglicht.
+		\begin{proof}
+			Wir zeigen an einem Beispiel, dass das Auktionsergebnis durchaus ineffizient sein kann: \\
+			
+			Wir wollen also überprüfen, ob die Funktion die in der Aufgabe gegeben ist, die gegenseitig beste Antwort ist. Für eine Zeichnung siehe Abbildung 2.4 auf Seite 45 im Skript. \\
+
+			  Wir haben $\beta_{1}(1) = \sqrt{2} - 1 \approx 0.41$ und $\beta_{2}(\frac{4}{3}) = \frac{1}{2}$ und damit ist das Ergebnis ineffizient, da obwohl Bieter 1 hatte die höhere Wertschätzung Bieter 2 allerdings das höhere Gebot und damit den Zuschlag
+		\end{proof}
+\end{enumerate}
+
+\section*{4. Übung}
+
+\subsection*{Aufgabe 10}
+
+\begin{enumerate}[label=\alph*\upshape)]
+	\item Im CV-Modell hat das Gut für alle Bieter den gleichen (ex-ante) unbekannten Wert.
+	\item Effizienz bedeutet, dass der Bieter mit der höchsten Wertschätzung das Gut erhält. Da aber im CV-Modell der Wert des Gutes für alle Bieter gleich ist, ist jedes Auktionsergebnis effizient (außer wenn alle Bieter eine niedriges Gebot abgeben, als die Wertschätzung des Gutes)
+	\item Der Fluch des Gewinners ist ein Phänomen, das häufig bei Gütern mit hoher CV-Komponente zu beobachten ist, bei dem der Gewinner der Auktion mehr für das Gut zahlt, als es wert ist. Grund ist, dass in der Regel der Bieter den Zuschlag erhält, der den Wert des Gutes \underline{am meisten} überschätzt hat. ~\\
+		Rationale Bieter berücksichtigen genau dies bei ihrem Gebot.
+\end{enumerate}
+
+\subsection*{Aufgabe 11}
+
+Die Rahmenbedingungen: SA, $n = 2$, Signale $x_1, x_2$, CV-Gut: $v = x_1 + x_2$, $F$ mit $f$ - wobei $x_{i} \in [0, 100]$ für $i \in \{1, 2 \}$. Annahme: die Bietfunktion sind monoton.
+
+\begin{enumerate}[label=\alph*\upshape)]
+	\item Symmetrisches Bayes-Nash-Gleichgewicht:
+		$$ \mathds{E}[\pi_{1}\left( x_1, X_2, b_1, \beta_{2}(X_2)\right)] \longrightarrow \max_{b_{1}}  $$
+		$$ = \int_{0}^{\beta_{2}^{-1}(b_{1})} \left( (x_1 + X_2) - \beta\left(X_{2}\right) \right)f(X_2) dx_2 $$
+		mit FOC folgt: $\beta^{SA}(x_{i}) = w(x_i, x_ii) v(x_i, x_i) = 2x_i$.
+	\item Gegenbeispiel: $x_1 = 0 \rightarrow b_1 = 70$, $x_2 = 50 \rightarrow \beta^{SA}(x_2) = 2x_2 = 100$.
+		$$ \Rightarrow v = 50 $$
+		$\Rightarrow p = 70 \Rightarrow \pi_2 = 50 - 70 = -20 \Rightarrow$ keine dominante Strategie, durch verringern des Gebots unter 70 wird der Verlust verringert.
+	\item \begin{itemize}
+		\item ex-ante: kein Winner's Curse, da $b_i = 2 x_i$
+		\item ex-post: 
+			\begin{itemize}
+				\item $n = 2$: $v = x_{(1)} + x_{(2)}$ (höheres + niedrigeres Signal)
+					$$ \begin{rcases}
+						b_{(1)} = \beta^{SA}(x_{(1)}) = 2x_{(1)} \\
+						b_{(2)} = \beta^{SA}(x_{(2)}) = 2x_{(1)}
+					\end{rcases} p = 2x_{(2)} < v$$
+				\item $n \geq 3$: $v = x_{(1)} + x_{(2)} + x_{(3)}$
+					$$ p = b_{(2)} = w\left( x_{(2)}, x_{(2)} \right) = 2x_{(2)} = 2x_{(2)} + \mathds{E}\left[ X_{(3)} \big| X_{(2)} = x_{(2)} \right] > V $$
+			\end{itemize}
+	\end{itemize}
+\end{enumerate}
+
+
+\subsection*{Aufgabe 12}
+$n = 4$, Signale $x_{i}$, $x_{1} = 30000$,$v = v_{i} = x_1 + x_2 + x_3 + x_4$.
+$$ \beta^{EA}(x) : \left( \underbrace{\beta_{4}^{EA}(x)}_{\text{falls noch 4 Bieter}}, \beta_{2}^{EA}(x), \underbrace{\beta_{2}^{EA}(x)}_{\text{falls nur noch 2 Bieter}} \right) $$
+$p_{(4)}$ - erster Ausstiegszeitpunkt ~\\
+$p_{(3)}$ - zweiter Ausstiegszeitpunkt ~\\
+$p_{(2)}$ - dritter Ausstiegszeitpunkt ~\\
+
+Wenn man die erwartete Rente maximiert erhält man für alle Bieter die gleiche Bietstrategie:
+$$ \beta_{4}^{EA}(x_{i}) = v_{i}(x_{i}, x_{i}, x_{i}, x_{i}) = 4 x_{i} $$
+$p_{(4)} = \beta_{4}(x_{(4)}) = 4 x_{(4)}$. Wir wissen damit: $x_{(4)} = \frac{p_{(4)}}{4}$. Damit gilt:
+$$  \beta_{4}^{EA}(x_{i}) = v_{i}(x_{i}, x_{i}, x_{i}, x_{(4)}) = 3 x_{i} + x_{(4)} < 4 x_{i}  $$
+$p_{(3)} = \beta_{3}(x_{(3)}) = 3x_{3} + x_{4} \Rightarrow x_{(3)} = \frac{p_{(3)} - x_{(4)}}{3}$
+$$ \beta_{2}^{EA}(x) = v(x_{i}, x_{i}, x_{(3)}, x_{(4)}) = 2x_{i} + x_{(3)} + x_{(4)} $$
+$p = 2x_{(2)} + x_{(3)} + x_{(4)}$.
+$$ \beta_{1}^{EA}(x_{i}) =\left( 120000, 90000 + x_{(4)}, 60000 + x_{(3)} + x_{(4)} \right) $$
+
+\printindex
+
+\end{document}
