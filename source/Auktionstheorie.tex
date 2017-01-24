@@ -56,7 +56,23 @@
 \usetikzlibrary{calc}	
 \usetikzlibrary{matrix}	
 
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.7}
+\usetikzlibrary{calc}	
+\usetikzlibrary{matrix}	
+\usepackage{minibox}
+\usepackage{xcolor}
+\usepackage{sgame} % Game theory packages
+\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
 
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{patterns}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{calc, intersections}
+\usetikzlibrary{trees, calc} % For extensive form games
+\pgfplotsset{compat=1.7}
+\usetikzlibrary{calc}	
+\usetikzlibrary{matrix}	
 
 % Options
 \makeatletter%%  
@@ -620,13 +636,13 @@ und Gleichheit gilt nur für die Wertschätzung $v = r$.
 	Gegeben zwei Verteilungen $F_{I}, F_{II}$, so sagen wir $F_{II}$ \textbf{dominiert} $F_{I}$ \textbf{stochastisch 1. Ordnung}, falls $F_{I}(x) < F_{II}(x) \quad \forall x$.
 \end{definition}
 
-\begin{unnamedtheorem}[Fall von asymmetrischen Bietern] ~\\
+\begin{beispiel}[Fall von asymmetrischen Bietern] ~\\
 	Gegeben seien 2 Klassen von Bietern mit jeweils unterschiedlichen Verteilungen $F_{I}$ und $F_{II}$, $F_{I} \neq F_{II}$. Betrachten wir die Strategien der Bieter unter stochastische Dominanz 1. Ordnung, so ergibt sich:
 	\begin{itemize}
 		\item Für Auktionen mit dominanten Strategien (wie in EA und SA) ändert sich nichts! 
 		\item Für EA und DA gibt es keine allgemeine Theorie mehr für optimale Strategie und Gleichgewichte $\rightarrow$ Einzelfallunterscheidung.
 	\end{itemize}	
-\end{unnamedtheorem}
+\end{beispiel}
 
 \begin{beispiel}[FA/DA]
 	Sei $n=2$, $X_{1} \sim U\left[0, \frac{4}{3}\right]$, $X_{2} \sim U\left[0, \frac{4}{5} \right]$ ~\newline
@@ -714,8 +730,13 @@ Im Skript wird das Gleichgewichtspaar bestimmt für stärkere/schwächere Bieter
 	  \end{center}
 \end{figure*}
 
-Wir haben hier unterschiedliche Bietfunktionen, also ein \textbf{asymmetrisches Gleichgewicht}. Zusätzlich liegt hier keine Effizienz mehr vor, denn $\beta_{2}$ ist an den markierten Stellen trotz niedrigerem Signal höher! $\Rightarrow$ RAT gilt nicht mehr.
+Wir haben hier unterschiedliche Bietfunktionen, also ein \textbf{asymmetrisches Gleichgewicht}.
 \end{beispiel}
+
+\begin{bemerkung}
+	Zusätzlich in obigem Beispiel liegt hier keine Effizienz mehr vor, denn $\beta_{2}$ ist an den markierten Stellen trotz niedrigerem Signal höher! $\Rightarrow$ RAT gilt nicht mehr.	
+\end{bemerkung}
+
 
 \index{Ex-post-Gleichgewichte}
 
@@ -1125,25 +1146,270 @@ Mögliche Preisregeln für diese Auktionsform:
 	\item $\mathbb{R}(X = x) =$ Wahrscheinlichkeit, dass die Zufallsvariable $X$ den Wert $x$ annimmt
 	\item Dichte- und Verteilungsfunktion (einer Zufallsvariable $X$)
 \end{itemize}
+\begin{figure*}[h!]
+	\pgfmathdeclarefunction{gauss}{3}{%
+  		\pgfmathparse{(1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2)))-#3}%
+	}
+	\begin{tikzpicture}[
+  						 declare function={ funcDE(\x)= 
+  								(\x<=2.5) * -0.423;
+  						  },
+					   ]
+		\begin{axis}[every axis plot post/.append style={
+ 					 mark=none,domain=0:4,samples=50},
+ 					 axis x line*=bottom, axis y line*=left, 
+ 					 ytick={0.25, 0.5, 1}, xticklabels={\overline{x}}, 
+ 					 xtick={1.5}, xticklabels={x}, 
+ 					 enlargelimits=upper] 
+  			\addplot {gauss(2,0.75,0)};
+  			\addplot +[black, dashed, mark=none] coordinates {(1.5, 0) (1.5, 0.423)};
 
-todo
+		\end{axis}
+	\end{tikzpicture}
+	\begin{tikzpicture}[
+  						 declare function={ funcDE(\x)= 
+  								(\x<=2.5) * -0.039;
+  						  },
+					   ]
+		\begin{axis}[every axis plot post/.append style={
+  					 mark=none,domain=-5:2,samples=50},
+  					 axis x line*=bottom, axis y line*=left,
+  					 ytick={-0.00001}, yticklabels={1}, 
+  					 xticklabels={\overline{x}}, xtick={0.0001}, 
+  					 xticklabels={x}, enlargelimits=upper] 
+  			\addplot {gauss(2,2.75,0.15)};
+  			\addplot +[black, dashed, mark=none] coordinates {(0.0001, -0.145) (0.0001, -0.039)};
+		\end{axis}
+	\end{tikzpicture}
+\end{figure*}
 
+\textbf{Eigenschaften}
+
+\begin{itemize}
+	\item $f(x) \geq 0$
+	\item $\int_{\R} f(x) = 1$
+	\item $F(\overline{x}) = \int_{-\infty}^{\overline{x}} f(t) dt = \mathds{P}(X \leq \overline{x})$
+\end{itemize}
+
+
+\begin{beispiel*}
+	Gleichverteilung auf $[0, 1]$: $f(x) = \begin{cases} 0, & x < 0 \\ 1, & x \in [0, 1] \\ 0, & x > 1 \end{cases}$
+\begin{figure*}[h!]
+	\begin{tikzpicture}[
+  						 declare function={ funcDE(\x)= 
+  								(\x<=1.1) * 1;
+  						  },
+					   ]
+		\begin{axis}[every axis plot post/.append style={
+ 					 mark=none,domain=0:1.1,samples=500},
+ 					 axis x line*=bottom, axis y line*=left, 
+ 					 ytick={0, 1}, xtick={1}, 
+ 					 enlargelimits=upper] 
+  			\addplot +[black, dashed, mark=none] coordinates {(1, 0) (1, 1)};
+			\addplot +[blue, solid, mark=none] coordinates {(0, 1) (1, 1)};
+		\end{axis}
+	\end{tikzpicture}
+	\begin{tikzpicture}[
+  						 declare function={ funcDE(\x)= 
+  								(\x<=1.1) * 1;
+  						  },
+					   ]
+		\begin{axis}[every axis plot post/.append style={
+ 					 mark=none,domain=0:1.1,samples=500},
+ 					 axis x line*=bottom, axis y line*=left, 
+ 					 ytick={0, 1}, xtick={1}, 
+ 					 enlargelimits=upper] 
+  			\addplot +[black, dashed, mark=none] coordinates {(1, 0) (1, 1)};
+  			\addplot +[black, dashed, mark=none] coordinates {(0.5, 0) (0.5, 0.5)};
+    			\addplot +[black, dashed, mark=none] coordinates {(0,1) (1, 1)};
+  			\addplot +[black, dashed, mark=none] coordinates {(0,0.5) (0.5, 0.5)};
+			\addplot +[blue, solid, mark=none] coordinates {(0, 0) (1, 1)};
+		\end{axis}
+	\end{tikzpicture}
+\end{figure*}
+\end{beispiel*}
+
+\begin{definition}[Erwartungswert]
+	$\mathds{E}[X] \int_{-\infty}^{\infty} x f(x) dx$
+	$$ \Rightarrow \mathds{E}[X] = \int_{0}^1 x \cdot 1 dx = \left[ \frac{1}{2} x^{2} \right]_0^1 = \frac{1}{2} $$
+\end{definition}
+
+
+\begin{definition}[Ordnungsstatistiken] ~\
+	\begin{itemize}
+		\item Für auktionstheoretische Betrachtung interessant:
+			\begin{itemize}
+				\item höchste Wertschätzung?
+				\item höchstes/zweithöchstes Gebot?
+			\end{itemize}
+		\item $n$ unabhängige Realisierungen $x_1, x_2, \dotsc, x_n$ einer stetigen Zufallsvariable $X$ 
+		\item geordnete Liste der Realisierungen $x_{(1,n)} \geq x_{(2,n)} \geq \dotsc \geq x_{(n,n)}$
+		\item Gibt es eine Zufallsvariable, die sich im höchsten der $n$ Werte realisiert?
+			$$ \underbrace{X_{(1,n)}}_{\overset{\text{erste}}{\text{Ordnungsstatistik}}} \geq X_{(2,n)} \geq \dotsc \geq X_{(n,n)} $$
+		\item Verteilungsfunktion der ersten Ordnungsstatistik $X_{(1,n)}$:
+			\begin{align*}
+				F_{(1,n)}(x) & = \mathds{P}(X_{(1,n)} \leq x) \\
+				& = \mathds{P}(X_{(1,n)} \leq x, X_{(2,n)} \leq x, \dotsc, X_{(n,n)} \leq x) \\
+				& = \mathds{P}(X \leq x)^{n} \\
+				& = F(x)^{(n)}
+			\end{align*}
+			wobei $X$ die gemeinsame ... Zufallsvariable der Ordnugnsstatistik mit $F(x)$ und $f(x)$ sei.
+		\item $f_{(1,n)}(x) = n \cdot F(x)^{n-1} \cdot f(x)$
+			\begin{beispiel*}
+				Gleichverteilung $[0, 1]$:
+				\begin{itemize}
+					\item $F_{(1,n)}(x) = F(x)^{n} = x^{n}$, $x \in [0, 1]$
+					\item $f_{(1,n)}(x) = n F(x)^{n-1}f(x) = n x^{n-1} \cdot 1 = n x^{n-1}$
+				\end{itemize}
+								\begin{figure*}[h] \centering
+				\begin{tikzpicture}[
+  					declare function={ funcD1(\x)= 
+  							(\x<=1)      * \x;
+  					},
+  					declare function={ funcD2(\x)= 
+  							(\x<=1)      * \x * \x;
+  					},
+  					declare function={ funcD4(\x)= 
+  							(\x<=1)      * \x^4;
+  					},
+  					declare function={ funcD6(\x)= 
+  							(\x<=1)      * \x * \x^5;
+  					},
+   					declare function={ funcD8(\x)= 
+  							(\x<=1)      * \x^7;
+  					},
+  					declare function={ funcD10(\x)= 
+  							(\x<=1)      * \x * \x^9;
+  					},
+				]
+					\begin{axis}[axis x line=middle, axis y line=middle, 
+  								 ymin=-0.1, ymax=1.1, 
+  								 ytick={}, ylabel=$$,
+  								 xmin=-0.1, xmax=1.1, 
+  								  xtick={}, xlabel=$$,
+								]
+						\addplot[black, domain=0:1]{funcD1(x)};
+						\addplot[black, dotted, domain=0:1]{funcD2(x)};
+						\addplot[black, dotted, domain=0:1]{funcD4(x)};
+						\addplot[black, dotted, domain=0:1]{funcD6(x)};
+						\addplot[black, dotted, domain=0:1]{funcD8(x)};
+						\addplot[black, dotted, domain=0:1]{funcD10(x)};
+						 \addplot +[black, dashed, mark=none] coordinates {(0,1) (1, 1)};
+						 \addplot +[black, dashed, mark=none] coordinates {(1,0) (1, 1)};
+					\end{axis}
+				\end{tikzpicture}
+			  \end{figure*}
+			\end{beispiel*}
+		\item Verteilungsfunktion der zweiten Ordnungsstatistik $X_{(2,n)}$:
+			\begin{itemize}
+				\item $F(_{(2,n)} = \mathds{P} \left( X_{(2,n)} \leq X \right)$
+				\item[$\rightarrow$] 2 Möglichkeiten:
+					\begin{itemize}
+						\item $X_{(1,n)} \leq x \Rightarrow F(x)^{n}$
+						\item $X_{(1,n)} > x \Rightarrow F(x)^{n-1} \cdot \left( 1 - F(x) \right)$
+					\end{itemize}
+				\item[$\rightarrow$] $F_{(2,n)} = F(x)^{n} + n \cdot F(x)^{n-1} \cdot \left( 1 - F(x) \right)$
+			\end{itemize}
+		\item Verteilungsfunktion von $X_{(k, n)}$: 			  \tikz[baseline=0.5ex]{  
+			\draw(0,0)--(6.5,0);
+				\foreach \x/\xtext in {0/$\underline{x}$,1.375/$\cdots$,2.75/{$k$},5.25/$n$,6/$\overline{x}$}
+      				\draw(\x,3pt)--(\x,-3pt) node[below] {\xtext}; }
+			\begin{itemize}
+				\item $F_{(k,n)}(x) = \mathds{P}(X_{(k,n)} \leq x)$
+					\begin{align*}
+						& = F(x)^{n} + n \cdot F(x)^{n-1} \cdot (1-F(x)) \\
+						& \qquad + \begin{pmatrix} n \\2 \end{pmatrix} \cdot F(x)^{n-2} \cdot \left( 1- F(x) \right)^{2} \hspace{4.5cm} \\
+						& \qquad \qquad \qquad \qquad \qquad \vdots \\
+						& \qquad + \begin{pmatrix} n \\ n-1  \end{pmatrix}  \cdot F(x)^{n - (k-1)} \cdot \left( 1- F(x) \right)^{k-1} \\
+						& = \sum_{j=0}^{k-1} \begin{pmatrix} n \\ j  \end{pmatrix} \cdot F(x)^{n-j} \cdot \left( 1 - F(x) \right)^{j}
+					\end{align*}
+			\end{itemize}
+		\item Erwartungswert von $X_{(1,n)}$:
+			$$ \mathds{E} [ X_{(1,n)} ] = \int_{\R} x \cdot f_{(1,n)}(x) dx $$
+			$\Rightarrow$ Für die Gleichverteilung auf $[0,1]$ gilt:
+			$$ \mathds{E}[X_{(1,n)}] = \int_{0}^1 x \cdot f_{(1,n)}(x) dx = n \int_0^1 x \cdot x^{n-1} dx = \frac{n}{n+1} \left[ x^{n-1} \right]_0^1 = \frac{n}{n+1} $$
+	\end{itemize}
+\end{definition}
+	
+	
 \newpage
 
 \section*{2. Übung}
- todo
+ 
+\subsection*{Aufgabe 1}
+
+Sei $F(x) \coloneqq \begin{cases} 0, & x < 0 \\ \frac{x}{100}, & 0 \leq x \leq 100 \\ 1, & x > 100 \end{cases}$ 
+\begin{enumerate}
+	\item Die Dichtefunktion lautet somit:
+	$$ f(x) = \begin{cases} 0, & x < 0 \\ \frac{1}{100}, & x \in [0, 100] \\ 0, & x > 100 \end{cases} $$
+	Den Erwartungswert der dazugehörigen Zufallsvariable erhalten wir nun über:
+		\begin{align*}
+			\mathds{E}[X] & = \int_{\R} x \cdot f(x) dx \\
+					& = \int_{0}^{100} \frac{x}{100} dx = 50
+		\end{align*}
+	\item Das Gebot ist definiert durch: $B = \frac{2}{3} X$. Somit ist das erwartete Gebot:
+		$$ \mathds{E}[B] = \frac{2}{3} \mathds{E}[X] = 33,\overline{3} $$
+	\setcounter{enumi}{3} \item $g$ sei die Gebotsdichte, $G$ die Gebotsverteilung
+		\begin{align*}
+			G(x) & = \mathds{P}\left(B \leq x \right) \\
+				& = \mathds{P}\left( \frac{2}{3} X \leq x \right) \\
+				& = \mathds{P} \left( X \leq \frac{3}{2} x \right) = F\left( \frac{3}{2} x \right)
+		\end{align*}
+		Damit sind Verteilung und Dichte gegeben durch:
+		\begin{align*}
+			G(x) & = \begin{cases} 0, & x < 0 \\ \frac{3x}{200}, & x \in \left[0, \frac{200}{3} \right] \\ 1, x > \frac{200}{3} \end{cases} 
+		\intertext{und}
+			g(x) & = \begin{cases} 0, & x < 0 \\ \frac{3}{200}, & x \in \left[ 0, \frac{200}{3} \right] \\ 0, & x > \frac{200}{3} \end{cases}
+		\end{align*}
+	\setcounter{enumi}{2} $\mathds{P}(X \leq 30) = \frac{30}{200} = 0,45 ~\hat{=} 45 \%$
+\end{enumerate}
+
+\subsection*{Aufgabe 2}
+
+Sei $n = 3$, $x_1 = 60$. IPV-Ansatz. $X_i \sim [0, 100]$, $i = 2,3$. $B_2 = \frac{2}{3} X_2$, $B_3 = \frac{2}{3} X_3$.
+$$ \mathds{E} \left[ \pi_1(b_1) \right] = \left( x_1 - b_1 \right) \cdot \mathds{P} \left( b_1 \geq \max \{ b_2, b_3 \} \right) \rightarrow \max_{b_1 \in \R_+} $$
+Wir definieren $B_{(1,2)} = \max \{ B_2, B_3 \}$, $G_{(1,2)}(b) = G(b) \cdot G(b) = G^{2}(b)$
+\begin{align*}
+	\Rightarrow \mathds{E} \left[ \pi_1(b_1) \right] & = (x_1 - b_1) \cdot G^{2}(b_1) \\
+				& = (x_1 - b_1) \cdot \frac{9 b_1^2}{40000} \\
+				& = (60 - b_1) \cdot \frac{9 b_1^2}{40000} \\
+				& = \left( 540 b_1^2 - 9 b_1^3 \right) \cdot \frac{
+				1}{40000} \rightarrow \max_{b_1}
+\end{align*}
+$$ \frac{d \mathds{E}[\pi_1]}{d b_1} = \left( 1080 b_1 - 27 b_1^2 \right) \cdot \frac{1}{40000} \overset{!}{=} 0 $$
+$\Rightarrow b_{1,1} = 0$, $b_{1,2} = 40$. Hinreichendes Kriterium führt zu: 
+\begin{itemize}
+	\item $b_{1,1}$ ist Minimum
+	\item $b_{1,2}$ ist Maximum
+\end{itemize}
+Also $b_1^* = 40 = \frac{2}{3} x_1$. Die Wahrscheinlichkeit dass man mit diesem Gebot den Zuschlag erhält ist:
+$$ \mathds{P} \big( 40 \geq \max \{ B_1, B_2 \} \big) = \mathds{P} \left( 40 \geq B_{(1,2)} \right) \approx 30 \% $$
+
+\subsection*{Aufgabe 3}
+
+\begin{enumerate}
+	\item $X_1, \dotsc, X_n$: Private Signale der Bieter ~\\
+		Schaut man sich alle Signale aus der Sicher von Bieter $i$ an, schreibt man:
+		$$ X_{-i} = \left( X_1, \dotsc, X_{i-1}, X_{i+1}, \dotsc, X_{n} \right) $$
+\end{enumerate}
 
 \newpage
 
 \section*{3. Übung}
 
-\subsection*{Aufgabe 7}
+\subsection*{Aufgabe 6}
 
-\begin{enumerate} \setcounter{enumi}{5}
+\begin{enumerate} 
+	\item Falsch. Gilt nur falls alle Signale gleich wären.
+	\item Falsch. Gilt nur in EA und SA.
+	\item Falsch. Gilt nur für den erwarteten Auktionserlös.
+	\item Wahr, da die Streuung der zweiten Ordnungsstatistik größer ist, als die der ersten.
+	\item Wahr aufgrund von Monotonie der Bietfunktion.
 	\item Der optimale Limitpreis in der FA steigt mit der Anzahl der an der Auktion teilnehmenden Bieter 
 		\begin{proof}
 			Falsch, der optimale Limitpreis ist unabhängig von der Anzahl der Bieter.	
-		\end{proof} \setcounter{enumi}{7}
+		\end{proof} 
+	\item Wahr
 	\item Bei symmetrischen und risikoneutralen Bietern ist der optimale Limitpreis von der Auktionsform EA, DA, FA oder SA unabhängig.
 		\begin{proof}
 			Wahr; im einfachen IPV-Modell ist das für alle Auktionsformen identisch.
@@ -1163,14 +1429,17 @@ todo
 	\item Selbst bei symmetrischen und risikoneutralen Bietern kann das Setzen des optimalen Limitpreises in jeder der vier Auktionsformen zu einem ineffizienten Ergebnis führen.
 		\begin{proof}
 			Wahr; wenn wegen $r^{*} - x_{0}$ das Gut nicht verkauft wird, also wegen dem Zuschlag des Reservationspreises, ergibt sich ein ineffizientes Ergebnis.
-		\end{proof}\setcounter{enumi}{15}
+		\end{proof}
+	\item Falsch.
+	\item Wahr.
+	\item Falsch. Symmetrie: gleiche Wertfunktion und gleiche Verteilung der Signale.
 	\item Das Revenue-Equivalence-Theorem (in Bezug auf ie vier Auktionsformen ohne Limitpreis) gilt auch im Falle von symmetrischen und risikoaversen Bietern.
 		\begin{proof}
 			Falsch;
 		\end{proof}
 	\item Sind die Bieter risikoavers und symmetrisch (was dieselbe Nutzenfunktion für alle Bieter beinhaltet), dann stellt sich im symmetrischen Bayes-Gleichgewicht einer jeder der vier Auktionsformen ohne Limitpreis ein effizientes Ergebnis ein.
 		\begin{proof}
-			 Wahr. In SA, EA ist weiterhin schwach-dominant, also ist die Frage ob bei DA, FA das auch gilt. Aber bei gleicher Risikoaversion, betreibt jeder gleichviel Bid-Shading, d.h. die Höchste Wertschätzung bietet immer noch am meisten - natürlich falls die risikoaversion unterschiedlich ist, gilt das nicht mehr.
+			 Wahr. In SA, EA ist weiterhin schwach-dominant, also ist die Frage ob bei DA, FA das auch gilt. Aber bei gleicher Risikoaversion, betreibt jeder gleichviel Bid-Shading, d.h. die Höchste Wertschätzung bietet immer noch am meisten - natürlich falls die Risikoaversion unterschiedlich ist, gilt das nicht mehr.
 		\end{proof}
 	\item Sind die Bieter risikofreudig und symmetrisch, dann kann der Auktionator in der FA ohne Limitpreis einen höheren Auktionserlös als in der SA ohne Limitpreis erwarten.
 		\begin{proof}
@@ -1349,7 +1618,7 @@ An einer simultanen Erstpreisauktion (FA) nehmen zwei asymmetrische Bieter teil,
 \subsection*{Aufgabe 10}
 
 \begin{enumerate}[label=\alph*\upshape)]
-	\item Im CV-Modell hat das Gut für alle Bieter den gleichen (ex-ante) unbekannten Wert.
+	\item Im CV-Modell hat das Gut für alle Bieter den gleichen (ex-ante) unbekannten Wert. Modelltechnische Umsetzung im Skript.
 	\item Effizienz bedeutet, dass der Bieter mit der höchsten Wertschätzung das Gut erhält. Da aber im CV-Modell der Wert des Gutes für alle Bieter gleich ist, ist jedes Auktionsergebnis effizient (außer wenn alle Bieter eine niedriges Gebot abgeben, als die Wertschätzung des Gutes)
 	\item Der Fluch des Gewinners ist ein Phänomen, das häufig bei Gütern mit hoher CV-Komponente zu beobachten ist, bei dem der Gewinner der Auktion mehr für das Gut zahlt, als es wert ist. Grund ist, dass in der Regel der Bieter den Zuschlag erhält, der den Wert des Gutes \underline{am meisten} überschätzt hat. ~\\
 		Rationale Bieter berücksichtigen genau dies bei ihrem Gebot.
