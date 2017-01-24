@@ -1158,11 +1158,11 @@ Mögliche Preisregeln für diese Auktionsform:
 		\begin{axis}[every axis plot post/.append style={
  					 mark=none,domain=0:4,samples=50},
  					 axis x line*=bottom, axis y line*=left, 
- 					 ytick={0.25, 0.5, 1}, xticklabels={\overline{x}}, 
- 					 xtick={1.5}, xticklabels={x}, 
+ 					 ytick={0.25, 0.5, 1}, xticklabels={$\overline{x}$}, 
+ 					 xtick={2.5}, 
  					 enlargelimits=upper] 
   			\addplot {gauss(2,0.75,0)};
-  			\addplot +[black, dashed, mark=none] coordinates {(1.5, 0) (1.5, 0.423)};
+  			\addplot +[black, dashed, mark=none] coordinates {(2.5, 0) (2.5, 0.423)};
 
 		\end{axis}
 	\end{tikzpicture}
@@ -1175,10 +1175,9 @@ Mögliche Preisregeln für diese Auktionsform:
   					 mark=none,domain=-5:2,samples=50},
   					 axis x line*=bottom, axis y line*=left,
   					 ytick={-0.00001}, yticklabels={1}, 
-  					 xticklabels={\overline{x}}, xtick={0.0001}, 
-  					 xticklabels={x}, enlargelimits=upper] 
+  					 xticklabels={$\overline{x}$}, xtick={0.0001},  enlargelimits=upper] 
   			\addplot {gauss(2,2.75,0.15)};
-  			\addplot +[black, dashed, mark=none] coordinates {(0.0001, -0.145) (0.0001, -0.039)};
+  			\addplot +[black, dashed, mark=none] coordinates {(0.000001, -0.145) (0.000001, -0.039)};
 		\end{axis}
 	\end{tikzpicture}
 \end{figure*}
