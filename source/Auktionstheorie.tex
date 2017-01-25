@@ -31,6 +31,7 @@
 \usepackage{dsfont}
 \usepackage{graphicx}
 \usepackage{mathrsfs}
+\usepackage{minibox}
 \usepackage[square,numbers]{natbib}
 \usepackage{nicefrac}
 \usepackage{pgf}
@@ -47,24 +48,6 @@
 \usepackage{subfig} % Manipulation and reference of small or sub figures and tables
 
 \makesavenoteenv{tabular}
-\usepgfplotslibrary{fillbetween}
-\usetikzlibrary{patterns}
-\usetikzlibrary{decorations.markings}
-\usetikzlibrary{calc, intersections}
-\usetikzlibrary{trees, calc} % For extensive form games
-\pgfplotsset{compat=1.7}
-\usetikzlibrary{calc}	
-\usetikzlibrary{matrix}	
-
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.7}
-\usetikzlibrary{calc}	
-\usetikzlibrary{matrix}	
-\usepackage{minibox}
-\usepackage{xcolor}
-\usepackage{sgame} % Game theory packages
-\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
-
 \usepgfplotslibrary{fillbetween}
 \usetikzlibrary{patterns}
 \usetikzlibrary{decorations.markings}
@@ -1106,28 +1089,104 @@ Hier kommt ein abnehmender Grenznutzen ins Spiel, Bieter $A$ ist bereit für die
 
 Verkauft werden an die 16 Einheiten mit höchsten Gebotspreisen: ~
 \begin{tabular}{c|c}
-  EH & Bieter  \\
+  Bieter & EH \\
   \hline
-  3 & B \\
-  4 & A \\
-  2 & B \\
-  5 & C \\
-  2 & C \\
+  B & 3 \\
+  A & 4 \\
+  B & 2 \\
+  C & 5 \\
+  C & 2 \\
   \hline
   $\Sigma ~$16 & ~
 \end{tabular} ~\\
 
-Mögliche Preisregeln für diese Auktionsform:
+Es gibt verschiedene mögliche Preisregeln bzw. Bepreisungsregeln für diese Auktionsform:
 \begin{itemize}
-	\item Preisdiskriminierende Auktion (Pay-as-bid, Gebotspreisauktion)
+	\item Preisdiskriminierende Auktion (Pay-as-bid, Gebotspreisauktion): 
+		\begin{itemize}
+			\item[*] Im obigen Beispiel bedeutet das:
+			\begin{description}
+				\item Bieter A: $4 \cdot 24 = 96$
+				\item Bieter B: $3 \cdot 24 + 2 \cdot 24 = 123$
+				\item Bieter C: $ 5 \cdot 23 + 2 \cdot 22,50 = 160$
+				\item Der Gesamterlös beträgt $379$.
+			\end{description}
+			Hier entsteht ein Anreiz für hohe Gebote ein großes bid-shading zu betreiben und wenig für kleine Gebote.
+		\end{itemize}
 	\item Einheitspreisauktion (Pay-as-cleared, Uniform pricing)
 		\begin{itemize}
 			\item LAB (lowest accepted bid): preisbestimmend ist das niedrigste bezuschlagte Gebot. Im obigen Beispiel: 22.50 Euro. Diese Form ist in der Praxis häufiger zu finden.
-			\item HRB (highest rejected bid): preisbestimmend ist das höchste nicht bezuschlagte Gebot. Im obigen Beispiel: 22 Euro. Diese Form ist theoretisch interssanter und wünschenswerter.
+				\begin{itemize}
+					\item[*] Im obigen Beispiel bedeutet das:
+						\begin{description}
+							\item Bieter A: $4 \cdot 22,50 = 90$
+							\item Bieter B: $5 \cdot 22,50 = 112,50$
+							\item Bieter C: $7 \cdot 22,50 = 157,50$
+							\item Der Gesamterlös beträgt $360$.
+						\end{description}
+				\end{itemize}
+			\item HRB (highest rejected bid): preisbestimmend ist das höchste nicht bezuschlagte Gebot. Im obigen Beispiel: 22 Euro. Diese Form ist theoretisch interessanter und wünschenswerter. 
+				Im obigen Beispiel bedeutet das:
+				\begin{itemize}
+					\item[*] Im obigen Beispiel bedeutet das:
+						\begin{description}
+							\item Bieter A: $4 \cdot 22 = 88$
+							\item Bieter B: $5 \cdot 22 = 110$
+							\item Bieter C: $7 \cdot 22 = 154$
+							\item Der Gesamterlös beträgt $352$.
+						\end{description}
+				\end{itemize}
 		\end{itemize} 
-	\item Vickrey-Auktion
+		Beide Einheitspreisauktionsformen sind nicht Anreizkompatibel.
+	\item Vickrey-Auktion ~\\
+		Falls Bieter A weg fällt, so würde anstatt seiner 3 Zuschläge von Bieter B zum Preis von 22 und 1 Zuschlag von  Bieter C zum Preis 20 dazu kommen, damit ist der Zuschlagspreis von A bestimmt durch:
+		$$ A: \quad 3 \cdot 22 + 1 \cdot 20 = 86 $$
+		Analog für B und C:
+		\begin{align*}
+			B: \quad 3 \cdot 22 + 2 \cdot 21 & = 108 \\
+			C: \quad 6 \cdot 22 + 1 \cdot 21 & = 153 \\
+			\text{ Insgesamt: } & \hspace{0.75cm} \overline{347}
+		\end{align*}
+		Dieses Verfahren ist Anreizkompatibel. Hier bestimmen die eigenen Gebote nicht den Zuschlagspreis, aber das ist lediglich notwenig und nicht hinreichend.
 \end{itemize}
 
+\begin{bemerkung}
+	Falls alle Bieter jeweils nur an einem Gut interessiert sind, so gilt für die Pay-as-Bid und die beiden Uniform pricing Auktionsformen das RET und der Zuschlagspreis ist der Knappheitspreis, also das $k+1$-höchste Gebot.
+\end{bemerkung}
+
+\begin{folgerung*}
+	Ist ein Verfahren anreizkompatibel, so müssen die eigenen Gebote nicht den Zuschlagspreis bestimmen, sondern lediglich die Zuschlagswahrscheinlichkeit.
+\end{folgerung*}
+
+\section{Verallgemeinerte Vickrey Auktion (GVA)} \index{Verallgemeinerte Vickrey Auktion} 
+
+
+\textit{Diese kommt auf jeden Fall in der Klausur dran!} % todo kommt auf jeden Fall in der Klausur dran!
+
+
+Sei $n$ die Anzahl der Bieter und es gebe $k \geq 2$ homogene oder heterogene Güter, $K = \{ 1, \dotsc, k\}$, und sei mit $\mathcal{P}(K)$ die Potenzmenge von $K$ bezeichnet. ~\\
+
+Somit lässt sich das Gesamtgebot von Bieter $i \in N$ durch den Gebotsvektor
+$$ b_{i} = \left( b_{i}(y) \right) $$
+für $y \in P(K) \setminus \{ \setminus \}$; somit ist die Anzahl der Gebote von Bieter $i$ gleich $\left| \mathcal{P}(K) \right| - 1$. ~\\
+
+
+\textbf{Bestimmung der Gewinnergebote:} ~\\
+
+Für die Bestimmung der Gewinnergebote sind zunächst die zulässigen Allokationen der Güter (Aufteilung der Güter auf die Bieter) zu definieren. Diese sind gegeben durch die Menge
+$$Z = \left\{ x \in \mathcal{P}(K)^{n} \text{ mit } \bigcup_{i=1}^{n} x_{i} = K \text{ und } x_{i} \cap x_{j} = \emptyset \text{ für alle } i, j \in N, i \neq j \right\}$$
+wobei $x = \left( x_{i}, \dotsc, x_{n} \right)$. Die optimale Allokation ist gegeben durch: 
+$$x^{*} = \arg \max_{x \in Z } \sum_{i=1}^{n} b_{i}(x_{i}) $$
+
+\textbf{Preisregel:} ~\\ \index{maximale Gebotssumme}
+
+Für $x^{*} = \left( x_1^{*}, \dotsc, x_{n}^{*} \right)$, wobei $x_{i}^{*} \in \mathcal{P}(J)$, sei
+	$$ B^{*}(N) = \sum_{i=1}^{n} b_{i}(x_{i}^{*}) $$
+die \textbf{maximale Gebotssumme} und mit 
+	$$ B_{-i}^{*}(N) = \sum_{j \neq i} b_{j}(x_{j}^{*}) = B^{*}(N) - b_{i}(x_{i}^{*}) $$
+die Gebotssumme ohne das Gebot von Bieter $i$. Die Zahlung von Bieter $i$ für $x_{i}^{*}$ lautet dann:
+$$ \rho_{i} = B^{*}\left(N \setminus \{ i \} \right) - B_{-i}^{*}(N) $$
+und das stellt die Opportunitätskosten seiner Teilnahme dar (da die Auktion anreizkompatibel ist und damit $B$ die wahre Zahlungsbereitschaft darstellt). Diese Opportunitätskosten können nicht auf die Güter bzw. die Güteranzahl heruntergebrochen werden, sonder weist der Menge an Gütern den Wert zu.
 \newpage
 
 % todo Bookmark Vorlesung / Übung
@@ -1390,13 +1449,95 @@ $$ \mathds{P} \big( 40 \geq \max \{ B_1, B_2 \} \big) = \mathds{P} \left( 40 \ge
 	\item $X_1, \dotsc, X_n$: Private Signale der Bieter ~\\
 		Schaut man sich alle Signale aus der Sicher von Bieter $i$ an, schreibt man:
 		$$ X_{-i} = \left( X_1, \dotsc, X_{i-1}, X_{i+1}, \dotsc, X_{n} \right) $$
+		Weiter haben wir
+		\begin{align*}
+			S_{0} & \text{ privates Signal des Auktionators} \\
+			S_{1}, \dotsc, S_{m} & \text{ unbeobachtbare Signale}
+		\end{align*}	
+		Sei nun 
+		$$ v_{i}(x_1, \dotsc, x_{n}, s_{0}, s_{1}, \dotsc, s_{m}) $$
+		mit $v_i \colon \R^{n} \times \R^{m+1} \rightarrow \R$ die Wertschätzung für das Gut von Bieter $i$ und $x_1, \dotsc, x_{n}, s_{0}, s_{1}, \dotsc, s_{m}$ jeweils Realisierung der Zufallsvariablen $X_1, \dotsc, X_n, S_0, S_1, \dotsc, S_m$. ~\\
+		
+		Der Informationsstand von Bieter $i \in N$ ist:
+			$$ \left( X_1, \dotsc, X_{i-1}, x_i, X_{i+1}, \dotsc, X_n, S_0, S_1, \dotsc, S_m \right) $$
+		Betrachten wir nun die verschiedenen Arten der Gutwertschätzung, so vereinfacht sich die Wertschätzung auf:
+		\begin{itemize}
+			\item private value: $v_i(x_i, x_{-i}, s) = x_i$
+			\item common value: $v_i(x_i, x_{-i}, s) = v_{j}(x_{j}, x_{-j}, s)$
+			\item interdependent value: $v_i(x_i, x_{-i}, s) \neq v_{j}(x_{j}, x_{-j}, s)$
+		\end{itemize}
+	\item \begin{enumerate}[label=\arabic*\upshape)]
+		\item PV
+		\item CV
+		\item CV
+		\item CV
+		\item IV, $x_i > x_j \Rightarrow v_i(x_i, x_{-i}, s) > v_j(x_j, x_{-j}, s)$
+	\end{enumerate}
 \end{enumerate}
+
+\subsection*{Aufgabe 4}
+
+Ausführliche Lösung im Skript Abschnitt 2.2.2
+
+\subsection*{Aufgabe 5}
+
+Es gebe $n$ risikoneutrale Bieter die (a priori) symmetrisch seien.
+$$ X_{i} \overset{uiv}{\sim} U[0,1], \quad v_i = x_i $$
+\begin{enumerate}
+	\item \begin{description}
+		\item[A1] Bieter sind risikoneutral
+		\item[A2] Wertschätzungen sind unabhängige, private Informationen $v_i = x_i$ 
+		\item[A3] Bieter sind symmetrisch
+		\item[A4] Zuschlagspreis hängt nur von den Geboten ab
+	\end{description}
+	\item $\mathds[E]\left[u_i\left(\pi\left(x_i, b_i, B_{-i}\right)\right)\right]  \longrightarrow \max_{b_i}, \quad$ $u_i(\cdot) = id(\cdot)$
+		$$ \pi = \begin{cases} x_i - b_i, & b_i > \max B_{-i} \\ 0, & \text{sonst} \end{cases} $$
+		\begin{align*}
+			\Rightarrow \mathds{E}[\pi] & = (x_i - b_i) \mathds{P}\left(\max B_{-i} < b_i\right) \\
+			& = (x_i - b_i) \mathds{P}\left(X_{(1,n-1)} < x_i\right) \\
+			& = (x_i - b_i) F_{(1,n-1)}(x_i)
+		\end{align*}
+	\item $\beta^{SA}(x_i) = x_i - \frac{\int_0^{x_{i}} F^{n-1}(x) dx}{F^{n-1}(x_i)} \leq x_i$ ~\\
+		Demnach betreibt ein Bieter, der sich seiner Stärke bewusst ist, höheres bid-shading.
+		\begin{align*}
+			\beta^{FA}(x_i) & = \mathds{E}\left[ X_{(2,n)} \big| X_{(1,n)} = x_i \right] \\
+			& = \mathds{E} \left[ X_{(1,n-1)} \big| X_{(1,n-1)} \leq x_i \right]
+		\end{align*}
+		Im Speziellen gilt für $X \sim U[0, 1]$:
+		$$ \beta^{FA}(x_i) = x_i - \frac{\frac{1}{n} x_i^n}{x_i^{n-1}} = \left( 1 - \frac{1}{n} \right) x_i \xrightarrow[n \rightarrow \infty]{} x_i, $$
+		also ist $\beta^{FA}$ wachsend in $n$.
+	\item Behauptung: $\mathds{E}\left[ \beta^{FA}(X_{1,n}) \right] = \mathds{E}\left[ X_{(2,n)} \right]$ 
+		\begin{proof}
+			 $$ \mathds{E}\left[ X_{(2,n)} \right] = \frac{n-2+1}{n-1} = \frac{n-1}{n+1} $$ 
+			 $$ \mathds{E}\left[ \beta^{FA}(X_{1,n}) \right] = \mathds{E}\left[ \left( 1 - \frac{1}{n} \right) X_{1,n} \right] = \left( 1 - \frac{1}{n} \right) \frac{n}{n+1} = \frac{n-1}{n+1} $$
+		\end{proof}
+	\item $\mathds{E}\left[ \pi_0 \right] = \mathds{E}\left[ p \left( \beta^{FA} \right) \right] = \mathds{E}\left[ \beta^{FA} \left( X_{1,n} \right) \right] \overset{s.o.}{=} \frac{n-1}{n+1}$ 
+	\item $\mathds{E}\left[ \pi_i \right] = \left( x_i - \beta^{FA}(x_i) \right) F_{(1,n-1)}(x_{i}) = \left( x_i - \frac{n-1}{n} x_i \right) x_i^{n-1} = \frac{1}{n} x_i^n$ ~\\
+		$$ \text{effizient } \iff \text{ Bieter mit höchster Wertschätzung (nicht höchstem Gebot) den Zuschlag bekommt } $$
+		Ist hier gesichert durch monotone Bietfunktion
+	\item Entscheidungskalkül (b):
+		$$ \mathds{E} \left[ x_i - \max B_{-i} \big| \max B_{-i} < b_{i} \right] \mathds{P} \left( b_i > \max B_{-i} \right) \longrightarrow \max_{b_i} $$
+		Gleichgewichtsstrategie (c):
+			$$ \beta_i^{SA}(x_i) = x_i $$
+		Verkaufserlös (e):
+			$$ \mathds{E}[\pi_{0}] = \mathds{E}\left[ p\left( \beta^{SA} \right) \right] = \mathds{E}[ X_{2,n} ] = \mathds{E} \left[ p\left( \beta^{FA} \right) \right] $$
+		Erwartete Rente (f):
+			\begin{align*}
+				\mathds{E}[\pi_i^{SA}] & = x_i - \mathds{E} \left[ X_{(2,n)} \big|  X_{(1,n)} = x_i \right] F_{(1,n-1)}(x_i) \\
+				& = x_i - x_i \left( 1 - \frac{1}{n} \right) x_i^{n-1} \\
+				& = \frac{1}{n} x_i^n
+			\end{align*}
+\end{enumerate}
+
+\textit{Standardaufgabe für Klausur!}
 
 \newpage
 
 \section*{3. Übung}
 
 \subsection*{Aufgabe 6}
+
+\textit{In Klausur sind 15 - 20 von 60 Punkten Multiple-Choice}
 
 \begin{enumerate} 
 	\item Falsch. Gilt nur falls alle Signale gleich wären.
@@ -1666,6 +1807,136 @@ $p_{(3)} = \beta_{3}(x_{(3)}) = 3x_{3} + x_{4} \Rightarrow x_{(3)} = \frac{p_{(3
 $$ \beta_{2}^{EA}(x) = v(x_{i}, x_{i}, x_{(3)}, x_{(4)}) = 2x_{i} + x_{(3)} + x_{(4)} $$
 $p = 2x_{(2)} + x_{(3)} + x_{(4)}$.
 $$ \beta_{1}^{EA}(x_{i}) =\left( 120000, 90000 + x_{(4)}, 60000 + x_{(3)} + x_{(4)} \right) $$
+
+\section*{Übung 6}
+
+\subsection*{Aufgabe 13}
+\begin{enumerate}
+	\item \begin{enumerate}
+	  \item Um welche Art von Gut hinsichtlich der Wertschätzungen der Bieter handelt es sich hierbei?
+		\begin{proof}
+			Es handelt sich um ein IV-Gut. Es ist kein CV-Gut, da die Wertschätzung der Bieter unterschiedlich sein könnte, z.B. $x_{(1)} > x_{(2)} > x_{(3)} \Rightarrow v_{(1)} > v_{(2)} > v_{(3)}$
+		\end{proof}
+	  \item Sind die Bieter (a priori) symmetrisch?
+		\begin{proof}
+			Die Bieter sind a priori symmetrisch:
+			\begin{itemize}
+				\item gleiche Verteilung für Signale
+				\item gleiche Wertfunktion
+			\end{itemize}
+		\end{proof}
+	  \item Geben Sie den erwarteten Wert des Gutes für einen repräsentativen Bieter $i$ mit dem Signal $x_{i} \in [0, 1]$ an.
+		\begin{proof}
+			\begin{align*}
+				\mathds{E} \left[ V_{i} \big| X_{i} \right] & = x_{i} + \frac{1}{2} \left( \mathds{E} \left[ X_{j} \right] + \mathds{E} \left[ X_{k} \right] \right) \\
+			& = x_{i} + \frac{1}{2}
+			\end{align*}
+		\end{proof}
+	 \end{enumerate}
+	\item Die Auktion wird als Zweitpreisauktion (SA) ohne Limitpreis durchgeführt. ~\\
+		Geben Sie die Bietfunktion eines repräsentativen Bieters im symmetrischen Gleichgewicht explizit an, und bestimmen Sie den erwarteten Auktionserlös, der sich im Gleichgewicht ergibt. ~\\
+		Überprüfen Sie, ob der Fluch des Gewinners ex post auftreten kann. Begründen Sie Ihre Antwort!
+		\begin{proof}
+			\begin{enumerate}
+				\item SA: 
+					$$ \beta^{SA}(x_{i}) = w(x_{i}, x_{i}) = x_{i} + \frac{1}{2} \Big( x_{i} + \mathds{E}\big[ X_{(4)} \big| \underbrace{X_{(2)} = x_{i}}_{\overset{preisbestimmendes}{Signal}} \big] \Big) $$
+					Grafisch:
+					\tikz[baseline=-0.5ex]{  
+					 	\draw(0,0)--(8,0);
+   						\foreach \x/\xtext in {0/$0$,2.75/$\frac{x_{i}}{2}$,5.5/$x_{i}$,8/$1$}
+      					\draw(\x,3pt)--(\x,-3pt) node[below] {\xtext};
+    				    				\draw[yshift=2ex]  (5.5,0) node[above=0ex] {\small {$X_{(2)} = x_{i}$}}  (6,0)};
+    				    				~\\
+					Damit folgt:
+					$$ \beta^{SA}(x_{i}) = x_{i} +\frac{1}{2} \left( x_{i} + \frac{x_{i}}{2} \right) = \frac{7}{4} x_{i} $$ ~\\
+				\item $\mathds{E}\left[p^{SA}\right] = \mathds{E} \left[ \beta^{SA} \left( X_{(2,3)}\right) \right]  = \frac{7}{4}  \underbrace{\mathds{E} \left[  \left( X_{(2,3)}\right) \right]}_{\overset{\text{mit}}{\mathds{E}\left[X_{(k,n)}\right] = \frac{n-k+1}{n+1}}}  = \frac{7}{4} \cdot \frac{1}{2} = \frac{7}{8}$
+				\item Als Beispiel für den Winners-Curse: $x_{1} = 0.9$, $x_{2} = 0.8$, $x_{3} = 0$
+					$$ \Rightarrow v_{1} = 0.9 + \frac{1}{2} \left( 0.8 + 0 \right) = 1.3 $$
+					Allerdings ist das zu zahlende Gebot, das Gebot von $i = 2$ und das lautet:
+					$$ b_{2} = \beta^{SA}(x_{2}) = 0.8 + \frac{1}{2} \left( 0.8 + 0.4 \right) = 1.4, $$
+					und damit ist $v_1 < p$ also der winners-curse tritt auf.
+			\end{enumerate}
+		\end{proof}
+	\item \begin{enumerate}
+			\item EA: $\beta^{EA}(x_{i}) = \left( \beta_{3}^{EA}(x_{i}), \beta_{2}^{EA}(x_{i}) \right)$ 
+				$$ x_{(1)} > x_{(2)} > x_{(3)} $$
+	 			\begin{itemize}
+	 				\item $\beta_{3}^{EA}(x_{i}) = v(x_{i}, x_{i}, x_{i}) = x_{i} + \frac{1}{2} \left( x_{i} + x_{i} \right) = 2 x_{i}$
+	 					$$ \Rightarrow \text{Ausstiegszeitpunkt von} x_{(3)}: ~ p_{3} = 2 \cdot x_{(3)} \Rightarrow x_{(3)} = \frac{p_{3}}{2}$$
+	 				\item $\beta_{2}^{EA}(x_{i}) = v_{i}\left(x_{i}, x_{i}, x_{(3)} \right) \frac{3}{2} x_{i} + \frac{1}{2} x_{(3)} < 2 x_{i}$
+	 				\item Zuschlagspreis: $p = \frac{3}{2} x_{(2)} + \frac{1}{2} x_{(3)} = \beta_{(2)}^{EA}(x_{i})$
+	 			\end{itemize}
+	 			$\Rightarrow \beta^{EA}(x_{i}) = \left( 2 x_{i}, \frac{3}{2} x_{i} + \frac{1}{4} p_{3} \right)$
+	 		\item $\mathds{E}\left[ p^{EA} \right] = \mathds{E}\left[ \beta_{2} \left( X_{(2,3)} \right) \right] = \frac{3}{2} \underbrace{\mathds[E] \left[ X_{(2,3)} \right]}_{= \frac{1}{2}} + \frac{1}{2} \underbrace{\mathds[E] \left[ X_{(3,3)} \right]}_{= \frac{1}{4}} = \frac{7}{8}$
+	 		\item Bieter (1) gewinnt die Auktion
+	 			\begin{align*}
+	 				\pi_{(1)} & = v_{(1)} - p \\
+	 						& = x_{(1)} + \frac{1}{2} \left( x_{(2)} + x_{(3)} \right) - \left( x_{2} + \frac{1}{2} \left( x_{(2)} + x_{(3)} \right) \right) \\
+	 						& = x_{(1)} - x_{(2)} \geq 0
+	 			\end{align*} 
+		  \end{enumerate}
+	\item Sind die Gleichgewichte aus den Teilaufgaben b) und c) Gleichgewichte in dominanten Strategien? Begründen Sie Ihre Antwort, indem Sie einen formalen Beweis führen oder ein geeignetes Gegenbeispiel angeben.
+		\begin{proof}
+			\begin{itemize}
+				\item SA: da der winners-curse ex-post auftreten kann, kann die ermittelte Strategie keine dominante Strategie sein.
+				\item EA: $x_1 = 1$, $x_3 = 0$, $x_2 \in (0, 1)$. Wir wissen:
+					\begin{align*}
+						v_1 = \frac{1}{2} x_2 + x_1.
+					\end{align*}
+					falls Bieter 3 sein Signal mit $x_3'$ übertreibt, wobei $x_3 < x_3' < x_2$. Wir wissen, dass der Zuschlagspreis lautet:
+					$$ v_1 < p \iff 1 + \frac{1}{2} x_2 < \frac{3}{2} x_2 + \frac{1}{2} x_3' \iff 1 < x_2 + \frac{1}{2} x_3' $$
+					Wobei $x_2  = \frac{5}{6}$, $x_3' = \frac{2}{3}$ diese Ungleichung erfüllen und daraus folgt $p = \frac{19}{12}$ und $v_1 = \frac{17}{12}$.
+			\end{itemize}
+		\end{proof}
+\end{enumerate}
+
+\subsection*{Aufgabe 14}
+
+$n$ Bieter, $X_{i} \overset{iid}{\sim} [4, 7]$.
+
+\begin{enumerate}
+	\item IV-Gut
+	\item ~\\
+	 \begin{itemize}
+		\item Bieter: $\mathds{E}[V_{i} \big| X_{i} = x_{i}] = 2 x_{i} + (n-1) x_{i} = (n+1) x_{i}$
+		\item Außenstehenden: $\mathds{E}[V_{i}] = v(X_{i}, x_{-i}) = 2 \cdot 5.5 + (n-1) \cdot 5.5 = (n+1) \cdot 5.5$
+	\end{itemize}
+	\item ~\\
+		\begin{itemize}
+			\item SA: $\beta^{SA}(x_{i}) = w(x_{i}, x_{i})$ Für $n = 2$:
+				$$ \beta^{SA}(x_{i}) = 2x_{i} + x_{i} = 3x_{i} $$
+			Den erwarteten Auktionserlös erhalten wir dann wieder über
+				$$ \mathds{E}\left[ p^{SA} \right] = \mathds{E}\left[ \beta^{SA}(X_{(2,2)}) \right] = 3 \mathds{E}\left[ X_{(2,2)} \right] = 3 \cdot 5 = 15  $$
+			\begin{figure*}
+				\tikz[baseline=-0.5ex]{  
+					 	\draw(0,0)--(8,0);
+						\foreach \x/\xtext in {0/$4$,2.75/$5$,5.5/$6$,8/$7$}
+      					\draw(\x,3pt)--(\x,-3pt) node[below] {\xtext};};
+			\end{figure*}
+    				$$ \frac{n-k + 1}{n + 1} \cdot \text{ Breite } + \text{ untere Intervallgrenze} $$	
+    		\begin{align*}
+    			\mathds{E}[\pi_{(1)}] & = \mathds{E}[v_{(1)} - p]  \\
+    			& = \mathds{E}[v_{(1)}]  - \mathds{E}[p]  \\
+    			& = \mathds{E}[2 \cdot X_{(1,2)} + X_{(2,2)}]  - 3 \cdot \mathds{E}[ X_{(2,)} ]  \\
+    			& \quad \vdots \\
+    			& = 2 \cdot 6 - 2 \cdot 5 = 2
+    		\end{align*}
+			\item Ex-post winners-curse?
+				$$ \pi_{(1)} = v_{(1)} - b_{(2)} = \left[ 2 x_{(1)} + x_{(2)} \right] - 3 x_{(2)} > 0 $$
+		\end{itemize}
+	\item EA, $n=4$
+		$$ x_1 = 4 = x_{(3)}, ~x_2 = 6 = x_{(2)}, ~x_{(3)} = 7 = x_{(1)}, ~x_{4} = 4 = x_{(4)} $$
+		Damit folgt für $\beta^{EA}(x_{i})$:
+		$$ \beta_{4}^{EA}(x_{i}) = 2x_{i} + 3 x_{i} = 5 x_{i} \begin{cases}
+			\beta^{EA}(x_{1}) = 5 \cdot 5 = 25 \\ \beta^{EA}(x_{2}) = 5 \cdot 6 = 30 \\ \beta^{EA}(x_{3}) = 5 \cdot 7 = 35 \\ \beta^{EA}(x_{4}) = 5 \cdot 4 = 20  
+		\end{cases} $$
+		$p_4 = (n+1) x_{(4)} \Rightarrow x_{(4)} = 4$.
+			$$ \beta_{3}^{EA}(x_{i}) = 2 x_{i} + 2x_{i} + x_{(4)} $$
+		$p_3 = 4 \cdot x_{(3)} + x_{(4)} \Rightarrow x_{(3)} = 5$
+			$$ \beta_{2}^{EA}(x_{i}) = 2 x_{i} + x_{i} + x_{(3)} + x_{(4)} $$
+		$p = \underbrace{3 x_{(2)}}_{= 3 \cdot 6} +  \underbrace{x_{(3)}}_{= 5} +  \underbrace{x_{(4)}}_{= 4} = 27 = p$
+		$$ v_{(1)} = 29, \quad  \pi_{(1)} = 28 - 27 = 2 $$
+\end{enumerate}
 
 \printindex
 
