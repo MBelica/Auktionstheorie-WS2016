@@ -514,7 +514,7 @@ Damit ergibt sich
 \end{align*}
 
 Damit haben wir das symmetrische BNE: $(b_{1}^{k}, \dotsc, \beta_{n}^{k})$ für $k \in \{ FA, DA \}$ mit $b_{i}(x_{i}) = \beta(x_{i}) ~\forall i \in N$, wobei
-$$ \beta(x_{i}) = x_{i} - \frac{\int_{0}^{x_{i}}F^{n}(t) dt}{F^{n-1}(x_{i})} $$
+$$ \beta(x_{i}) = x_{i} - \frac{\int_{0}^{x_{i}}F^{n-1}(t) dt}{F^{n-1}(x_{i})} $$
 
 \begin{folgerung}
 	$\beta(x_{i}) < x_{i}$, $\beta(x_{i}) > \beta(x_{j})$ für $x_{i} > x_{j}$
@@ -1186,7 +1186,155 @@ die \textbf{maximale Gebotssumme} und mit
 	$$ B_{-i}^{*}(N) = \sum_{j \neq i} b_{j}(x_{j}^{*}) = B^{*}(N) - b_{i}(x_{i}^{*}) $$
 die Gebotssumme ohne das Gebot von Bieter $i$. Die Zahlung von Bieter $i$ für $x_{i}^{*}$ lautet dann:
 $$ \rho_{i} = B^{*}\left(N \setminus \{ i \} \right) - B_{-i}^{*}(N) $$
-und das stellt die Opportunitätskosten seiner Teilnahme dar (da die Auktion anreizkompatibel ist und damit $B$ die wahre Zahlungsbereitschaft darstellt). Diese Opportunitätskosten können nicht auf die Güter bzw. die Güteranzahl heruntergebrochen werden, sonder weist der Menge an Gütern den Wert zu.
+und das stellt die Opportunitätskosten seiner Teilnahme dar (da die Auktion anreizkompatibel ist und damit $B$ die wahre Zahlungsbereitschaft darstellt). Diese Opportunitätskosten können nicht auf die Güter bzw. die Güteranzahl herunter gebrochen werden, sonder weist der Menge an Gütern den Wert zu. ~\\
+
+
+% Vorlesung: 01.02.2017 
+
+Sei $n=3$, $k=3$, $\{ A, B, C\}$ 
+
+\begin{figure*}[h!] \centering
+	\begin{tabular}{l|ccccccc}
+  		Bider & A & B &  C & AB & AC & BC & ABC \\
+  						\hline
+  		$B_1$ & 8 & 5 &  4 & 12 & 10 & 11 & 21  \\
+  		$B_2$ & 6 & 3 &  5 & 15 &  9 & 12 & 19  \\
+  		$B_3$ & 7 & 4 & 10 & 12 & 10 & 18 & 22 
+	\end{tabular}
+\end{figure*}	
+
+
+Wir sehen für Bieter 1 zu Beispiel, dass Gut A und B komplementäre Eigenschaften haben, da $b(AB) = 12 < 8 + 5 = b(A) + b(B)$, und analog für Gut A und C. Bei allen drei Gütern entstehen Synergie-Effekte, da $b(ABC) = 21 > 8 + 5+ 4 = b(A) + b(B) + b(C)$ (Klausuraufgabe) ~\\
+
+Um den Gewinn zu maximieren, müssen die Güter wie folgt verteilt werden:
+$$ \left( x_1^*, x_2^*, x_3^* \right) = \left( \{ A \}, \emptyset, \{ B, C \} \right) ~ \longrightarrow ~ b_1(x_1^*) = 8,  ~b_3(x_3^*) = 18 $$
+damit ist der Auktionserlös $B^{*} = 36$. ~\\
+
+
+Da jeder Bieter maximal nur ein Gebot bezuschlagt bekommt, so brauchen wir für den Preis den die Bieter bei dieser verallgemeinerte Vickrey Auktion zu zahlen haben zwei Komponenten:
+
+\begin{itemize}
+	\item Falls Bieter 1 nicht teilnimmt, ist $\left( x_2^*, x_3^* \right) = \left(\{A, B \}, \{ C \} \right)$ und der Auktionserlös wäre damit gleich 25. Damit gilt:
+				\begin{align*}
+					\rho_1 & = B^{*} \left(N \setminus \{ 1 \} \right) - B_{-1}^{*} \\
+							& = 25 - 18 = 7
+				\end{align*}
+	\item Bieter 2 erhält kein Gut, somit ist $\rho_2 = 0$.
+	\item Falls Bieter 3 nicht teilnimmt, ist $\left( x_1^*, x_1^* \right) = \left(\{A, B, C \}, \emptyset \right)$ und der Auktionserlös wäre damit gleich 21. Damit gilt:
+				\begin{align*}
+					\rho_3 & = B^{*} \left(N \setminus \{ 3 \} \right) - B_{-3}^{*} \\
+							& = 21 - 8 = 13
+				\end{align*}			
+\end{itemize}
+
+\begin{erinnerung}
+	Diese Gebotsform ist schwach Anreizkompatibel, d.h. jeder Bieter hat einen Anreiz seine eigene Wertschätzung zu bieten.
+\end{erinnerung} 
+
+\begin{unnamedtheorem*}[Probleme der GVA] ~\
+	\begin{itemize}
+		\item Aufwendiges Verfahren (bei $k$ Güter sind $2^{k} - 1$ Gebote nötig).
+		\item Komplex, NP-vollständiges Problem % todo read
+		\item Auktionserlös kann sehr niedrig sein
+		\item Verfahren ist nicht \enquote{nachverhandlungsstabil}.
+	\end{itemize}
+\end{unnamedtheorem*} ~\\
+
+
+\textbf{Typische Klausuraufgabe:} ~\\
+
+\begin{figure*}[h!] \centering
+	\begin{tabular}{l|ccc}
+		& A & B & AB \\
+  			\hline
+  		$B_1$ & 0 & 0 & 2  \\
+  		$B_2$ & 2 & 0 & 2  \\
+  		$B_3$ & 0 & 2 & 2  
+	\end{tabular}
+\end{figure*}	~\\
+
+\begin{enumerate}
+	\item  Welche Charakteristik haben die Güter für die Bieter?
+		\begin{itemize}
+			\item Bieter 1: Güter sind perfekte Komplemente, mit nur einem der Güter ist der Wert gleich 0
+			\item Bieter 2: Gut B hat keinen Nutzen für den Bieter, dementsprechend ist er indifferent zwischen nur A oder AB
+			\item Bieter 3: Gut A hat keinen Nutzen für den Bieter, dementsprechend ist er indifferent zwischen nur B oder AB
+		\end{itemize}
+	\item Wie werden die Güter optimal aufgeteilt und was müssen die Bieter zahlen?
+		$$ \left( x_1^*, x_2^*, x_3^* \right) = \left( \emptyset, A, B \right) \rightarrow B^* = 4 $$
+		\begin{itemize}
+			\item Bieter 1: erhält kein Gut, demnach: $\rho_1 = 0$
+			\item Bieter 2: ohne Bieter 2 ist der Auktionserlös gleich 2, d.h. $\rho_2 = 2 - 2 = 0$
+			\item Bieter 3: ohne Bieter 3 ist der Auktionserlös gleich 2, d.h. $\rho_3 = 2 - 2 = 0$
+		\end{itemize}
+	\item Ist die Auktion effizient? ~\\
+		Ja, die Auktion ist effizient, da die Auktion anreizkompatibel ist, d.h. jeder Bietet seine echte Wertschätzung. Der Zuschlag wird über die Maximierung des Auktionserlös ermittelt, damit muss sie effizient sein.	
+	\item Ist diese Auktion verhandlungsstabil?
+		Nein, denn das ist das erste Verfahren, welches wir kennen gelernt haben, bei dem die Zuschlagspreise der Bieter unter dem Gebot von nicht-bezuschlagten Bieter liegen können.
+\end{enumerate} ~\newpage
+
+
+\textbf{Ein weiteres Beispiel:} ~\\
+
+\begin{figure*}[h!] \centering
+	\begin{tabular}{l|ccc}
+		& A & B & AB \\
+  			\hline
+  		$B_1$ & 0 & 0 & 2  \\
+  		$B_2$ & 0.5 & 0.5 & 1  \\
+	\end{tabular}
+\end{figure*}
+
+Der optimale Auktionserlös wird erzieht durch:
+$$ (x_1^*, x_2^*) = \left( \{ A, B \}, \emptyset \right) $$
+Damit muss Bieter 1 folgendes zahlen: $\rho_1 = 1 - 0 = 1$. ~\\
+
+Hier ist allerdings ein Anreiz, dass sich Bieter 2 aufteilt wie in obigen Beispiel. Damit erhält er die Güter $A$ und $B$ ohne etwas zahlen zu müssen. Voraussetzung dafür ist allerdings, dass er die Zahlungsbereitschaft von Bieter 1 kennt.
+
+
+\section{Simultane Mehrrundenauktion}
+
+\begin{bemerkung}
+	Warum CCV in Praxis nicht positiv bewertet wird: Wertschätzung für Gut hängt davon ab was die Konkurrenz bekommt und das wird in dieser Form überhaupt nicht abgebildet.
+\end{bemerkung}
+
+Seien $A, B, C$ Güter, es gebe eine Anzahl an Bietrechten für jeder Bieter, $r_A, r_B, r_C$ stellen die Reservationspreise für und $b_A^i, b_B^i, b_C^i$ die Gebote 
+$$ \rightarrow p_A^1, p_B^1, p_C^1 \text{ aktuelle Höchstgebote nach Runde 1} $$
+Die Anzahl der Bietrechte bestimmt sich immer aus der Anzahl der stehenden Höchstgebote und aktiver neuer Gebote. Bei geringerer Gebotsanzahl verringert sich die Anzahl der Bietrechte und die Auktion endet, sobald keine Gebote mehr eingehen. ~\\
+
+Es gibt nach jeder Runde ein Inkrement auf die Höchstgebote der letzten Runde und das wird als Mindestgebot festgelegt. Dadurch entstehen neue Reservationspreise  $r_A^2, r_B^2, r_C^2$
+
+\begin{itemize}
+	\item Vorteil dieser Auktion: man sieht jede Runde wer für welchen Preis das Höchstgebot hält, also alle Informationen sind offen und man kann auf Situationen reagieren.
+	\item Nachteil dieser Auktion: keine kombinatorische Gebote, damit ist dieses Verfahren schwer für starke Synergien oder Komplemente umzusetzen.
+\end{itemize}
+
+
+\begin{bemerkung}
+	Es ist keine dominante Strategie auf das eigene präferierte Gut zu bieten, auch wenn es nur eins davon gibt, z.B. durch komplementäre Eigenschaften bei den anderen Bietern.	
+\end{bemerkung}
+
+\begin{beispiel}
+	Sei $r_A = 0, r_b = 0$
+	\begin{figure*}[h!] \centering
+		\begin{tabular}{l|ccc}
+			& A & B & AB \\
+  				\hline
+  			$B_1$ & 7 & 7 & 7  \\
+  			$B_2$ & 9 & 9 & 18  
+		\end{tabular}
+	\end{figure*}
+	Für Bieter 2 ist die Menge der Güter relevant. Beide Güter sind gleich viel wert und beide zusammen sind doppelt so viel Wert. Für Bieter 1 sind ads perfekte Substitute, denn Gut A und Gut B sind gleich viel Wert, aber beide zusammen haben keinen Mehrnutzen. ~\\
+	
+	In einer Auktion: wird Bieter 1 nur auf ein Gut bieten und Bieter 2 wird auf beide bieten, d.h. es sind nur 3 Bietrechte aktiv. Der Zuschlag wird bei 7 sein für beide Güter und Bieter 2 erhält beide, d.h. Zuschlagspreis wird gleich dem Knappheitspreis sein.~\\
+	
+	Die Rente von Bieter 2 liegt bei $\pi_2 = 18- 14 = 4$, falls die Bieter sich allerdings richtig einschätzen, würde es sich lohnen aber gleich ein Bietrecht aufzugeben und damit die Rente auf 9 zu erhöhen.
+\end{beispiel}
+
+
+Das Problem aus obigem Beispiel ist eines der Hauptrisiken dieser Auktionsform, denn implizit kollusives Verhalten, also Verhalten dass durch Reaktion auf das Verhalten anderen kollusiv wird, kann dazu führen, dass der Zuschlagspreis zu Ungunsten des Auktionators gedrückt wird.
+
+
 \newpage
 
 % todo Bookmark Vorlesung / Übung
@@ -1754,7 +1902,7 @@ An einer simultanen Erstpreisauktion (FA) nehmen zwei asymmetrische Bieter teil,
 		\end{proof}
 \end{enumerate}
 
-\section*{4. Übung}
+\section*{4. \& 5hh. Übung}
 
 \subsection*{Aufgabe 10}
 
@@ -1809,7 +1957,7 @@ $$ \beta_{2}^{EA}(x) = v(x_{i}, x_{i}, x_{(3)}, x_{(4)}) = 2x_{i} + x_{(3)} + x_
 $p = 2x_{(2)} + x_{(3)} + x_{(4)}$.
 $$ \beta_{1}^{EA}(x_{i}) =\left( 120000, 90000 + x_{(4)}, 60000 + x_{(3)} + x_{(4)} \right) $$
 
-\section*{Übung 6}
+\section*{6. Übung}
 
 \subsection*{Aufgabe 13}
 \begin{enumerate}
@@ -1938,6 +2086,144 @@ $n$ Bieter, $X_{i} \overset{iid}{\sim} [4, 7]$.
 		$p = \underbrace{3 x_{(2)}}_{= 3 \cdot 6} +  \underbrace{x_{(3)}}_{= 5} +  \underbrace{x_{(4)}}_{= 4} = 27 = p$
 		$$ v_{(1)} = 29, \quad  \pi_{(1)} = 28 - 27 = 2 $$
 \end{enumerate}
+
+\section*{7. Übung}
+
+\subsection*{Aufgabe 15}
+
+\begin{enumerate}
+	\item Welcher zusätzlicher Faktor spielt in Mehrgüterauktionen für die Bewertung der Güter durch die Bieter eine entscheidende Rolle?
+		\begin{proof}
+			Die Wertschätzung eines Bieters hängt davon ab, welche und wie viele Güter der Bieter bekommt.
+		\end{proof}
+	\item Erklären Sie die Begriffspaare \textit{homogen - heterogen} und \textit{komplementär - substitutiv}, mit denen Güter in Mehrgutauktionen klassifiziert werden, und geben Sie für jede Kombination ein Beispiel aus der Praxis an.
+		\begin{proof} ~\
+			\begin{itemize}
+				\item homogen - heterogen: bedeutet gleichartige und unterschiedliche Güter
+				\item substitutive - komplementär: \textbf{bezieht sich auf die Wertschätzung und nicht die Güter an sich!}
+					\begin{align*}
+						v(A \wedge B ) & > v(A) + v(B) \text{ komplementär / superadditiv} \\
+						v(A \wedge B ) & \leq v(A) + v(B) \text{ substitutiv / subadditiv}
+					\end{align*}
+				\item Beispiele: ~\\
+					\begin{tabular}{l|cc}
+  						     & homogen    & heterogen \\
+  								\hline
+ 				substitutiv  & Schuhpaare & linke und rechte Schuhe oder Handys \\
+ 				komplementär &   Aktien         & Start- und Landeberechtigung für versch. Flughäfen
+			\end{tabular}
+
+			\end{itemize}
+		\end{proof}
+	\item Erklären Sie intuitiv aus Sicht der Bieter die Problematik des Bietens auf Komplemente bzw. Substitute.
+		\begin{proof} ~\
+			\begin{itemize}
+				\item Komplemente: man weiß nicht, ob man alle benötigten Güter bekommt $\Rightarrow$ \textbf{Exposure}-Problem
+				\item Substitute: vielmehr ein Problem für den Auktionator (strategische Mengenreduktion, vgl. Vorlesung: verringere Nachfrage um Preise zu reduzieren)
+			\end{itemize}
+		\end{proof}
+\end{enumerate}
+
+\subsection*{Aufgabe 16}
+
+\begin{enumerate}
+	\item Erläutern und klassifizieren Sie die in der Vorlesung vorgestellten Auktionsformen für Mehrgüterauktionen.
+		\begin{proof} ~\
+		  \begin{itemize}
+			\item sequentielle Auktion - d.h. hintereinander veranstaltete Eingutauktionen
+			\item Simultane Mehrgüterauktionen - davon kennen wir drei Typen:
+				\begin{itemize}
+					\item Vickrey-Auktion
+					\item Pay-As-Bid oder Preisdiskriminierende Auktion
+					\item Einheitspreisauktion (Uniform Pricing, pay-as-clear)
+						\begin{itemize}
+							\item LAB
+							\item HRB
+						\end{itemize}
+				\end{itemize}
+			\item GVA
+			\item Simultane Mehrrundenauktion
+		  \end{itemize}
+		\end{proof}
+	\item Welche Auktionsformen aus Teilaufgabe a) sind für heterogene bzw. homogene Güter geeignet?
+		\begin{proof} ~\
+		  \begin{itemize}
+			\item sequentielle Auktion: für beide Arten, also heterogene und homogene Güter
+			\item Simultane Mehrgüterauktionen: nur für homogene Güter
+				\begin{itemize}
+					\item Vickrey-Auktion
+					\item Pay-As-Bid oder Preisdiskriminierende Auktion
+					\item Einheitspreisauktion (Uniform Pricing, pay-as-clear)
+						\begin{itemize}
+							\item LAB
+							\item HRB
+						\end{itemize}
+				\end{itemize}
+			\item GVA: für beide Arten, also heterogene und homogene Güter
+			\item Simultane Mehrrundenauktion: für beide Arten, heterogene u. homogene Güter
+		  \end{itemize}
+		\end{proof}
+\end{enumerate}
+
+
+\subsection*{Aufgabe 17}
+
+Drei Bieter nehmen an einer simultanen Mehrgüterauktion teil, in der fünf homogene Güter versteigert werden. Die Gebotsvektoren der Bieter lauten:
+
+\begin{align*}
+	b^1 & = \left( 22, 16, 15, 11, 11 \right), \\
+	b^2 & = \left( 32, 28, 19, 10, 9 \right), \\
+	b^3 & = \left( 31, 12, 8, 8, 8 \right),
+\end{align*}
+
+Geben Sie für die preisdiskriminierende Auktion, die Vickrey-Auktion sowie die Einheitspreisauktion (beide gebräuchlichen Preisregeln) an, wie die Güter unter den Bietern verteilt werden und welche Zuschlagspreise sich dabei einstellen.
+
+\begin{proof}
+	Angebot: 5 EH. Zuschläge: Bieter 1: 1EH, Bieter 2: 3 EH, Bieter 3: 1 EH ~\\
+	
+	\begin{figure*}[h!]
+	\begin{tabular}{l|cccc}
+  		& Preisdiskriminierend & $\overset{\text{Erstpreisauktion}}{LAB ~ (p = 19)}$ & $\overset{\text{Erstpreisauktion}}{HRB ~ (p = 16)}$ & Vickrey\\
+  			\hline \hline
+  		$B_1$ & $22$ & $19$ & $16$ & $12$ \\
+  		$B_2$ & $32 + 28 + 19 = 79$ & $3 \cdot 19$ & $3 \cdot 16$ & $16 + 15 + 12 = 43$ \\
+  		$B_3$ & $31$ & $19$ & $16$ & $16$ \\
+  		  	\hline
+  		 Auktionserlös & $132$ & $95$ & $80$ & $71$
+	\end{tabular}
+	\end{figure*}
+	Allgemein kann man diesen fallenden Preiserlös nicht feststellen. Allgemein würden Bieter bei einer preisdiskriminierenden Auktion mehr bid-shading betrieben.
+\end{proof}
+
+\subsection*{Aufgabe 18}
+Es gilt: $n$ Bieter mit \enquote{single-unit-demand}, $k$ Güter mit $n > k$.
+
+\begin{enumerate}
+	\item Wie lautetet das Ergebnis der sequentiellen Auktion, wenn sich die Bieter bei der Versteigerung einer jeden Flasche an die Gleichgewichtsstrategie der Englischen Eingutauktion halten? (Inkremente können dabei vernachlässigt werden).
+		\begin{proof}
+			Es ist $\beta^{EA}(x_i) = x_i$, d.h. \enquote{mitbieten bis zur eigenen Wertschätzung} - was eine schwach dominante Strategie darstellt. Damit ergibt sich:
+			\begin{align*}
+				p_1 & = \beta^{EA}\left( X_{(2,n)} \right) = X_{(2,n)} \\
+				p_2 & = \beta^{EA}\left( X_{(3,n)} \right) = X_{(3,n)} \left( = X_{(2,n-1)} \right) \\
+				& ~\qquad \vdots \\
+				p_k & = \beta^{EA}\left( X_{(k+1, n)} \right) = X_{(k+2,n)}
+			\end{align*}
+			wobei gilt $X_{(2,n)} > \dotsc > X_{(k+2,n)}$.
+		\end{proof}
+	\item Ist das Ergebnis aus Teilaufgabe a) effizient?
+		\begin{proof}
+			Ja!
+		\end{proof}
+	\item Überprüfen Sie, ob das Bietverhalten aus Teilaufgabe a) dominante Strategie in der sequentiellen Auktion ist und ob es mit Annahme rationaler Bieter vereinbar ist.
+		\begin{proof} ~\
+			\begin{itemize}
+				\item \enquote{Bis man eine Flasche Wein hat, bietet man seine wahre Wertschätzung} ist keine dominante Strategie!
+				\item Bietstrategie induziert zudem kein symmetrisches Gleichgewicht mehr!
+			\end{itemize}
+		\end{proof}
+\end{enumerate}
+
+Bei dieser Auktionsform könnten die ersten Bieter realisieren, dass sie auch den Erwartungswert von $X_{(k+2,n)}$ bieten würden.
 
 \printindex
 

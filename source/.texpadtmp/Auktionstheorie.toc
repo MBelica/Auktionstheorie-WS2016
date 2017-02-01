@@ -7,5 +7,6 @@
 \contentsline {chapter}{\numberline {5}Mehrg\IeC {\"u}terauktionen}{31}{chapter.5}
 \contentsline {section}{\numberline {5.1}Simultane Mehrg\IeC {\"u}terauktion}{33}{section.5.1}
 \contentsline {section}{\numberline {5.2}Verallgemeinerte Vickrey Auktion (GVA)}{35}{section.5.2}
-\contentsline {chapter}{Appendix}{}{section*.6}
-\contentsline {section}{\IeC {\"U}bungen}{I}{section*.6}
+\contentsline {section}{\numberline {5.3}Simultane Mehrrundenauktion}{40}{section.5.3}
+\contentsline {chapter}{Appendix}{}{section*.10}
+\contentsline {section}{\IeC {\"U}bungen}{I}{section*.10}
