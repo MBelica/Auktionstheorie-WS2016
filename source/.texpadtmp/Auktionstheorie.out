@@ -1,9 +1,10 @@
 \BOOKMARK [0][-]{chapter.1}{Grundlagen}{}% 1
 \BOOKMARK [0][-]{chapter.2}{Theoretische Modellierung}{}% 2
-\BOOKMARK [0][-]{chapter.3}{IPV-Modell}{}% 3
-\BOOKMARK [0][-]{chapter.4}{IV-Modell \(Interdependent Value\)}{}% 4
-\BOOKMARK [1][-]{section.4.1}{Das symmetrische Modell}{chapter.4}% 5
-\BOOKMARK [0][-]{chapter.5}{Mehrg\374terauktionen}{}% 6
-\BOOKMARK [1][-]{section.5.1}{Simultane Mehrg\374terauktion}{chapter.5}% 7
-\BOOKMARK [1][-]{section.5.2}{Verallgemeinerte Vickrey Auktion \(GVA\)}{chapter.5}% 8
-\BOOKMARK [1][-]{section.5.3}{Simultane Mehrrundenauktion}{chapter.5}% 9
+\BOOKMARK [0][-]{chapter.3}{Eingutauktionen}{}% 3
+\BOOKMARK [1][-]{section.3.1}{IPV-Modell}{chapter.3}% 4
+\BOOKMARK [1][-]{section.3.2}{IV-Modell \(Interdependent Value\)}{chapter.3}% 5
+\BOOKMARK [2][-]{subsection.3.2.1}{Das symmetrische Modell}{section.3.2}% 6
+\BOOKMARK [0][-]{chapter.4}{Mehrg\374terauktionen}{}% 7
+\BOOKMARK [1][-]{section.4.1}{Simultane Mehrg\374terauktion}{chapter.4}% 8
+\BOOKMARK [2][-]{subsection.4.1.1}{Verallgemeinerte Vickrey Auktion \(GVA\)}{section.4.1}% 9
+\BOOKMARK [2][-]{subsection.4.1.2}{Simultane Mehrrundenauktion}{section.4.1}% 10

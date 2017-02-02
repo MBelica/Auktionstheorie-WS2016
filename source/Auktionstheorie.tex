@@ -163,7 +163,7 @@
 % Skript - Anfang 
 \chapter{Grundlagen}
 
-Der Begriff \enquote{Auktion} kommt vermutlich vom lat. augere $\hat=$ vergrößern/vermehren
+Der Begriff \textbf{Auktion} kommt vermutlich vom lateinischen \enquote{augere} was so viel wie vergrößern oder vermehren bedeutet
 
 \index{Auktion!Definition} 
 \begin{definition}
@@ -204,7 +204,7 @@ Das Auktionsdesign ist das durch den Auktionator festgelegte Regelwerk. Zusätzl
 				\item Verkaufsauktion (was auch das Hauptgebiet dieser Vorlesung ausmachen wird, allerdings lassen sich die Ergebnisse durch Vorzeichenwechsel im Grunde übertragen)
 			\end{itemize}
 			Hauptunterschied: Bei Einkaufsauktionen bieten meist viele Teilnehmer mit unterschiedlichen Gütern um die Gunst des Auktionators.
-			Bei Einkaufsauktionen bieten viele Teilnehmer um ein und das gleiche Gut (bzw. ein Angebot).
+			Bei Verkaufsauktionen bieten viele Teilnehmer um ein und das gleiche Gut (bzw. ein Angebot).
 		\item Anzahl der Güter
 			\begin{itemize}
 				\item Eingutauktion
@@ -266,8 +266,8 @@ Das Auktionsdesign ist das durch den Auktionator festgelegte Regelwerk. Zusätzl
 \newpage
 
 \index{Eingutauktionen}\index{Wertschätzung}
-\begin{unnamedtheorem*}[Eingutauktionen]
-	IPV (bieter mit bekannter Wertschätzung für das Gut. Die Wertschätzung $\hat=$ maximaler Zahlungsbereitschaft; bei diesem Preis ist man indifferent zwischen Erwerb und Nichterwerb des Gutes)
+\begin{unnamedtheorem*}[Eingutauktionen im IPV-Kontext] ~\\
+Wir setzen voraus, dass die Bieter eine private, ihnen bekannte Wertschätzung für das Gut haben. Die Wertschätzung entspricht der maximalen Zahlungsbereitschaft für das Gut, bei diesem Preis ist der Bieter indifferent zwischen Erwerb und Nichterwerb)
 	
 	\begin{enumerate}
 		\item Simultane Erstpreisauktion (First Price Sealed Bid Auction, FA)  \index{Eingutauktionen!Simultane Erstpreisauktion} 
@@ -301,10 +301,14 @@ Das Auktionsdesign ist das durch den Auktionator festgelegte Regelwerk. Zusätzl
 	\end{enumerate}
 \end{unnamedtheorem*}
 
+Es kann sich lohnen, unter der wahren Zahlungsbereitschaft zu bieten, also beim Gebot einen Abschlag von der Zahlungsbereitschaft zu tätigen, da sich dadurch der Gewinn erhöht.
+
 \index{bid shading}
 \begin{definition}
-	Es kann sich lohnen, unter der wahren Zahlungsbereitschaft zu bieten, also beim Gebot einen Abschlag von der Zahlungsbereitschaft zu tätigen, da sich dadurch der Gewinn erhöht; dieses Verhalten wird als \textbf{bid shading} bezeichnet.
+	In Auktionen bezeichnet \textbf{bid shading} das Abgeben eines Gebot das geringer als die Wertschätzung ist.
 \end{definition}
+
+Vergleichen wir nun die vier eingeführten Auktionsformen, so lässt sich zeigen:
 
 \begin{satz} ~\
 	\begin{enumerate}
@@ -382,8 +386,9 @@ Das Auktionsdesign ist das durch den Auktionator festgelegte Regelwerk. Zusätzl
 		$$ u_{i}(x_{i}) = \begin{cases} u_{i}(v_{i}-p), & \text{Bieter $i$ erhält Zuschlag} \\ u_{i}(0), & \text{sonst} \end{cases} $$ 
 \end{unnamedtheorem}
 
+\chapter{Eingutauktionen}
 
-\chapter{IPV-Modell}
+\section{IPV-Modell}
 
 	Wir nehmen zuerst \textbf{Bewertungssymmetrie} an, d.h.
 	$$ v_{i} = v(x_{i}) = x_{i}, \quad \forall i \in \{1, \dotsc, n\}. $$
@@ -882,7 +887,8 @@ und dafür auch für die Rangstatistiken
 		 $$\mathbb{E}\left[ h\left(X_{(i,n)} \right) \big| X_{k} = x_{k}' \right] \geq \mathbb{E}\left[ h\left(X_{(i,n)} \right)\big| X_{k} = x_{k}'' \right]$$
 	\end{enumerate}
 
-\chapter{IV-Modell (Interdependent Value)}
+
+\section{IV-Modell (Interdependent Value)}
 
 Wir definieren für das Kapitel
 
@@ -921,7 +927,7 @@ Wir definieren für das Kapitel
 	\end{enumerate}
 \end{satz}
 
-\section{Das symmetrische Modell}
+\subsection{Das symmetrische Modell}
 
 \begin{enumerate}[label=\alph*\upshape)]
 	\item Zwei Aspekte der Symmetrie
@@ -1158,7 +1164,7 @@ Es gibt verschiedene mögliche Preisregeln bzw. Bepreisungsregeln für diese Auk
 	Ist ein Verfahren anreizkompatibel, so müssen die eigenen Gebote nicht den Zuschlagspreis bestimmen, sondern lediglich die Zuschlagswahrscheinlichkeit.
 \end{folgerung*}
 
-\section{Verallgemeinerte Vickrey Auktion (GVA)} \index{Verallgemeinerte Vickrey Auktion} 
+\subsection{Verallgemeinerte Vickrey Auktion (GVA)} \index{Verallgemeinerte Vickrey Auktion} 
 
 
 \textit{Diese kommt auf jeden Fall in der Klausur dran!} % todo kommt auf jeden Fall in der Klausur dran!
@@ -1292,7 +1298,7 @@ Damit muss Bieter 1 folgendes zahlen: $\rho_1 = 1 - 0 = 1$. ~\\
 Hier ist allerdings ein Anreiz, dass sich Bieter 2 aufteilt wie in obigen Beispiel. Damit erhält er die Güter $A$ und $B$ ohne etwas zahlen zu müssen. Voraussetzung dafür ist allerdings, dass er die Zahlungsbereitschaft von Bieter 1 kennt.
 
 
-\section{Simultane Mehrrundenauktion}
+\subsection{Simultane Mehrrundenauktion}
 
 \begin{bemerkung}
 	Warum CCV in Praxis nicht positiv bewertet wird: Wertschätzung für Gut hängt davon ab was die Konkurrenz bekommt und das wird in dieser Form überhaupt nicht abgebildet.
@@ -1508,7 +1514,7 @@ Das Problem aus obigem Beispiel ist eines der Hauptrisiken dieser Auktionsform, 
 			\end{beispiel*}
 		\item Verteilungsfunktion der zweiten Ordnungsstatistik $X_{(2,n)}$:
 			\begin{itemize}
-				\item $F(_{(2,n)} = \mathds{P} \left( X_{(2,n)} \leq X \right)$
+				\item $F_{(2,n)}(x) = \mathds{P} \left( X_{(2,n)} \leq x \right)$
 				\item[$\rightarrow$] 2 Möglichkeiten:
 					\begin{itemize}
 						\item $X_{(1,n)} \leq x \Rightarrow F(x)^{n}$
