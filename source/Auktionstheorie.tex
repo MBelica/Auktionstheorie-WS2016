@@ -226,8 +226,6 @@ Eine Auktion ist insbesondere dann in Erwägung zu ziehen wenn dem Auktionator w
 	\end{itemize}
 \end{anwendung}
 
-\newpage
-
 \index{Ziele des Auktionators} \index{Effizienz}
 \begin{unnamedtheorem*}[Ziele des Auktionators] ~\
 	\begin{enumerate}
@@ -261,10 +259,8 @@ Eine Auktion ist insbesondere dann in Erwägung zu ziehen wenn dem Auktionator w
 	\end{enumerate}	
 \end{unnamedtheorem*}
 
-\newpage
-
 \index{Eingutauktionen}\index{Wertschätzung}
-\begin{unnamedtheorem*}[Eingutauktionen im IPV-Kontext] ~\\
+\begin{unnamedtheorem*}[Eingutauktionen im IPV-Kontext] ~\
 Wir setzen voraus, dass die Bieter eine private, ihnen bekannte Wertschätzung für das Gut haben. Die Wertschätzung entspricht der maximalen Zahlungsbereitschaft für das Gut, bei diesem Preis ist der Bieter indifferent zwischen Erwerb und Nichterwerb)
 	
 	\begin{enumerate}
@@ -303,7 +299,7 @@ Es kann sich lohnen, unter der wahren Zahlungsbereitschaft zu bieten, also beim 
 
 \index{bid shading}
 \begin{definition}
-	In Auktionen bezeichnet \textbf{bid shading} das Abgeben eines Gebot das geringer als die Wertschätzung ist.
+	In Auktionen bezeichnet \textbf{bid shading} das Abgeben eines Gebot das geringer als die eigene Wertschätzung ist.
 \end{definition}
 
 Vergleichen wir nun die vier eingeführten Auktionsformen, so lässt sich zeigen:
@@ -348,7 +344,7 @@ Vergleichen wir nun die vier eingeführten Auktionsformen, so lässt sich zeigen
 \begin{unnamedtheorem}[Modellierung der individuellen Wert] ~\
 	\begin{itemize}
 		\item Vektor der Signale: $x = (x_1, \dotsc, x_{n}) \in \mathbb{R}^{n}$, $x_{-i} \coloneqq (x_1, \dotsc, x_{i-1}, x_{i+1}, \dotsc, x_{n})$
-		\item unbeobachtbare Signale: $s = (s_{0}, s_{1}, s_{m})$ (den Bietern unbekannt
+		\item Unbeobachtbare Signale: $s = (s_{0}, s_{1}, s_{m})$ (den Bietern unbekannt
 			\begin{itemize}
 				\item $s_0$ stellt die Kenntnis des Auktionators über das Gut dar
 				\item $s_1, \dotsc, s_n$ Zukunftsinformationen (Wertentwicklung, etc.) für die $n$ Bieter
@@ -471,7 +467,7 @@ $$ \mathbb{E}\left[ \pi\left( \beta^{k}(X) \right) \big| X_{i} = x_{i} \right] =
 	Die folgenden Aussagen werden für $FA$ und $DA$ mit $A1$, $A2$, $A3$, $A4$ getroffen!
 \end{vereinbarung}
 
-Der Gebotsvektor der Konkurenten besteht aus Zufallsvariablen:
+Der Gebotsvektor der Konkurrenten besteht aus Zufallsvariablen:
 	$$ B_{-i} \coloneqq \left(B_{1}, \dotsc, B_{i-1}, B_{i+1}, \dotsc, B_{n} \right) $$
 
 Betrachten wir nun den erwarteten Gewinn von Bieter $i$:
@@ -992,7 +988,7 @@ Beachte: im IPV-Modell würde gelten, dass $w(x,y) = x_{i}$ und $ g\left(y | x \
 
 Die Wahrscheinlichkeit dass man die Auktion gewinnt ist damit
 $$ G \left(\overline{y} | x \right) = \int_{0}^{y} g \left(y | x \right) dy \longrightarrow \max_{b} $$
-und wird maximiert bei $y = x$, denn der vordere Teil im Integranten ist positiv für $y < x$ und negativ für $y > x$.
+und wird maximiert bei $y = x$, denn der vordere Teil im Integrant ist positiv für $y < x$ und negativ für $y > x$.
 
 Maximieren von $(*)$ liefert
 $$ \frac{\partial}{\partial b} \mathds{E} \left[ \pi(\cdot) \right] = \left( w(x, \beta^{-1}(b)) \right) - \beta \left( \beta^{-1}(b) \right) g\left( \beta^{-1}(b) | x \right)  \frac{d\beta^{-1}(b)}{db} \overset{!}{=} 0 $$
@@ -1073,7 +1069,7 @@ Ein Gleichgewicht in der Zweitpreisauktion müsste dadurch in beiden Runden den 
 
 Die Gleichgewichts-Bietstrategien lauten damit
 \begin{itemize}
-	\item Erstpreisauktion: u nter der Annahme man habe das höchste Gebot bietet man das 3. höchste Gebot
+	\item Erstpreisauktion: unter der Annahme man habe das höchste Gebot bietet man das 3. höchste Gebot
 	\item Zweitpreisauktion: unter der Annahme man habe das höchste Gebot bietet man das 2. höchste Gebot.
 \end{itemize}
 
@@ -1140,7 +1136,7 @@ Es gibt verschiedene mögliche Preisregeln bzw. Bepreisungsregeln für diese Auk
 						\end{description}
 				\end{itemize}
 		\end{itemize} 
-		Beide Einheitspreisauktionsformen sind nicht Anreizkompatibel.
+		Beide Einheitspreis-Auktionsformen sind nicht anreizkompatibel.
 	\item Vickrey-Auktion ~\\
 		Falls Bieter A weg fällt, so würde anstatt seiner 3 Zuschläge von Bieter B zum Preis von 22 und 1 Zuschlag von  Bieter C zum Preis 20 dazu kommen, damit ist der Zuschlagspreis von A bestimmt durch:
 		$$ A: \quad 3 \cdot 22 + 1 \cdot 20 = 86 $$
@@ -1234,7 +1230,7 @@ Da jeder Bieter maximal nur ein Gebot bezuschlagt bekommt, so brauchen wir für 
 	Diese Gebotsform ist schwach Anreizkompatibel, d.h. jeder Bieter hat einen Anreiz seine eigene Wertschätzung zu bieten.
 \end{erinnerung} 
 
-\begin{unnamedtheorem*}[Probleme der GVA] ~\
+\begin{unnamedtheorem*}[Probleme der GVA] ~\ \index{nachverhandlungsstabil}
 	\begin{itemize}
 		\item Aufwendiges Verfahren (bei $k$ Güter sind $2^{k} - 1$ Gebote nötig).
 		\item Komplex, NP-vollständiges Problem % todo read
@@ -1905,7 +1901,7 @@ An einer simultanen Erstpreisauktion (FA) nehmen zwei asymmetrische Bieter teil,
 		\end{proof}
 \end{enumerate}
 
-\section*{4. \& 5hh. Übung}
+\section*{4. \& 5. Übung}
 
 \subsection*{Aufgabe 10}
 
@@ -2044,26 +2040,26 @@ $$ \beta_{1}^{EA}(x_{i}) =\left( 120000, 90000 + x_{(4)}, 60000 + x_{(3)} + x_{(
 
 \subsection*{Aufgabe 14}
 
-$n$ Bieter, $X_{i} \overset{iid}{\sim} [4, 7]$.
+Es gebe $n$ Bieter und $X_{i} \overset{iid}{\sim} [4, 7]$.
 
 \begin{enumerate}
 	\item IV-Gut
-	\item ~\\
+	\item ~\
 	 \begin{itemize}
 		\item Bieter: $\mathds{E}[V_{i} \big| X_{i} = x_{i}] = 2 x_{i} + (n-1) x_{i} = (n+1) x_{i}$
 		\item Außenstehenden: $\mathds{E}[V_{i}] = v(X_{i}, x_{-i}) = 2 \cdot 5.5 + (n-1) \cdot 5.5 = (n+1) \cdot 5.5$
 	\end{itemize}
-	\item ~\\
+	\item ~\
 		\begin{itemize}
 			\item SA: $\beta^{SA}(x_{i}) = w(x_{i}, x_{i})$ Für $n = 2$:
 				$$ \beta^{SA}(x_{i}) = 2x_{i} + x_{i} = 3x_{i} $$
 			Den erwarteten Auktionserlös erhalten wir dann wieder über
 				$$ \mathds{E}\left[ p^{SA} \right] = \mathds{E}\left[ \beta^{SA}(X_{(2,2)}) \right] = 3 \mathds{E}\left[ X_{(2,2)} \right] = 3 \cdot 5 = 15  $$
-			\begin{figure*}
+			\begin{figure*}[h!] \centering
 				\tikz[baseline=-0.5ex]{  
 					 	\draw(0,0)--(8,0);
 						\foreach \x/\xtext in {0/$4$,2.75/$5$,5.5/$6$,8/$7$}
-      					\draw(\x,3pt)--(\x,-3pt) node[below] {\xtext};};
+      					\draw(\x,3pt)--(\x,-3pt) node[below] {\xtext};}
 			\end{figure*}
     				$$ \frac{n-k + 1}{n + 1} \cdot \text{ Breite } + \text{ untere Intervallgrenze} $$	
     		\begin{align*}

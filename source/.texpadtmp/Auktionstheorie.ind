@@ -1,78 +1,82 @@
 \begin{theindex}
 
-  \item Affiliation, \hyperpage{23}
+  \item Affiliation, \hyperpage{22}
   \item Akteure, \hyperpage{2}
   \item Auktion
     \subitem Akteure in einer, \hyperpage{2}
     \subitem Definition, \hyperpage{2}
     \subitem Kategorisierung von, \hyperpage{3}
     \subitem notwendige Kriterien, \hyperpage{3}
-    \subitem symmetrische, \hyperpage{11}
+    \subitem symmetrische, \hyperpage{10}
     \subitem zul\IeC {\"a}ssige, \hyperpage{2}
 
   \indexspace
 
-  \item Bayes-Nash-Gleichgewicht, \hyperpage{12}
-  \item bid shading, \hyperpage{7}
+  \item Bayes-Nash-Gleichgewicht, \hyperpage{11}
+  \item bid shading, \hyperpage{6}
 
   \indexspace
 
-  \item common value, \hyperpage{5}
+  \item common value, \hyperpage{4}
 
   \indexspace
 
-  \item Effizienz, \hyperpage{5}
-  \item Eingutauktionen, \hyperpage{6}
-    \subitem Dutch Auction, \hyperpage{7}
-    \subitem Englische Auktion, \hyperpage{6}
-    \subitem Simultane Erstpreisauktion, \hyperpage{6}
-    \subitem Simultane Zweitpreisauktion, \hyperpage{6}
-  \item Ex-post-Gleichgewichte, \hyperpage{19}
+  \item Effizienz, \hyperpage{4}
+  \item Eingutauktionen, \hyperpage{5}
+    \subitem Dutch Auction, \hyperpage{6}
+    \subitem Englische Auktion, \hyperpage{5}
+    \subitem Simultane Erstpreisauktion, \hyperpage{5}
+    \subitem Simultane Zweitpreisauktion, \hyperpage{5}
+  \item Ex-post-Gleichgewichte, \hyperpage{18}
 
   \indexspace
 
-  \item independent private value, \hyperpage{5}
-  \item individual value, \hyperpage{5}
-  \item individuelle Werte, \hyperpage{9}
-  \item IPV-Grundmodell, \hyperpage{12}
-  \item IPV-Modell, \hyperpage{12}
+  \item independent private value, \hyperpage{4}
+  \item individual value, \hyperpage{4}
+  \item individuelle Werte, \hyperpage{8}
+  \item IPV-Grundmodell, \hyperpage{11}
+  \item IPV-Modell, \hyperpage{11}
 
   \indexspace
 
   \item komponentenweise
-    \subitem Maximum, \hyperpage{22}
-    \subitem Minimum, \hyperpage{22}
+    \subitem Maximum, \hyperpage{21}
+    \subitem Minimum, \hyperpage{21}
 
   \indexspace
 
-  \item maximale Gebotssumme, \hyperpage{36}
+  \item maximale Gebotssumme, \hyperpage{35}
 
   \indexspace
 
-  \item optimal auction, \hyperpage{22}
-  \item Ordnungsstatistik, \hyperpage{11}
+  \item nachverhandlungsstabil, \hyperpage{37}
 
   \indexspace
 
-  \item revenue equivalence theorem, \hyperpage{16}
+  \item optimal auction, \hyperpage{21}
+  \item Ordnungsstatistik, \hyperpage{10}
 
   \indexspace
 
-  \item Stochastische Dominanz 1. Ordnung, \hyperpage{17}
-  \item symmetrisch, \hyperpage{11}
-  \item symmetrische Bieter, \hyperpage{12}
+  \item revenue equivalence theorem, \hyperpage{15}
 
   \indexspace
 
-  \item Verallgemeinerte Vickrey Auktion, \hyperpage{35}
+  \item Stochastische Dominanz 1. Ordnung, \hyperpage{16}
+  \item symmetrisch, \hyperpage{10}
+  \item symmetrische Bieter, \hyperpage{11}
 
   \indexspace
 
-  \item Wertsch\IeC {\"a}tzung, \hyperpage{6}
+  \item Verallgemeinerte Vickrey Auktion, \hyperpage{34}
 
   \indexspace
 
-  \item Ziele des Auktionators, \hyperpage{5}
+  \item Wertsch\IeC {\"a}tzung, \hyperpage{5}
+
+  \indexspace
+
+  \item Ziele des Auktionators, \hyperpage{4}
   \item zul\IeC {\"a}ssig, \hyperpage{2}
 
 \end{theindex}
