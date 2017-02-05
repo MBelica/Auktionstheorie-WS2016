@@ -94,12 +94,14 @@
 
 %% Theorems (unnamedtheorem = Theorem ohne Namen)
 \newtheoremstyle{named}{}{}{\normalfont}{}{\bfseries}{:}{0.25em}{#2 \thmnote{#3}}
+\newtheoremstyle{nnamed}{}{}{\normalfont}{}{\bfseries}{:}{0.25em}{\thmnote{#3}}
 \newtheoremstyle{itshape}{}{}{\itshape}{}{\bfseries}{:}{ }{}
 \newtheoremstyle{normal}{}{}{\normalfont}{}{\bfseries}{:}{ }{}
 \renewcommand*{\qed}{\hfill\ensuremath{\square}}
 
 \theoremstyle{named}
 \newtheorem{unnamedtheorem}{Theorem} \counterwithin{unnamedtheorem}{chapter}
+\theoremstyle{nnamed}
 \newtheorem*{unnamedtheorem*}{Theorem} 
 
 \theoremstyle{itshape}
@@ -112,6 +114,7 @@
 \newtheorem{hilfssatz}[unnamedtheorem]{Hilfssatz}
 \newtheorem{anwendung}[unnamedtheorem]{Anwendung}
 \newtheorem{anwendungen}[unnamedtheorem]{Anwendungen}
+\newtheorem*{anwendunen*}{Anwendungen}
 \newtheorem*{beispiel*}{Beispiel}
 \newtheorem*{beispiele}{Beispiele}
 \newtheorem*{bemerkung}{Bemerkung} 
@@ -217,14 +220,13 @@ Eine Auktion ist insbesondere dann in Erwägung zu ziehen wenn dem Auktionator w
 \end{unnamedtheorem*}
 
 \index{Auktion!notwendige Kriterien}
-\begin{anwendung}
-	notwendige Kriterien:
+\begin{unnamedtheorem*}[Notwendige Kriterien] ~\
 	\begin{itemize}
 		\item Wettbewerb
 		\item Güter ohne (sichtbaren) Marktpreis
 		\item Informationsasymmetrie (Auktionator kennt nicht alle Zahlungsbereitschaften der Bieter, denn sonst würde er einfach zu dem einen Bieter mit der höchsten Zahlungsbereitschaft gehen).
 	\end{itemize}
-\end{anwendung}
+\end{unnamedtheorem*}
 
 \index{Ziele des Auktionators} \index{Effizienz}
 \begin{unnamedtheorem*}[Ziele des Auktionators] ~\
@@ -260,24 +262,24 @@ Eine Auktion ist insbesondere dann in Erwägung zu ziehen wenn dem Auktionator w
 \end{unnamedtheorem*}
 
 \index{Eingutauktionen}\index{Wertschätzung}
-\begin{unnamedtheorem*}[Eingutauktionen im IPV-Kontext] ~\
-Wir setzen voraus, dass die Bieter eine private, ihnen bekannte Wertschätzung für das Gut haben. Die Wertschätzung entspricht der maximalen Zahlungsbereitschaft für das Gut, bei diesem Preis ist der Bieter indifferent zwischen Erwerb und Nichterwerb)
+\begin{unnamedtheorem*}[Eingutauktionen im IPV-Kontext] ~\\
+Wir setzen voraus, dass die Bieter eine private, ihnen bekannte Wertschätzung für das Gut haben. Die Wertschätzung entspricht der maximalen Zahlungsbereitschaft für das Gut, bei diesem Preis ist der Bieter indifferent zwischen Erwerb und Nichterwerb.
 	
 	\begin{enumerate}
 		\item Simultane Erstpreisauktion (First Price Sealed Bid Auction, FA)  \index{Eingutauktionen!Simultane Erstpreisauktion} 
 			\begin{itemize}
 				\item Jeder Bieter gibt verdeckt ein Gebot ab. Auktion endet nach fest vorgegebener Zeit
-				\item Zuschlagsregel: Höchstes Gebot gewinne
+				\item Zuschlagsregel: höchstes Gebot gewinnt
 				\item Preisregel: Zuschlagspreis ist höchstes Gebot (Pay as bid)
 			\end{itemize}
-		\item Simlutane Zweitpreisauktion (Second Price Sealed Bid Auction, SA)  \index{Eingutauktionen!Simultane Zweitpreisauktion} 
+		\item Simultane Zweitpreisauktion (Second Price Sealed Bid Auction, SA)  \index{Eingutauktionen!Simultane Zweitpreisauktion} 
 			\begin{itemize}
 				\item Wie in der FA, allerdings entspricht der Preis dem zweithöchsten Gebot
 			\end{itemize}
 		\item Englische Auktion (English Auction, EA) [Saalversion]  \index{Eingutauktionen!Englische Auktion} 
 			\begin{itemize}
 				\item Bieter überbieten sich, bis kein Gebot mehr eingeht
-				\item Preisregel: Zuschlagspreis letztem Gebot
+				\item Preisregel: Zuschlagspreis ist gleich dem letzten Gebot
 			\end{itemize}
 		\item Englische Auktion (English Auction, EA) [Clock-Version]
 			\begin{itemize}
@@ -344,29 +346,29 @@ Vergleichen wir nun die vier eingeführten Auktionsformen, so lässt sich zeigen
 \begin{unnamedtheorem}[Modellierung der individuellen Wert] ~\
 	\begin{itemize}
 		\item Vektor der Signale: $x = (x_1, \dotsc, x_{n}) \in \mathbb{R}^{n}$, $x_{-i} \coloneqq (x_1, \dotsc, x_{i-1}, x_{i+1}, \dotsc, x_{n})$
-		\item Unbeobachtbare Signale: $s = (s_{0}, s_{1}, s_{m})$ (den Bietern unbekannt
+		\item Unbeobachtbare Signale: $s = (s_{0}, s_{1}, \dotsc, s_{m})$ (den Bietern unbekannt
 			\begin{itemize}
 				\item $s_0$ stellt die Kenntnis des Auktionators über das Gut dar
-				\item $s_1, \dotsc, s_n$ Zukunftsinformationen (Wertentwicklung, etc.) für die $n$ Bieter
+				\item $s_1, \dotsc, s_m$ Zukunftsinformationen (Wertentwicklung, etc.) für die $n$ Bieter
 			\end{itemize}
 		\item Wert des Spielers $i$: $v_{i}(x_{i}, x_{-i}, s)$, $v_{i} \colon \mathbb{R} \times \mathbb{R}^{n-1} \times \mathbb{R}^{m+1} \rightarrow \mathbb{R}$
 	\end{itemize}
 \end{unnamedtheorem}
 
 \begin{beispiele}
-	Betrachten wir zwei der Grundmodelle, so gilt jeweils für alle $i \in N$:
+	Betrachten wir zwei der Grundmodelle, so gilt für alle $i \in N$:
 	\begin{enumerate}
-		\item CV: $v_{i} = v(s_{i})$
+		\item CV-Modell: $v_{i} = v(s_{1})$
 		\item IPV-Modell: $v_{i} = v_{i}(x_{i}) = x_{i}$
 	\end{enumerate}	
 \end{beispiele}
 
-\begin{unnamedtheorem}[Modellierung der Unsicherheiten über Zufallsvariablen]
-	Wir müssen zuerst zwischen verschiedenen Sichtweisen unterscheiden:
+\begin{unnamedtheorem}[Modellierung der Unsicherheiten über Zufallsvariablen] ~\\
+	Wir müssen zuerst zwischen verschiedenen Sichtweisen unterscheiden.
 	\begin{itemize}
-		\item Externe Sicht: $X_{1}, \dotsc, X_{n}, S_{0}, S_{n}, \dotsc, S_{m}$
+		\item Externe Sicht: $X_{1}, \dotsc, X_{n}, S_{0}, S_{1}, \dotsc, S_{m}$
 		\item Sicht des Auktionators: $X_{1}, \dotsc, X_{n}, s_{0}, S_{n}, \dotsc, S_{m}$
-		\item Sicht des Bieters $i$:  $X_{1}, \dotsc, X_{i-1}, x_{i}, X_{i}, \dotsc, X_{n}, S_{0}, S_{n}, \dotsc, S_{m}$
+		\item Sicht des Bieters $i$:  $X_{1}, \dotsc, X_{i-1}, x_{i}, X_{i+1}, \dotsc, X_{n}, S_{0}, S_{n}, \dotsc, S_{m}$
 	\end{itemize}
 	Grundannahme: Alle Bieter haben den gleichen Informationsstand (bis auf die eigene, private Wertschätzung).
 \end{unnamedtheorem}
@@ -400,11 +402,11 @@ Vergleichen wir nun die vier eingeführten Auktionsformen, so lässt sich zeigen
 \index{Ordnungsstatistik}
 \begin{definition}
 	Wir modellieren die geordnete Stichprobe mit Umfang $n$ durch:
-		$$ X_{{1}} > X_{(2)} > \dotsc > X_{(n)}, $$
+		$$ X_{(1)} > X_{(2)} > \dotsc > X_{(n)}, $$
 		und nennen $X_{(k)}$ die $k$-te \textbf{Ordnungsstatistik} bzw. $X_{(k, n)}$ wenn der Stichprobenumfang nicht klar ist.
 \end{definition}
 
-Der Erwartungswert für das größte Gebot steigt hier mit der Anzahl der Bieter!
+Der Erwartungswert für das größte Gebot unter der Annahme der Gleichverteilung auf $[0, 1]$ steigt hier mit der Anzahl der Bieter:
 	$$ \mathbb{E}[X_{(1,n)}] = \frac{n}{n+1} $$
 
 \index{Bayes-Nash-Gleichgewicht}
@@ -424,17 +426,16 @@ Der Erwartungswert für das größte Gebot steigt hier mit der Anzahl der Bieter
 \end{satz}
 
 \begin{bemerkung}
-	Bei schwach dominanten Strategien (in Auktionstheorie vorherrschend) kann er mehrere solche BNE's geben. Bei dominanten Strategien ist das BNE eindeutig.	
+	Bei schwach dominanten Strategien (in Auktionstheorie vorherrschend) kann es mehrere solche BNE's geben. Bei dominanten Strategien ist das BNE eindeutig.	
 \end{bemerkung}
 
 \index{IPV-Grundmodell} \index{IPV-Modell} \index{symmetrische Bieter}
 \begin{unnamedtheorem}[IPV-Grundmodell] ~\
 	\begin{enumerate}
 		\item[\hspace{0.5cm}A1:] Die Bieter sind risikoneutral, $u_{i}(\pi_{i}) = \pi$
-		\item[\hspace{0.5cm}A2:] IPV-Modell, $v_{i} = x_{i} ~\forall i \in N$
-		\item[\hspace{0.5cm}A3:] Die Bieter sind a priori symmetrisch, d.h.
-			$$ X_{1} = X_{2} = \dotsc = X_{n} = X, ~F_{i} = F \quad \forall i \in N $$
-		\item[\hspace{0.25cm}A4:] Der Zuschlagspreis wird ausschließlich über die Gebote bestimmt. D.h. der vom Auktionator gesetzte Reservationspreis $r = 0$.
+		\item[\hspace{0.5cm}A2:] IPV-Ansatz: Die Signale der Bieter $x_i$; $i \in N$; sind unabhängig und private Information. Die Wertschätzungen der Bieter entsprechen ihren Signalen, d. h. $v_i = x_i$ für alle $i \in N$.
+		\item[\hspace{0.5cm}A3:] Die Bieter sind (a priori) symmetrisch, d.h.$$ X_{1} = X_{2} = \dotsc = X_{n} = X \text{ bzw. } F_{i} = F \quad \forall i \in N $$
+		\item[\hspace{0.5cm}A4:] Der Zuschlagspreis wird ausschließlich über die Gebote determiniert.
 	\end{enumerate}
 	Die Annahme A3 ist sinnvoll, denn man kann in den seltensten Fällen die Bieter schon im Vorhinein klassifizieren; ein Gegenbeispiel wären allerdings die Telekommunikationsauktionen.
 \end{unnamedtheorem}
@@ -477,46 +478,50 @@ $G$ sei die Verteilung der Zufallsvariable des höchsten Gebots der anderen (bea
 
 $$ \mathbb{E}[\pi\left( x_{i}, b_{i}, B_{-i} \right)] = (x_{i} - b_{i}) \cdot G(b_{i}) \longrightarrow \max_{b_{i}} $$
 
-FOC: ~$\frac{\partial}{\partial b_{i}} \mathbb{E}\left[ \pi(x_{i}, b_{i} ) \right]$ ~ (Vor.: $G$ differenzierbar)
+FOC: ~$\frac{\partial}{\partial b_{i}} \mathbb{E}\left[ \pi(x_{i}, b_{i} ) \right]$ ~ (Voraussetzung: $G$ differenzierbar)
 $$ \iff ~ - G(b_{i}) + (x_{i} - b_{i}) \cdot g(b_{i}) \overset{!}{=} 0 \quad $$
 $$ \iff ~ b_{i}^{*} = x_{i} - \frac{G(b_{i}^{*})}{g(b_{i})} < x_{i} $$
 
-Was zeigt, dass das optimale Gebot bid shading enthält! Zeigt aber auch, dass diejenigen Bieter, die sich als besonders stark einschätzen auch mehr bid shading betreiben und umgekehrt.
+Was zeigt, dass das optimale Gebot bid shading enthält! Zeigt aber auch, dass diejenigen Bieter, die sich als besonders stark einschätzen auch mehr bid shading betreiben und umgekehrt. -\\
 
 Wir wollen jetzt das Bayes-Nash-Gleichgewicht über einen spieltheoretischen Ansatz finden.  \\
 
 Ableitung eines $\underbrace{\text{symmetrischen}}_{\iff \beta_{1} = \dotsc = \beta_{n} \eqqcolon \beta}$ Bietgleichgewichts (BNE), $\beta_{i} \colon \mathbb{R} \rightarrow \mathbb{R}$, $b_{i} = \beta_{i}(x_{i})$
 
-Annahme: $\beta$ ist monoton in $x$, in dem Sinne, dass $\beta(x) > \beta(y)$ für $x > y$.
+Annahme: $\beta$ ist monoton in $x$, in dem Sinne, dass $\beta(x) > \beta(y)$ für $x > y$. ~\\
 
-Nach vorherigen Untersuchungen muss dann gelten:
-$$ \beta(x_i) \cdot g(\beta(x_{i})) + G(\beta(x_{i})) - x_{i} g(\beta_{i}(x_{i})) = 0 \quad \forall i \in N $$
+Nach vorherigen Untersuchungen muss damit gelten:
+$$ \left( \beta(x_i) - x_{i} \right) \cdot g(\beta(x_{i})) + G(\beta(x_{i}))  = 0 \quad \forall i \in N $$
 
-Bemerke: $G(b_{i}) = G(\beta(x_{i})) = F_{(1,n-1)}(x_{i})$
+Beachten wir, dass $F_{(1,n-1)}(x_{i}) = G(\beta(x_{i}))$, so erhalten wir durch partielles Differenzieren
 
-$$ \frac{D G(\beta(x_{i}))}{d x_{i}} = g(\beta_{i})) \cdot \beta'(x_{i}) = \frac{d F_{(1:n-1)}(x_{i})}{dx_{i}}, \quad \tilde{f}(x_{i}) \coloneqq f_{(1, n-1)}(x_{i}) $$
-$$ \iff g(\beta(x_{i})) = \frac{\tilde{f}(\beta(x_{i}))}{\beta'(x_{i})} $$
+$$ \frac{\partial F_{(1,n-1)}(x_{i})}{\partial x_{i}} = \frac{\partial G(\beta(x_{i}))}{\partial x_{i}} = g(\beta_{i}(x_{i})) \cdot \beta'(x_{i}) \iff g(\beta(x_{i})) = \frac{f_{(1, n-1)}(x_{i})}{\beta'(x_{i})} $$
 
-Insgesamt ist nun die BNE-Bedingung: $(\beta(x_{i}) - x_{i}) \frac{\tilde{f}(x_{i})}{\beta'(x_{i})} + F_{(1,n-1)}(x_{i}) \overset{!}{=} 0$
-$$ \iff F_{(1, n-1)}(x_{i}) \beta'(x_{i}) + \tilde{f}(x_{i}) \beta(x_{i}) - f_{(1, n-1)}(x_{i}) x_{i} \overset{!}{=} 0. $$
-Dies ist eine Differentialgleichung, betrachten wir allerdings
-$$ \frac{d F_{(1,n-1)}(x_{i}) \beta(x_{i})}{d x_{i}} = \tilde{f}(x_{i}) \beta(x_{i}) + F_{(1, n-1)}(x_{i}) \beta'(x_{i}) $$
-und setzen das in die Differentialgleichung ein, so ergibt das:
-$$ \Rightarrow \frac{d}{dx_{i}} F_{(1,n-1)}(x_{i}) \cdot \beta(x_{i}) = \tilde{f}(x_{i}) x_{i} \text{ mit der Randbedingung } \beta(0) = 0. $$
-Dies können wir durch Integration lösen:
-$$ F_{(1, n-1)}(x_{i}) \beta(x_{i}) = \int_{0}^{x_{i}}  \tilde{f}(s) s ds. $$
-Damit ergibt sich
+Setzen wir diesen Zusammenhang in die Gleichgewichtsbedingung des Bayes-Nash-Gleichgewichts ein, so erhalten wir:  $$(\beta(x_{i}) - x_{i}) \frac{\tilde{f}(x_{i})}{\beta'(x_{i})} + F_{(1,n-1)}(x_{i}) \overset{!}{=} 0.$$
+Unter der Voraussetzung, dass $\beta'(x_i) \neq 0$ gilt damit:
+$$ F_{(1, n-1)}(x_{i}) \beta'(x_{i}) + \tilde{f}(x_{i}) \beta(x_{i}) - f_{(1, n-1)}(x_{i}) x_{i} \overset{!}{=} 0. $$
+Um diese Differentialgleichung zu lösen, betrachten wir den Zusammenhang:
+$$ \frac{d F_{(1,n-1)}(x_{i}) \beta(x_{i})}{d x_{i}} = \tilde{f}(x_{i}) \beta(x_{i}) + F_{(1, n-1)}(x_{i}) \beta'(x_{i}). $$
+Einsetzen in die Differentialgleichung ergibt:
+$$ \frac{d}{dx_{i}} F_{(1,n-1)}(x_{i}) \cdot \beta(x_{i}) = f_{(1, n-1)}(x_{i}) x_{i}, $$
+mit der Randbedingung $\beta(0) = 0$. Dies ist durch  einfache Integration lösbar:
+$$ F_{(1, n-1)}(x_{i}) \beta(x_{i}) = \int_{0}^{x_{i}} \frac{d}{ds} F_{(1,n-1)}(s) \cdot \beta(s) = \int_{0}^{x_{i}}  f_{(1, n-1)}(s) s ds. $$
+Das Gleichgewicht, bestehend aus Bietstrategien, erhalten wir durch Umstellen nach $\beta$:
 \begin{align*}
-	\beta(x_{i}) & = \frac{\int_{0}^{x_{i}} s \tilde{f}(s) ds}{\tilde{F}(x_{i})} \qquad \Rightarrow \beta'(x_{i}) \geq 0 \\
+	\beta(x_{i}) & = \frac{1}{F_{(1, n-1)}(x_{i})}  \int_{0}^{x_{i}}  f_{(1, n-1)}(s) s ds \\
+	& = \frac{1}{F_{(1, n-1)}(x_{i})} \left( \big[ s F_{(1,n-1)(s)} \big]_{s=0}^{s=x_{i}} - \int_{0}^{x_{i}}  F_{(1, n-1)}(s)  ds \right) \\
 	& = x_{i} - \frac{\int_{0}^{x_{i}} F_{(1, n-1)}(s) ds}{F_{(1,n-1)}(x_{i})} \\
-	& = x_{i} - \frac{\int_{0}^{x_{i}} F_{(1,n-1)}(s) ds}{F^{n-1}(x_{i})} 
+	& = x_{i} - \frac{\int_{0}^{x_{i}} F^{n-1}(s) ds}{F^{n-1}(x_{i})} 
 \end{align*}
 
-Damit haben wir das symmetrische BNE: $(b_{1}^{k}, \dotsc, \beta_{n}^{k})$ für $k \in \{ FA, DA \}$ mit $b_{i}(x_{i}) = \beta(x_{i}) ~\forall i \in N$, wobei
-$$ \beta(x_{i}) = x_{i} - \frac{\int_{0}^{x_{i}}F^{n-1}(t) dt}{F^{n-1}(x_{i})} $$
+Damit lautet das sym. Bayes-Nash-Gleichgewicht: $(\beta_{1}^{k}, \dotsc, \beta_{n}^{k})$ für $k \in \{ FA, DA \}$, wobei
+$$ \beta(x_{i}) = x_{i} - \frac{\int_{0}^{x_{i}} F^{n-1}(s) ds}{F^{n-1}(x_{i})} $$
 
-\begin{folgerung}
-	$\beta(x_{i}) < x_{i}$, $\beta(x_{i}) > \beta(x_{j})$ für $x_{i} > x_{j}$
+\begin{folgerung} ~\
+	\begin{itemize}
+		\item Es wird bid-shading betrieben, da $\beta(x_{i}) < x_{i}$,
+		\item und die Bietfunktion ist monoton, da $\beta(x_{i}) > \beta(x_{j})$ für $x_{i} > x_{j}$.
+	\end{itemize}	 
 \end{folgerung}
 
 \begin{satz}
@@ -525,9 +530,9 @@ $$ \beta(x_{i}) = x_{i} - \frac{\int_{0}^{x_{i}}F^{n-1}(t) dt}{F^{n-1}(x_{i})} $
 	$$ \text{(Bedingung), dass dieses Signal nicht größer als das eigene Signal ist.\grqq} $$
 \end{satz}
 
-\index{revenue equivalence theorem}
-\begin{folgerung}
-	Für alle vier Auktionen ist die erwartete Zahlung an den Auktionator gleich hoch (\textbf{revenue equivalence theorem} (RET))
+\index{revenue equivalence theorem} \index{RET}
+\begin{folgerung}[revenue equivalence theorem (RET)] ~\\
+Im IPV-Grundmodell führen die symmetrischen Bayes-Nash-Gleichgewichte $\beta^k$ aller vier Auktionstypen $k \in \{EA, DA, FA, SA\}$ zum gleichen erwarteten Auktionserlös, d.h. zur gleichen erwartete Zahlung an den Auktionator.
 \end{folgerung}
 
 \begin{unnamedtheorem}[Limitpreis] (Reservationspreis, Mindestpreis, $\dotsc$) 
@@ -542,29 +547,28 @@ Wir nehmen (realistischer Weise) an, dass: $r \geq v_{0}$
 Betrachten wir einen Reservationspreis $r$ in der FA:
 
 \begin{align*}
-	\mathbb{E}\left[ \pi\left(v_{i}, v_{i}, r \right) \right] & = \left( v_{i} - v_{i} \right) \cdot \mathbb{P}\left( b_{i} > \max \{ B_{-i}^{r} \} \right) \\
-	& \rightarrow \max_{b_{i}}
+	\mathbb{E}\left[ \pi\left(v_{i}, v_{-i}, r \right) \right] & = \left( v_{i} - b_{i} \right) \cdot \mathbb{P}\left(\max \{ B_{-i}^{r} \} \leq b_{i} \right) \longrightarrow \max_{b_{i}}
 \end{align*}
-wobei $B_{-i}^{r} \subseteq B_{-i}$, sodass $\forall b_{j} \in B_{-i}^{r}: b_{j} \geq r$. Das heißt, wir nehmen an, dass die Bieter mit $v_{j} < r$ nicht an der Auktion teilnehmen und damit $B_{-i}^{r}$ die Menge der Gebote der der teilnehmen Bieter bezeichnet. Somit gilt für das Optimierungsproblem
+wobei $B_{-i}^{r} \subseteq B_{-i}$, sodass $\forall b_{j} \in B_{-i}^{r}: b_{j} \geq r$. Das heißt, wir nehmen an, dass die Bieter mit $v_{j} < r$ nicht an der Auktion teilnehmen und damit $B_{-i}^{r}$ die Menge der Gebote der trotz Reservationspreis teilnehmenden Bieter bezeichnet. Somit gilt für das Optimierungsproblem
 \begin{align*}
-	\mathbb{E}\left[ \pi\left(v_{i}, v_{i}, r \right) \right] \leq v - r.
+	\mathbb{E}\left[ \pi\left(v_{i}, v_{-i}, r \right) \right] \leq v_i - r.
 \end{align*}
 
-Wir definieren $\tilde{F}(x) \coloneqq F^{n-1}(x)$, damit gilt
-$$ \frac{d}{dx} \tilde{F}(x) \beta(x) = x \cdot \tilde{f}(x) \text{ unter der Nebenbedingung } \beta(r) = r $$
-$$ \Rightarrow ~ \tilde{F}(x) \beta(x) \big|^{v}_{r} = \int_{r}^{v} x \tilde{f}(x) dx $$
-$$ \Rightarrow \beta^{r}(v) = \frac{\tilde{F}(r)r + \int_{r}^{v} x \tilde{f}(x) dx}{\tilde{F}(v)} = v - \frac{\int_{r}^{v} \tilde{F}(x) dx}{\tilde{F}(v)} $$
-wobei $\tilde{F}(x) = F^{n-1}(x)$. \\
+Betrachten wir wie oben das Optimierungskalkühl, so ergibt sich:
+$$ \frac{d}{dx} F^{n-1}(x) \beta(x) = x \cdot f_{(1,n-1)}(x), $$
+unter der Nebenbedingung $\beta(r) = r$. Integration mit unterer Grenze $r$ ergibt:
+$$ F^{n-1}(x) \beta(x) \big|^{v}_{r} = \int_{r}^{v} x f_{(1,n-1)}(x) dx  \iff \beta^{r}(v) = \frac{F^{n-1}(r) r + \int_{r}^{v} x f_{(1,n-1)}(x) dx}{F^{n-1}(v)}$$
+$$ \beta^{r}(v) = v - \frac{\int_{r}^{v} F^{n-1}(x) dx}{F^{n-1}(v)} $$
 
 Für den Fall, dass der Auktionator einen höheren Reservationspreis wählt, als seine eigene Wertschätzung, ist das Ergebnis der Auktion mit positiver Wahrscheinlichkeit ineffizient. Außerdem gilt:
 $$ \beta_{r=0}(v) < \beta_{r > 0} \leq v $$
 und Gleichheit gilt nur für die Wertschätzung $v = r$.
 
 \begin{beispiel}
-	Für $X_{i} \sim U[0,1]$:
+Betrachtet sei eine FA mit $n=2$ risikoneutralen und symmetrischen Bietern mit unabhängigen Wertschätzungen $X_i \sim U(0, 1)$; mit $v_0 = x_0 = 0$.
 		$$ r^{*} = x_{0} + \frac{1 - F(r^{*})}{f(r^{*})} \overset{x_{0}=0}{=} \frac{1-r^{*}}{1} \Rightarrow r^{*} = \frac{1}{2} $$
 	\begin{align*}
-		p^{FA} & = x_{i} - \int_{r}^{x_{i}} \frac{F^{n-1}(s)}{F^{n-1}(x_{i})} ds \overset{n=2}{n} x_{i} - \int_{r}^{x_{i}} \frac{s}{x_{i}} ds \\
+		\beta^{FA} & = x_{i} - \int_{r}^{x_{i}} \frac{F^{n-1}(s)}{F^{n-1}(x_{i})} ds \overset{n=2}{=} x_{i} - \int_{r}^{x_{i}} \frac{s}{x_{i}} ds \\
 		& = \frac{x_{i}^{2} + r^{2}}{2 x_{i}} = \frac{x_{i}}{2} + \frac{r^{2}}{2 x_{i}}
 	\end{align*} ~\newline
 
@@ -610,19 +614,19 @@ und Gleichheit gilt nur für die Wertschätzung $v = r$.
 \end{beispiel}
 
 \begin{bemerkung}
-	RAT gilt trotz der Einführung eines Reservationspreises.
+	RAT gilt trotz der Einführung eines Reservationspreises - \textit{ müssen wir hier nicht annehmen, dass der Reservationspreis unter dem (erwarteten) gebid-shadetem Gebot des stärksten Bieters liegt?}
 \end{bemerkung}
 
 \index{Stochastische Dominanz 1. Ordnung}
 \begin{definition}
-	Gegeben zwei Verteilungen $F_{I}, F_{II}$, so sagen wir $F_{II}$ \textbf{dominiert} $F_{I}$ \textbf{stochastisch 1. Ordnung}, falls $F_{I}(x) < F_{II}(x) \quad \forall x$.
+	Gegeben zwei Verteilungen $F_{I}, F_{II}$, so sagen wir $F_{II}$ \textbf{dominiert} $F_{I}$ \textbf{stochastisch 1. Ordnung}, falls $F_{I}(x) < F_{II}(x)$ gilt $\forall x \in \R$.
 \end{definition}
 
 \begin{beispiel}[Fall von asymmetrischen Bietern] ~\\
 	Gegeben seien 2 Klassen von Bietern mit jeweils unterschiedlichen Verteilungen $F_{I}$ und $F_{II}$, $F_{I} \neq F_{II}$. Betrachten wir die Strategien der Bieter unter stochastische Dominanz 1. Ordnung, so ergibt sich:
 	\begin{itemize}
-		\item Für Auktionen mit dominanten Strategien (wie in EA und SA) ändert sich nichts! 
-		\item Für EA und DA gibt es keine allgemeine Theorie mehr für optimale Strategie und Gleichgewichte $\rightarrow$ Einzelfallunterscheidung.
+		\item Für Auktionen mit dominanten Strategien (wie in EA und SA) ändert sich logischerweise nichts! 
+		\item Für EA und DA gibt es keine allgemeine Theorie mehr für optimale Strategie und Gleichgewichte $\rightarrow$ Einzelfallunterscheidung. \textit{Im Skript steht: Existenz von asymmetrischen Gleichgewichten, die innerhalb der Verteilungsklassen symmetrisch sind - relevant?}
 	\end{itemize}	
 \end{beispiel}
 
@@ -658,8 +662,8 @@ und Gleichheit gilt nur für die Wertschätzung $v = r$.
 		\end{tikzpicture}
 	  \end{center}
 \end{figure*}	
-~\newpage
-Im Skript wird das Gleichgewichtspaar bestimmt für stärkere/schwächere Bieter. Hier nur das Ergebnis:
+
+Im Skript 44 wird das Gleichgewicht für die stärkeren bzw. schwächeren Bieter auf Seite bestimmt, hier nur das Ergebnis:
 
 \begin{align*}
 	\beta_{1}(x_{1}) & = - \frac{1}{x_1} \left( 1 - \sqrt{1+x_{1}^{2}} \right), ~x_{1} \neq 0 \\
@@ -827,7 +831,7 @@ Das gilt für FA und SA! Das heißt man nimmt in Kauf, dass die Auktion ineffizi
 
 \index{optimal auction}
 \begin{folgerung}[optimal auction] ~\
-	Maximaler Erlös und Effizienz sind nicht gleichzeitig erreichbar. % todo optimal auction mit reinbringen
+	Maximaler Erlös und Effizienz sind nicht gleichzeitig erreichbar.
 \end{folgerung}
 
 \begin{unnamedtheorem}[Modell der interdependenten Wertschätzungen] ~\
