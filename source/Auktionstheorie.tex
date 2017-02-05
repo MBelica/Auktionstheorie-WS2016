@@ -793,8 +793,8 @@ Wir haben hier unterschiedliche Bietfunktionen, also ein \textbf{asymmetrisches 
 	Es entstehen 3 disjunkte Fälle:
 	\begin{enumerate}
 		\item $r > X_{(1, n)}$: $\mathbb{P}\left( X_{(1,n)} < r \right) = F^{n}(r)$
-		\item $X_{(1,n)} \geq r \geq X_{(2,n)}$: $\mathbb{P}\left( X_{(1,n)} \geq r \geq X_{(2, n)} \right) = n\left(1-F(r) \right) F^{n-1}(r) \Rightarrow ~ \text{ Verkauf zu } r$
-		\item $X_{(2,n)} \geq r$: (Normalfall)
+		\item $X_{(1,n)} \geq r \geq X_{(2,n)}$: $$\mathbb{P}\left( X_{(1,n)} \geq r \geq X_{(2, n)} \right) = n \cdot \left(1-F(r) \right) \cdot F^{n-1}(r) \Rightarrow \text{Verkauf zu } r$$
+		\item $X_{(2,n)} > r$: (Normalfall)
 			\begin{align*}
 				\mathbb{P}\left( X_{(2,n)} > r \right) & = 1 - \mathbb{P}\left( X_{(1,n)} \geq r \geq X_{(2,n)} \right) - \mathbb{P} \left( X_{(1,n)} < r \right) \\
 				& = 1 - F^{n}(r) - n \cdot \left( 1 - F(r) \right) \cdot F^{n-1}(r)
@@ -813,18 +813,20 @@ Was ändert eine nicht neutrale Risikoeinstellung? ~\\
 	\item Für risikoneutrale Bieter gilt:
 		$$ \mathbb{E} \left[ p\left( \beta^{FA/DA}(X) \right) \right] = \mathbb{E} \left[ p\left( \beta^{SA}(X) \right) \right] = \mathbb{E} \left[ p\left( \beta^{EA}(X) \right) \right] = \mathbb{E} \left[ X_{(2,n)} \right]  $$
 	\item Für risikoaverse Bieter gilt:
-		$$ \begin{rcases} x_{i} > \beta_{ra}^{FA/DA}(x_{i}) > \beta_{rn}^{FA/DA}(x_{i}) \end{rcases} \longrightarrow \underbrace{\mathbb{E}\left[ p \left( \beta^{FA/DA}(X) \right) \right]}_{< \mathbb{E}\left[ X_{(1,n)} \right]} > \underbrace{\mathbb{E}\left[ p \left( \beta^{SA/EA}(X) \right) \right]}_{= \mathbb{E}\left[ X_{(2,n)} \right]} $$
+		$$ \begin{rcases} \beta_{rn}^{FA/DA}(x_{i}) < \beta_{ra}^{FA/DA}(x_{i}) < x_{i} \end{rcases} \longrightarrow  \underbrace{\mathbb{E}\left[ p \left( \beta^{SA/EA}(X) \right) \right]}_{= \mathbb{E}\left[ X_{(2,n)} \right]} < \underbrace{\mathbb{E}\left[ p \left( \beta^{FA/DA}(X) \right) \right]}_{< \mathbb{E}\left[ X_{(1,n)} \right]}$$
 \end{description} 
 
 Nur bei risikofreudigen Bietern kommt man unter $\mathbb{E}\left[ X_{(2,n)} \right]$
 
 \begin{bemerkung}
-	Gelten (A1) - (A4), gewinnt der Auktionator, falls er die höchste Wertschätzung hat und kein anderer muss etwas zahlen, so gilt auch bei allen anderen Auktionsformen das RET
+	Gelten (A1) - (A4), gewinnt der Auktionator falls er die höchste Wertschätzung besitzt und falls kein Bieter sonstige Kosten zu tragen hat, so gilt auch bei bestehendem Reservationspreis und bei unbestimmter Anzahl von Bietern bei allen vier Auktionsformen das RET.
 \end{bemerkung}
 
-Notwendiges Kriterium für Anreizkompatibilität: Mein Gebot bestimmt im Falle des Zuschlags nicht die Zahlung, sondern nur die Gewinnwahrscheinlichkeit. Allerdings ist diese Bedingung nicht hinreichen, Gegenbeispiel wäre dafür z.B.: 3. Preisauktion, denn da hat ein Bieter den Anreiz seine Wertschätzung zu überbietet; man bietet nämlich die erwartete höchste Wertschätzung unter der Annahme, dass man selbst die 2. höchste hat. ~\\
+\begin{folgerung*}[Notwendiges Kriterium für Anreizkompatibilität]
+Ein notwendiges Kriterium für Anreizkompatibilität ist, dass das eigene Gebot im Falle des Zuschlags nicht die Zahlung bestimmt, sondern nur die Gewinnwahrscheinlichkeit. Allerdings ist diese Bedingung nicht hinreichend, Gegenbeispiel wäre dafür z.B.: 3. Preisauktion, denn da hat ein Bieter den Anreiz seine Wertschätzung zu überbietet; man bietet nämlich die erwartete höchste Wertschätzung unter der Annahme, dass man selbst die 2. höchste hat. 
+\end{folgerung*}
 
-$$r^{*} = x_{0} + \frac{1}{\lambda(r^{*})}, ~ \lambda(r^{*}) = \frac{f(r^{*})}{1 - F(r^{*})}$$
+$$ r^{*} = x_{0} + \frac{1}{\lambda(r^{*})}, ~ \lambda(r^{*}) = \frac{f(r^{*})}{1 - F(r^{*})} $$
 Interessanterweise ist dies nicht von der Zahl der Bieter abhängig. ~\\
 
 Das gilt für FA und SA! Das heißt man nimmt in Kauf, dass die Auktion ineffizient ist. ~\\
@@ -1237,7 +1239,7 @@ Da jeder Bieter maximal nur ein Gebot bezuschlagt bekommt, so brauchen wir für 
 \begin{unnamedtheorem*}[Probleme der GVA] ~\ \index{nachverhandlungsstabil}
 	\begin{itemize}
 		\item Aufwendiges Verfahren (bei $k$ Güter sind $2^{k} - 1$ Gebote nötig).
-		\item Komplex, NP-vollständiges Problem % todo read
+		\item Komplex, NP-vollständiges Problem
 		\item Auktionserlös kann sehr niedrig sein
 		\item Verfahren ist nicht \enquote{nachverhandlungsstabil}.
 	\end{itemize}
