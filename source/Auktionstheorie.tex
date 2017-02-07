@@ -931,7 +931,9 @@ Wir definieren für das Kapitel
 	\item Zwei Aspekte der (a priori) Symmetrie
 		\begin{enumerate}[label=\arabic*.]
 			\item Symmetrie der Signale: die gemeinsame Verteilung $F(x)$ und Dichte $f(x)$ der Signale ist in den Argumenten symmetrisch; d.h. für alle $x = (x_1, \dotsc, x_n)$ gilt $F(\rho(x)) = F(x)$ und $f(\rho(x)) = f(x)$ für alle Permutationen $\rho(x)$, d.h. alle Bieter teilen sich eine gemeinsame Verteilung $F(x)$ bzw. Dichte $f(x)$.
-			\item Symmetrie der Bewertung: Die Wertfunktion ist für alle Bieter gleich; d.h. es existiert eine Funktion $v \colon [0,\overline{x}]^n \rightarrow \mathbb{R}$, so dass für alle $i \in N$ und alle $x \in [0, \overline{x}]$ gilt $v(x) = v_i(x)$. Diese Wertfunktion ist in den Argumenten 2 bis n (Signale der anderen Bieter) symmetrisch; d.h. für alle $x_i$ und alle $x_{-i}$ gilt $v(x_i, \rho(x_{-i})) = v(x_{i}, x_{-i})$ für alle Permutationen $\rho(x_{-i})$, d.h. es ist unabhängig von der Identität der anderen Bieter. ~\\
+			\item Symmetrie der Bewertung: Die Wertfunktion ist für alle Bieter gleich, d.h. es existiert eine Funktion $v \colon [0, \overline{x}]^n \rightarrow \mathbb{R}$, so dass für alle $i \in N$ und alle $x \in [0, \overline{x}]$ gilt $v(x) = v_i(x)$. Diese Wertfunktion ist in den Argumenten $2$ bis $n$ (Signale der anderen Bieter) symmetrisch, d.h. für alle $x_i$ und alle $x_{-i}$ gilt
+				$$ v\left(x_i, \rho(x_{-i}) \right) = v\left(x_i, x_{-i} \right) $$
+				für alle Permutationen $\rho(x_{-i})$. Demnach ist die Wertfunktion unabhängig von der Identität der anderen Bieter. ~\\
 				
 				Außerdem gilt: 
 				$$ \frac{\partial v_{i}(\cdot)}{\partial x_{i}} > 0, ~\frac{\partial v_{i}(\cdot)}{\partial x_{j}} \geq 0 $$		
@@ -1340,12 +1342,12 @@ Das Problem aus obigem Beispiel ist eines der Hauptrisiken dieser Auktionsform, 
 
 % todo Bookmark Vorlesung / übung
 \phantomsection \appendix \pagenumbering{Roman}  \cftaddtitleline{toc}{chapter}{Appendix}{}
-\cftaddtitleline{toc}{section}{übungen}{I}
+\cftaddtitleline{toc}{section}{Übungen}{I}
 
-\chapter*{übungen}
+\chapter*{Übungen}
 
 
-\section*{1. übung}
+\section*{1. Übung}
 
 \subsection*{Statistische Grundlagen}
 
@@ -1683,7 +1685,7 @@ $$ X_{i} \overset{uiv}{\sim} U[0,1], \quad v_i = x_i $$
 
 \newpage
 
-\section*{3. übung}
+\section*{3. Übung}
 
 \subsection*{Aufgabe 6}
 
@@ -1759,7 +1761,7 @@ Ein Auktionator beabsichtigt ein Gut mittels einer Simultanen Zweitpreisauktion 
     \hline
     Fall & W'keit & Erwarteter Erlös  \\ \hline
     $x_{(1,2)} < r$ & $r^{2}$ & $0$  \\ \hline
-    $x_{(1, 2)} > r > x_{(1, 2)} $ & $2 \cdot r (1 - r)$ & $r - v_{0}$  \\ \hline
+    $x_{(1, 2)} > r > x_{(2, 2)} $ & $2 \cdot r (1 - r)$ & $r - v_{0}$  \\ \hline
     $x_{(2, 2)} > r$ & $(1-r)^{2} $  &  \pbox{20cm}{$\mathbb{E}[X_{(2,2)} - v_{0} \big| X_{(2,2)} > r] =$ \\ ~\hspace{0.25cm} $r + \frac{1}{3} (1-r) = \frac{2}{3} r + \frac{1}{3}$} \footnote{Wir wissen nämlich aus der 2. übung: $\mathbb{E}[X_{(k, n)}] = \frac{n - k +1}{n+1} \xRightarrow[n=2]{k=2} \mathbb{E}[X_{(2,2)}] = \frac{1}{3}$}  \\ 
     \hline
     \end{tabular}
@@ -1903,7 +1905,7 @@ An einer simultanen Erstpreisauktion (FA) nehmen zwei asymmetrische Bieter teil,
 		\end{proof}
 \end{enumerate}
 
-\section*{4. \& 5. übung}
+\section*{4. \& 5. Übung}
 
 \subsection*{Aufgabe 10}
 
@@ -1958,7 +1960,7 @@ $$ \beta_{2}^{EA}(x) = v(x_{i}, x_{i}, x_{(3)}, x_{(4)}) = 2x_{i} + x_{(3)} + x_
 $p = 2x_{(2)} + x_{(3)} + x_{(4)}$.
 $$ \beta_{1}^{EA}(x_{i}) =\left( 120000, 90000 + x_{(4)}, 60000 + x_{(3)} + x_{(4)} \right) $$
 
-\section*{6. übung}
+\section*{6. Übung}
 
 \subsection*{Aufgabe 13}
 \begin{enumerate}
@@ -2088,7 +2090,7 @@ Es gebe $n$ Bieter und $X_{i} \overset{iid}{\sim} [4, 7]$.
 		$$ v_{(1)} = 29, \quad  \pi_{(1)} = 28 - 27 = 2 $$
 \end{enumerate}
 
-\section*{7. übung}
+\section*{7. Übung}
 
 \subsection*{Aufgabe 15}
 
