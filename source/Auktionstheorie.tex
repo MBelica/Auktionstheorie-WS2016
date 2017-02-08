@@ -396,7 +396,7 @@ Vergleichen wir nun die vier eingeführten Auktionsformen, so lässt sich zeigen
 
 \index{Auktion!symmetrische} \index{symmetrisch}
 \begin{definition}
-	Eine Auktion heißt \textbf{symmetrisch} genau dann, wenn ein externer Beobachter die Bieter nicht unterscheiden kann.
+	Eine Auktion heißt \textbf{symmetrisch} genau dann, wenn ein externer Beobachter die Bieter nicht unterscheiden kann, d.h. falls Bewertungs- und Informationssymmetrie vorliegt.
 \end{definition}
 
 \index{Ordnungsstatistik}
@@ -417,8 +417,8 @@ Der Erwartungswert für das größte Gebot unter der Annahme der Gleichverteilun
 
 
 \begin{satz}
-	Im IPV-Modell (siehe A2 unten) der EA und SA besitzt jeder Bieter $i \in N$ die dominante Strategie seine Bietgrenze (EA) bzw. sein Gebot (SA) gleich seinem Signal (individuelle Wertschätzung zu setzen.
-	$$ \beta_{i}^{EA}(x_{i}) = \beta_{i}^{SA}(x_{i}) = x_{i} \coloneqq v_{i} $$
+	Im IPV-Modell (siehe A2 unten) der EA und SA besitzt jeder Bieter $i \in N$ die dominante Strategie seine Bietgrenze (EA) bzw. sein Gebot (SA) gleich seinem Signal/individuelle Wertschätzung zu setzen.
+	$$ \beta_{i}^{EA}(x_{i}) = \beta_{i}^{SA}(x_{i}) = x_{i} = v_{i} $$
 \end{satz}
 
 \begin{satz}
@@ -433,11 +433,11 @@ Der Erwartungswert für das größte Gebot unter der Annahme der Gleichverteilun
 \begin{unnamedtheorem}[IPV-Grundmodell] ~\
 	\begin{enumerate}
 		\item[\hspace{0.5cm}A1:] Die Bieter sind risikoneutral, $u_{i}(\pi_{i}) = \pi$
-		\item[\hspace{0.5cm}A2:] IPV-Ansatz: Die Signale der Bieter $x_i$; $i \in N$; sind unabhängig und private Information. Die Wertschätzungen der Bieter entsprechen ihren Signalen, d. h. $v_i = x_i$ für alle $i \in N$.
-		\item[\hspace{0.5cm}A3:] Die Bieter sind (a priori) symmetrisch, d.h.$$ X_{1} = X_{2} = \dotsc = X_{n} = X \text{ bzw. } F_{i} = F \quad \forall i \in N $$
+		\item[\hspace{0.5cm}A2:] IPV-Ansatz: Die Signale der Bieter $x_i$ ($i \in N$) sind unabhängig und private Information. Die Wertschätzungen der Bieter entsprechen ihren Signalen, d. h. $v_i = x_i$ für alle $i \in N$.
+		\item[\hspace{0.5cm}A3:] Die Bieter sind a priori symmetrisch, d.h.$$ X_{1} = X_{2} = \dotsc = X_{n} = X \text{ bzw. } F_{i} = F \quad \forall i \in N $$
 		\item[\hspace{0.5cm}A4:] Der Zuschlagspreis wird ausschließlich über die Gebote determiniert.
 	\end{enumerate}
-	Die Annahme A3 ist sinnvoll, denn man kann in den seltensten Fällen die Bieter schon im Vorhinein klassifizieren; ein Gegenbeispiel wären allerdings die Telekommunikationsauktionen.
+	Die Annahme A3 ist sinnvoll, denn man kann in den seltensten Fällen die Bieter schon im Vorhinein klassifizieren. Ein Gegenbeispiel ist allerdings in Telekommunikationsauktionen zu finden, denn man kann a priori bereits zwischen stärkeren und schwächeren Anbietern unterscheiden.
 \end{unnamedtheorem}
 
 \begin{vereinbarung}
@@ -450,7 +450,7 @@ Wir definieren
 	\item $\rho$ = die Zahlung der Bieter an den Auktionator
 \end{itemize}
 
-$\beta^{k} = \left(\beta_{1}^{k}, \dotsc, \beta_{n}^{k} \right)$ mit $\beta_{i}^{k}(x_{i}) = x_{i} ~\forall i \in N$ die dominanten Strategien der $n$ Bieter für $k \in \{ EA, SA \}$. \\
+$\beta^{k} = \left(\beta_{1}^{k}, \dotsc, \beta_{n}^{k} \right)$ mit $\beta_{i}^{k}(x_{i}) = x_{i}$ für alle $i \in N$ die dominanten Strategien der $n$ Bieter für $k \in \{ EA, SA \}$. \\
 
 Der erwartete Zuschlagspreis (erwartete Auktionserlös):
 	$$ \mathbb{E}\left[ p\left(\beta^{k}(X) \right) \right] = \mathbb{E}[X_{(2,n)}] $$
@@ -1645,10 +1645,11 @@ $$ X_{i} \overset{uiv}{\sim} U[0,1], \quad v_i = x_i $$
 		$$ \pi = \begin{cases} x_i - b_i, & b_i > \max B_{-i} \\ 0, & \text{sonst} \end{cases} $$
 		\begin{align*}
 			\Rightarrow \mathds{E}[\pi] & = (x_i - b_i) \mathds{P}\left(\max B_{-i} < b_i\right) \\
-			& = (x_i - b_i) \mathds{P}\left(X_{(1,n-1)} < x_i\right) \\
-			& = (x_i - b_i) F_{(1,n-1)}(x_i)
+			& = (x_i - b_i) \mathds{P}\left(X_{(1,n-1)} < \beta^{-1}(b_i)\right) \\
+			& = (x_i - b_i) F_{(1,n-1)}\left(\beta^{-1}(b_i) \right) \\
+			& = (x_i - b_i) F^{n-1}\left(\beta^{-1}(b_i) \right)
 		\end{align*}
-	\item $\beta^{SA}(x_i) = x_i - \frac{\int_0^{x_{i}} F^{n-1}(x) dx}{F^{n-1}(x_i)} \leq x_i$ ~\\
+	\item $\beta^{FA}(x_i) = x_i - \frac{\int_0^{x_{i}} F^{n-1}(x) dx}{F^{n-1}(x_i)} \leq x_i$ ~\\
 		Demnach betreibt ein Bieter, der sich seiner Stärke bewusst ist, höheres bid-shading.
 		\begin{align*}
 			\beta^{FA}(x_i) & = \mathds{E}\left[ X_{(2,n)} \big| X_{(1,n)} = x_i \right] \\
@@ -1689,7 +1690,7 @@ $$ X_{i} \overset{uiv}{\sim} U[0,1], \quad v_i = x_i $$
 
 \subsection*{Aufgabe 6}
 
-\textit{In Klausur sind 15 - 20 von 60 Punkten Multiple-Choice}
+\textit{In der Klausur werden 15 - 20 von 60 Punkten durch MC-Aufgaben gegeben sein.}
 
 \begin{enumerate} 
 	\item Falsch. Gilt nur falls alle Signale gleich wären.
@@ -1737,7 +1738,7 @@ $$ X_{i} \overset{uiv}{\sim} U[0,1], \quad v_i = x_i $$
 		\begin{proof}
 			Falsch; 
 		\end{proof}
-	\item Im IVP-Modell mit asymmetrischen Bietern stellt das Bayes-Nashgleichgewicht einer FA ein effizientes Auktionsergebnis sicher. (asymmetrische Bieter = unterschiedliche Verteilungen liegen zugrunde)
+	\item Im IVP-Modell mit asymmetrischen Bietern stellt das Bayes-Nash-Gleichgewicht einer FA ein effizientes Auktionsergebnis sicher. (asymmetrische Bieter = unterschiedliche Verteilungen liegen zugrunde)
 		\begin{proof}
 			Falsch;
 		\end{proof}
