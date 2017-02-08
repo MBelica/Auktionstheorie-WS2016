@@ -2122,7 +2122,7 @@ Es gebe $n$ Bieter und $X_{i} \overset{iid}{\sim} [4, 7]$.
 	\item Erklären Sie intuitiv aus Sicht der Bieter die Problematik des Bietens auf Komplemente bzw. Substitute.
 		\begin{proof} ~\
 			\begin{itemize}
-				\item Komplemente: man weiß nicht, ob man alle benötigten Güter bekommt $\Rightarrow$ \textbf{Exposure}-Problem
+				\item Komplemente: man weiß nicht, ob man alle benötigten Güter bekommt $\Rightarrow$ \textbf{Exposure}-Problem (vgl. Seite 85 im Skript)
 				\item Substitute: vielmehr ein Problem für den Auktionator (strategische Mengenreduktion, vgl. Vorlesung: verringere Nachfrage um Preise zu reduzieren)
 			\end{itemize}
 		\end{proof}
@@ -2228,6 +2228,214 @@ Es gilt: $n$ Bieter mit \enquote{single-unit-demand}, $k$ Güter mit $n > k$.
 \end{enumerate}
 
 Bei dieser Auktionsform könnten die ersten Bieter realisieren, dass sie auch den Erwartungswert von $X_{(k+2,n)}$ bieten würden.
+
+\section*{8. Übung}
+
+\subsection*{Aufgabe 19}
+
+Ein Auktionator ersteigt zwei unterschiedliche gebrauchte Maschinen $X$ und $Y$. An der Auktion nehmen vier Bieter $A, B, C$ und $D$ teil. Die individuellen Wertschätzung der Bieter sind voneinander unabhängig und die Wertschätzung eines jeden Bieters sind weer dem Auktionator noch den anderen Bietern bekannt. Wir nehmen jedoch an, dass uns alle Wertschätzungen bekannt sind, die wie folgt lauten.
+
+\begin{enumerate}
+	\item a
+		\begin{proof} ~\
+			\begin{itemize}
+				\item Beitstrategien nicht angegeben, jedoch: Annahme: $\beta_i\left( v_i(x_i) \right) = v_i(x)$. ~\\
+			
+					$X \colon \beta_i\left( v_i(x) \right) = v_i(x)$, $i \in \{ A, \dotsc, D \}$
+					$$ \Rightarrow B \text{ erhält Zuschlag für $X$ zu } = p_{x} = 50 $$
+					$Y \colon \beta_i\left( v_i(y) \right) = v_i(y)$, $i \in \{ A, \dotsc, D \}$
+					$$ \Rightarrow C \text{ erhält Zuschlag für $Y$ zu } p_{y} = 60 $$
+					Damit ist der jeweilige Gewinn gegeben durch
+					$$\pi_A = \pi_D = 0, ~ \pi_B = 10, ~\pi_C = 5 $$
+					Der Auktionserlös ist damit $p_x + p_y = 110$.
+				\item $(X, Y)$ als Los zusammen versteigert
+					$$ X + Y \colon \beta_i \left( v(x+y) \right) = v_i(x+y), ~ i \{ A, \dotsc, D \} $$
+					$\Rightarrow C$ erhält Zuschlag für $X+Y$ zu $p_{x+y} = 105$.
+			\end{itemize}
+			In der sequentiellen Auktion ist das Ergebnis effizient, in der Los-Auktion gibt es eine Reallokationsmöglichkeit die den Erlös erhöhen würde und demnach kann dieses Verfahren nicht effizient sein.
+		\end{proof}
+	\item b
+		\begin{proof}
+			$D$ nicht nicht an der Auktion teil.
+			\begin{itemize}
+				\item Sequentielle Form ~\\
+					 $X$: $B$ erhält $X$ zu $p_{x} = 50$ \\
+					  $Y$: $C$ erhält $Y$ zu $p_{y} = 50$ \\
+					  
+					  und der Auktionserlös ist damit $p_x + p_y = 100$.
+				\item  $(X, Y)$ als Los zusammen versteigert ~\\
+					$X + Y$: siehe a) mit $p_x + p_y = 105$.
+			\end{itemize}
+		\end{proof}
+\end{enumerate}
+
+\subsection*{Aufgabe 20}
+
+2 homogene Güter $X$ und $Y$, die für den Auktionator die folgende Wertschätzung hat
+$$ v_0(X) = v_0(Y) = 100 = r(X) = r(Y), ~ v_0(X+Y) = 200 $$
+2 Bieter $A$ und $B$ mit
+$$ v_A(X) = v_A(Y) = v_A(X+Y) = 750 $$
+\begin{enumerate}
+	\item $v_B(X) = v_B(Y) = 0$, $v_B(X+Y) = 1000$ 
+		\begin{enumerate}[label=\arabic*.]
+			\item Wie muss eine Auktion enden ... ~\\
+				\begin{itemize}
+					\item Effizient wäre die Auktion, wenn Bieter $B$ beide Güter $X+Y$ erhält. 
+					\item Soziale Gewinn $= v_B(X+Y) - v_0(X+Y) = 1000 - 200 = 800$
+					\item $p_{X+Y} = 900$, $\pi_A = 0$ $\pi_B = 1000 - 900 = 100$, $\pi_0 = 900 - 200 = 700$.
+				\end{itemize}
+			\item Überprüfen Sie, ob bei der Sequentiellen Englischen Auktion und der Simultanen mehrperiodigen Auktion ein effizientes Ergebnis zu erwarten ist.
+				\begin{proof}
+					kein effizientes Ergebnis in beiden Fällen zu erwarten
+					$$ \Rightarrow Exposure-Problem $$
+				\end{proof}
+			\item Geben Sie eine Auktionsform an, die unter den obigen Wertschätzungen ein effizientes Ergebnis sich stellt.
+				\begin{proof}
+					Zum Beispiel GVA $\Rightarrow B $ erält $X$ und $Y$ zu:
+					$$ p_{x+y} = B^{*}(N \setminus \{ B \} ) - B_{-B}^{*}(N) = 850 - 0 = 850 $$
+					\begin{tabular}{l|ccc}
+  						& $\{ X \}$ & $\{ Y \}$ & $\{ X + Y \}$ \\
+  						\hline
+  						A & 750 & 750 & 750 \\
+  						B & 0 & 0 & 1000 \\
+  						AUK & 100 & 100 & 200
+					\end{tabular}
+				\end{proof}
+		\end{enumerate}	
+	\item $y_B(X) = v_B(Y) = 900$, $v_B(X+Y) = 1700$
+		\begin{enumerate}[label=\arabic*.]
+			\item $B$ erhält $X$ und $Y$. Sozialer Gewinn $= 1700 - 200 = 1500$
+			\item $B$ erhält beide Maschinen $X + Y$. $p_X = p_Y = 750$ (effizientes Ergebnis)
+				$$ \pi_A = 0, ~ \pi_B = 200, ~\pi_0 = 1300 $$
+				Sozialer Gewinn $= 200 + 1300 = 1500$
+			\item Zeigen Sie, dass die Bietstrategie der beiden Bieter aus (b2) kein Full-Information-Gleichgewicht in den Auktionen bildet, d-h- dass die Bietstrategien unter der Kenntnis der konkreten Wertschätzungen nich t gegenseitig optimal sind. Geben Sie für beide Auktionsformen aus b2) 
+				\begin{proof}
+					\begin{itemize}
+						\item $A$ bietet für eine Maschine bis max 750, solange er keine hat, ansonsten bietet $A$: $b = 0$
+						\item $B$ bietet nur für die zweite Maschine bis max. 900
+					\end{itemize}
+					$\Rightarrow A$ erhält $X$ zu $p_X = 100$ und $B$ erhält $Y$ zu $p_Y = 100$. 
+					$$\pi_A = 750 - 100 = 650, ~\pi_B = 900 - 100 = 800, ~ \pi_0 = 200  200 = 0$$
+					Strategische Nachfragereduktion
+				\end{proof}
+		\end{enumerate}	
+	\item Was versteht man in der Auktionstheorie unter dem Regret Proem? geben Sie ein Beispiel hierfür an, indem Sie die Wertschätzung von Bieter $B$ aus Teilaufgabe b) geeignet ändern.
+		\begin{proof}
+			Es stellt sich ein Auktionsergebnis ein, welches bereits zu einem günstigeren Preis möglich gewesen wäre. ~\\
+			
+			Zum Beispiel: $v_B(X) = v_B(Y) = 900$, aber $v_B(X+Y) = 1600$
+			$$ \Rightarrow B \text{ erhält $X$ zu } p_X = 750 $$
+			$$ \Rightarrow A \text{ erhält $Y$ zu } p_Y = 700 $$
+			Durch aufgeben des ersten Gutes könnte $B$ das Gut $Y$ günstig erhalten und dadurch seine Rente maximieren
+		\end{proof}
+\end{enumerate}
+
+
+\subsection*{Aufgabe 21}
+\begin{enumerate}
+	\item a
+		\begin{proof}
+			siehe Skript 3.2.3
+		\end{proof}
+	\item b
+		\begin{proof} ~\
+			\begin{itemize}
+				\item GVA ist Anreizkompatibel, d.h. die Gebote sind gegeben durch
+					$$b_A = (X: 20, Y: 20, (X,Y) : 49), ...  $$
+				\item symmetrisches GGW in dominanten Strategien
+				\item $x^* = (x_A^*, x_B^*, x_C^*) = (X, 0, Y)$
+				\item $B^*(N) = 20 + 30 = 50$ mit $N = \{ A, B, C \}$
+				\item $p_A = 47 - 30 = 17$, $p_B = 0$, $p_C = 49 - 20 = 29$
+					$$ \Rightarrow \pi_A = 20- 17 = 3, ~\pi_B = 0, ~\pi_C = 30  29 = 1 $$
+					Die Rente des Auktionators: $\pi_0 = 17 +29 = 46$
+			\end{itemize}
+		\end{proof}
+\end{enumerate}
+
+
+\subsection*{Aufgabe 22}
+$N = \{ A, B \}$, 2 identische Güter $X, Y$
+\begin{figure*}[hbt]	\centering
+\begin{tabular}{l|ccc}
+  & $X$ & $Y$ & $\{X, Y \}$ \\
+  \hline
+  A & 0 & 0 & 40 \\
+  B & 0 & 0 & 35
+\end{tabular}
+\end{figure*} 
+
+
+\begin{enumerate}
+	\item Die optimale Allokation: $x* = \big((X,Y), 0 \big)$, wobei $B^*(N) = 40$ und den Preis den der Bieter zu zahlen hat $p_{A+B} = 35 - 0 = 35$
+		$$ \Rightarrow \pi_A = 5, ~\pi_0 = 35, ~\pi_B = 0 $$
+	\item Folgendes ist gegeben: $N = \{ A, B \}$, 2 identische Güter $X, Y$
+\begin{figure*}[hbt]	\centering
+			\begin{tabular}{l|ccc}
+ 			 & $X$ & $Y$ & $\{X, Y \}$ \\
+  				\hline
+  			A & 0 & 0 & 40 \\
+  			B & 0 & 0 & 35 \\
+  			C & 40 & 40 & 40 \\
+  			D & 40 & 40 & 40
+		\end{tabular}
+		\end{figure*}
+		Die optimale Allokation lautet damit: $x^* = (0, 0, X, Y)$ und $B^*(N) = 80$ und die Preise für die Bieter $p_A = p_B = 0$, $p_C = p_D = 40 - 40$
+		$$ \Rightarrow \pi_A = \pi_B = 0, ~ \pi_C = \pi_D = 40 $$
+		\textbf{Gefahren/Schwächen die in eine GVA bestehen:}
+		\begin{itemize}
+			\item I: Niedriger Auktionserlöses
+			\item II: Rente des Auktionators kann sinken, trotz mehr Wettbewerb
+		\end{itemize}
+	\item Mit der neuen Firma:
+	\begin{figure*}[hbt]	\centering
+			\begin{tabular}{l|ccc}
+ 			 & $X$ & $Y$ & $\{X, Y \}$ \\
+  				\hline
+  			A & 0 & 0 & 40 \\
+  			B & 0 & 0 & 35 \\
+  			E & 40 & 40 & 100
+		\end{tabular}
+		\end{figure*}
+		$x* = (0, 0, \{X, Y \})$, damit $B^*(N) = 100$ und $p_E = 40 - 0 = 40$
+		$$ \Rightarrow \pi_A = \pi_B = 0, ~ \pi_E = 100 - 40 = 60 $$
+		Damit stellen sich die beiden Firmen schlechter, da sie nur noch 30 erhalten, anstatt den 40 davor.
+			\textbf{Weitere Gefahren/Schwächen die in eine GVA bestehen:}
+		\begin{itemize}
+			\item III: Synergieeffekte der Bieter können zu ihren Lasten gehen
+		\end{itemize}
+	\item Mit den korrigierten Wertschätzungen ergibt das
+		\begin{figure*}[hbt]	\centering
+			\begin{tabular}{l|ccc}
+ 			 & $X$ & $Y$ & $\{X, Y \}$ \\
+  				\hline
+  			A & 0 & 0 & 40 \\
+  			B & 0 & 0 & 35 \\
+  			C & 4 & 4 & 4 \\
+  			D & 4 & 4 & 4
+		\end{tabular}
+		\end{figure*}
+		$\Rightarrow Auktionsergebnis aus a)$  ~\\
+				\textbf{Weitere Gefahren/Schwächen die in eine GVA bestehen:}
+		\begin{itemize}
+			\item IV: Absprechen unter Bietern machen Ergebnis beeinflussbar
+		\end{itemize}
+	\item Mit Bieter F:
+	\begin{figure*}[hbt]	\centering
+			\begin{tabular}{l|ccc}
+ 			 & $X$ & $Y$ & $\{X, Y \}$ \\
+  				\hline
+  			A & 0 & 0 & 40 \\
+  			B & 0 & 0 & 35 \\
+  			F & 0 & 0 & 34
+		\end{tabular}
+		\end{figure*}
+		$\Rightarrow$ Auktionsergebnis aus a). Bieter F kann sich aber wie in b) aufspalten, das Gut bekommen und trotzdem nichts zahlen müssen. ~\\
+						\textbf{Weitere Gefahren/Schwächen die in eine GVA bestehen:}
+		\begin{itemize}
+			\item V: Für Bieter kann sich Teilnehmen an Auktionen mit verschiedenen Identitäten lohnen!
+		\end{itemize}
+\end{enumerate}
+
 
 \printindex
 

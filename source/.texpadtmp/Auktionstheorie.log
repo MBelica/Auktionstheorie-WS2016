@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.7)  8 FEB 2017 14:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.7)  8 FEB 2017 17:31
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2507,16 +2507,100 @@ Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 2214.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 2214.
-[31] (/Users/martin/Dropbox/Skripte/Auctionstheorie-WS2016/source/.texpadtmp/Auktionstheorie.ind
+[31]
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1.
+(babel)             in language  on input line 2237.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1.
+(babel)             in language  on input line 2237.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 1.
+(babel)             in language  on input line 2237.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 1.
+(babel)             in language  on input line 2237.
  [32]
+Underfull \hbox (badness 10000) in paragraph at lines 2242--2243
+
+ []
+
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 2256.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 2256.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 2256.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 2256.
+[33]
+Underfull \hbox (badness 10000) in paragraph at lines 2261--2264
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2281--2283
+
+ []
+
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 2285.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 2285.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 2285.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 2285.
+[34]
+Overfull \hbox (4.92159pt too wide) in paragraph at lines 2311--2313
+[]\OT1/lmr/m/n/12 (-20) Zeigen Sie, dass die Biet-stra-te-gie der bei-den Bie-ter aus (b2) kein Full-Information-
+ []
+
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 2313.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 2313.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 2313.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 2313.
+[35]
+Underfull \hbox (badness 10000) in paragraph at lines 2324--2325
+
+ []
+
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 2339.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 2339.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 2339.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 2339.
+[36]
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 2383.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 2383.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 2383.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 2383.
+ [37]
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 2404.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 2404.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 2404.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 2404.
+ [38] (/Users/martin/Dropbox/Skripte/Auctionstheorie-WS2016/source/.texpadtmp/Auktionstheorie.ind
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 1.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 1.
+Package babel Info: Redefining ngerman shorthand "|
+(babel)             in language  on input line 1.
+Package babel Info: Redefining ngerman shorthand "~
+(babel)             in language  on input line 1.
+ [39]
 Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 83.
 Package babel Info: Redefining ngerman shorthand "~
@@ -2525,33 +2609,33 @@ Package babel Info: Redefining ngerman shorthand "|
 (babel)             in language  on input line 83.
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 83.
- [33
+ [40
 
 ])
 \Changes@OutFile=\write7
 \openout7 = `Auktionstheorie.soc'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2234.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2234.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2442.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2442.
  (/Users/martin/Dropbox/Skripte/Auctionstheorie-WS2016/source/.texpadtmp/Auktionstheorie.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2234.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2234.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2442.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2442.
 Package rerunfilecheck Info: File `Auktionstheorie.out' has not changed.
 (rerunfilecheck)             Checksum: <no file>.
  ) 
 Here is how much of TeX's memory you used:
- 40807 strings out of 493089
- 908595 string characters out of 6134843
+ 40842 strings out of 493089
+ 908948 string characters out of 6134843
  1118178 words of memory out of 5000000
  43125 multiletter control sequences out of 15000+600000
  78482 words of font info for 140 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  73i,19n,108p,10412b,2274s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</usr/local/texlive/2015/texmf-dist/fonts/type1/public/doublestroke/dsrom12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/doublestroke/dsrom8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmri12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmri7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmri8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on /Users/martin/Dropbox/Skripte/Auctionstheorie-WS2016/source/.texpadtmp/Auktionstheorie.pdf (75 pages, 507311 bytes).
+Output written on /Users/martin/Dropbox/Skripte/Auctionstheorie-WS2016/source/.texpadtmp/Auktionstheorie.pdf (82 pages, 521021 bytes).
 PDF statistics:
- 768 PDF objects out of 1000 (max. 8388607)
- 655 compressed objects within 7 object streams
- 265 named destinations out of 1000 (max. 500000)
+ 832 PDF objects out of 1000 (max. 8388607)
+ 711 compressed objects within 8 object streams
+ 300 named destinations out of 1000 (max. 500000)
  17005 words of extra memory for PDF output out of 17280 (max. 10000000)
 
