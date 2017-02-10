@@ -462,7 +462,7 @@ Erwartete Zahlung von Bieter $i$:
 	\end{align*}
 	
 Erwartete Rente von Bieter $i$:
-$$ \mathbb{E}\left[ \pi\left( \beta^{k}(X) \right) \big| X_{i} = x_{i} \right] = \left( x_{i} - \mathbb{E} \left[ X_{(1, n-1)} \big| X_{(1, n-1)} \leq x_{i} \right] \cdot \mathbb{P}\left( X_{(1,n-1)} \leq x_{i} \right) \right) $$
+$$ \mathbb{E}\left[ \pi\left( \beta^{k}(X) \right) \big| X_{i} = x_{i} \right] = \left( x_{i} - \mathbb{E} \left[ X_{(1, n-1)} \big| X_{(1, n-1)} \leq x_{i} \right] \right) \cdot \mathbb{P}\left( X_{(1,n-1)} \leq x_{i} \right) $$
 
 \begin{vereinbarung}
 	Die folgenden Aussagen werden für $FA$ und $DA$ mit $A1$, $A2$, $A3$, $A4$ getroffen!
@@ -497,9 +497,9 @@ Beachten wir, dass $F_{(1,n-1)}(x_{i}) = G(\beta(x_{i}))$, so erhalten wir durch
 
 $$ \frac{\partial F_{(1,n-1)}(x_{i})}{\partial x_{i}} = \frac{\partial G(\beta(x_{i}))}{\partial x_{i}} = g(\beta_{i}(x_{i})) \cdot \beta'(x_{i}) \iff g(\beta(x_{i})) = \frac{f_{(1, n-1)}(x_{i})}{\beta'(x_{i})} $$
 
-Setzen wir diesen Zusammenhang in die Gleichgewichtsbedingung des Bayes-Nash-Gleichgewichts ein, so erhalten wir:  $$(\beta(x_{i}) - x_{i}) \frac{\tilde{f}(x_{i})}{\beta'(x_{i})} + F_{(1,n-1)}(x_{i}) \overset{!}{=} 0.$$
+Setzen wir diesen Zusammenhang in die Gleichgewichtsbedingung des Bayes-Nash-Gleichgewichts ein, so erhalten wir:  $$(\beta(x_{i}) - x_{i}) \frac{f_{(1, n-1)}(x_{i})}{\beta'(x_{i})} + F_{(1,n-1)}(x_{i}) \overset{!}{=} 0.$$
 Unter der Voraussetzung, dass $\beta'(x_i) \neq 0$ gilt damit:
-$$ F_{(1, n-1)}(x_{i}) \beta'(x_{i}) + \tilde{f}(x_{i}) \beta(x_{i}) - f_{(1, n-1)}(x_{i}) x_{i} \overset{!}{=} 0. $$
+$$ F_{(1, n-1)}(x_{i}) \beta'(x_{i}) + f_{(1, n-1)}(x_{i}) \beta(x_{i}) - f_{(1, n-1)}(x_{i}) x_{i} \overset{!}{=} 0. $$
 Um diese Differentialgleichung zu lösen, betrachten wir den Zusammenhang:
 $$ \frac{d F_{(1,n-1)}(x_{i}) \beta(x_{i})}{d x_{i}} = \tilde{f}(x_{i}) \beta(x_{i}) + F_{(1, n-1)}(x_{i}) \beta'(x_{i}). $$
 Einsetzen in die Differentialgleichung ergibt:
@@ -568,7 +568,7 @@ und Gleichheit gilt nur für die Wertschätzung $v = r$.
 Betrachtet sei eine FA mit $n=2$ risikoneutralen und symmetrischen Bietern mit unabhängigen Wertschätzungen $X_i \sim U(0, 1)$; mit $v_0 = x_0 = 0$.
 		$$ r^{*} = x_{0} + \frac{1 - F(r^{*})}{f(r^{*})} \overset{x_{0}=0}{=} \frac{1-r^{*}}{1} \Rightarrow r^{*} = \frac{1}{2} $$
 	\begin{align*}
-		\beta^{FA} & = x_{i} - \int_{r}^{x_{i}} \frac{F^{n-1}(s)}{F^{n-1}(x_{i})} ds \overset{n=2}{=} x_{i} - \int_{r}^{x_{i}} \frac{s}{x_{i}} ds \\
+		\beta^{FA} & = x_{i} -  \frac{\int_{r}^{x_{i}} F^{n-1}(s) ds}{F^{n-1}(x_{i})} \overset{n=2}{=} x_{i} - \int_{r}^{x_{i}} \frac{s}{x_{i}} ds \\
 		& = \frac{x_{i}^{2} + r^{2}}{2 x_{i}} = \frac{x_{i}}{2} + \frac{r^{2}}{2 x_{i}}
 	\end{align*} ~\newline
 
@@ -1763,7 +1763,7 @@ Ein Auktionator beabsichtigt ein Gut mittels einer Simultanen Zweitpreisauktion 
     Fall & W'keit & Erwarteter Erlös  \\ \hline
     $x_{(1,2)} < r$ & $r^{2}$ & $0$  \\ \hline
     $x_{(1, 2)} > r > x_{(2, 2)} $ & $2 \cdot r (1 - r)$ & $r - v_{0}$  \\ \hline
-    $x_{(2, 2)} > r$ & $(1-r)^{2} $  &  \pbox{20cm}{$\mathbb{E}[X_{(2,2)} - v_{0} \big| X_{(2,2)} > r] =$ \\ ~\hspace{0.25cm} $r + \frac{1}{3} (1-r) = \frac{2}{3} r + \frac{1}{3}$} \footnote{Wir wissen nämlich aus der 2. übung: $\mathbb{E}[X_{(k, n)}] = \frac{n - k +1}{n+1} \xRightarrow[n=2]{k=2} \mathbb{E}[X_{(2,2)}] = \frac{1}{3}$}  \\ 
+    $x_{(2, 2)} > r$ & $(1-r)^{2} $  &  \pbox{20cm}{$\mathbb{E}[X_{(2,2)} - v_{0} \big| X_{(2,2)} > r] =$ \\ ~\hspace{0.25cm} $r + \frac{1}{3} (1-r) = \frac{2}{3} r + \frac{1}{3}$} \footnote{Wir wissen nämlich aus der 2. Übung: $\mathbb{E}[X_{(k, n)}] = \frac{n - k +1}{n+1} \xRightarrow[n=2]{k=2} \mathbb{E}[X_{(2,2)}] = \frac{1}{3}$}  \\ 
     \hline
     \end{tabular}
     \end{center}
