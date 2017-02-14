@@ -908,7 +908,7 @@ Wir definieren für das Kapitel
 		\item IPV: $V_{i} = v_{i}(X_1, \dotsc, X_{n}) = X_{i} \Rightarrow v_i = x_i$
 		\item CV: $V_1 = \dotsc = V_n = V$
 			$$v_1(X_1, \dotsc, X_n) = v_2(X_1, \dotsc, X_n) = \dotsc = v_n(X_1, \dotsc, X_n) = v(X_1, \dotsc, X_n)$$
-			$v(x_1, \dotsc, x_n) = \mathbb{E}\left[ V |~X_1 = x_1, \dotsc, X_n = x_n \right]$
+			wobei $v(x_1, \dotsc, x_n) = \mathbb{E}\left[ V |~X_1 = x_1, \dotsc, X_n = x_n \right]$.
 	\end{enumerate}		
 \end{erinnerung}
 ~\newline
@@ -1992,7 +1992,7 @@ $$ \beta_{1}^{EA}(x_{i}) =\left( 120000, 90000 + x_{(4)}, 60000 + x_{(3)} + x_{(
 		\begin{proof}
 			\begin{enumerate}
 				\item SA: 
-					$$ \beta^{SA}(x_{i}) = w(x_{i}, x_{i}) = x_{i} + \frac{1}{2} \Big( x_{i} + \mathds{E}\big[ X_{(4)} \big| \underbrace{X_{(2)} = x_{i}}_{\overset{preisbestimmendes}{Signal}} \big] \Big) $$
+					$$ \beta^{SA}(x_{i}) = w(x_{i}, x_{i}) = x_{i} + \frac{1}{2} \Big( x_{i} + \mathds{E}\big[ X_{(3)} \big| \underbrace{X_{(2)} = x_{i}}_{\overset{preisbestimmendes}{Signal}} \big] \Big) $$
 					Grafisch:
 					\tikz[baseline=-0.5ex]{  
 					 	\draw(0,0)--(8,0);
@@ -2015,7 +2015,7 @@ $$ \beta_{1}^{EA}(x_{i}) =\left( 120000, 90000 + x_{(4)}, 60000 + x_{(3)} + x_{(
 				$$ x_{(1)} > x_{(2)} > x_{(3)} $$
 	 			\begin{itemize}
 	 				\item $\beta_{3}^{EA}(x_{i}) = v(x_{i}, x_{i}, x_{i}) = x_{i} + \frac{1}{2} \left( x_{i} + x_{i} \right) = 2 x_{i}$
-	 					$$ \Rightarrow \text{Ausstiegszeitpunkt von} x_{(3)}: ~ p_{3} = 2 \cdot x_{(3)} \Rightarrow x_{(3)} = \frac{p_{3}}{2}$$
+	 					$$ \Rightarrow \text{Ausstiegszeitpunkt von } x_{(3)}: ~ p_{3} = 2 \cdot x_{(3)} \Rightarrow x_{(3)} = \frac{p_{3}}{2}$$
 	 				\item $\beta_{2}^{EA}(x_{i}) = v_{i}\left(x_{i}, x_{i}, x_{(3)} \right) \frac{3}{2} x_{i} + \frac{1}{2} x_{(3)} < 2 x_{i}$
 	 				\item Zuschlagspreis: $p = \frac{3}{2} x_{(2)} + \frac{1}{2} x_{(3)} = \beta_{(2)}^{EA}(x_{i})$
 	 			\end{itemize}
@@ -2078,7 +2078,7 @@ Es gebe $n$ Bieter und $X_{i} \overset{iid}{\sim} [4, 7]$.
 				$$ \pi_{(1)} = v_{(1)} - b_{(2)} = \left[ 2 x_{(1)} + x_{(2)} \right] - 3 x_{(2)} > 0 $$
 		\end{itemize}
 	\item EA, $n=4$
-		$$ x_1 = 4 = x_{(3)}, ~x_2 = 6 = x_{(2)}, ~x_{(3)} = 7 = x_{(1)}, ~x_{4} = 4 = x_{(4)} $$
+		$$ x_1 = 5 = x_{(3)}, ~x_2 = 6 = x_{(2)}, ~x_{(3)} = 7 = x_{(1)}, ~x_{4} = 4 = x_{(4)} $$
 		Damit folgt für $\beta^{EA}(x_{i})$:
 		$$ \beta_{4}^{EA}(x_{i}) = 2x_{i} + 3 x_{i} = 5 x_{i} \begin{cases}
 			\beta^{EA}(x_{1}) = 5 \cdot 5 = 25 \\ \beta^{EA}(x_{2}) = 5 \cdot 6 = 30 \\ \beta^{EA}(x_{3}) = 5 \cdot 7 = 35 \\ \beta^{EA}(x_{4}) = 5 \cdot 4 = 20  
@@ -2088,7 +2088,7 @@ Es gebe $n$ Bieter und $X_{i} \overset{iid}{\sim} [4, 7]$.
 		$p_3 = 4 \cdot x_{(3)} + x_{(4)} \Rightarrow x_{(3)} = 5$
 			$$ \beta_{2}^{EA}(x_{i}) = 2 x_{i} + x_{i} + x_{(3)} + x_{(4)} $$
 		$p = \underbrace{3 x_{(2)}}_{= 3 \cdot 6} +  \underbrace{x_{(3)}}_{= 5} +  \underbrace{x_{(4)}}_{= 4} = 27 = p$
-		$$ v_{(1)} = 29, \quad  \pi_{(1)} = 28 - 27 = 2 $$
+		$$ v_{(1)} = 29, \quad  \pi_{(1)} = 29 - 27 = 2 $$
 \end{enumerate}
 
 \section*{7. Übung}

@@ -1,0 +1,364 @@
+\documentclass[12pt]{extreport} % Schriftgröße: 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt oder 20pt
+
+% Language Setup (Deutsch)
+\usepackage[utf8]{inputenc} 
+\usepackage[ngerman]{babel}
+
+%% Packages
+\usepackage{scrextend}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage[inline]{enumitem}
+\usepackage{changes}
+\usepackage{chngcntr}
+\usepackage{cmap}
+\usepackage{color}
+\usepackage{csquotes}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{footnote}
+
+\usepackage{lmodern}
+\usepackage{makeidx}
+\usepackage{mathtools} 
+\usepackage{xpatch}
+\usepackage{pgfplots}
+\usepackage{stmaryrd}
+\usepackage{pbox}
+\usepackage{apptools}
+\usepackage{booktabs}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage{mathrsfs}
+\usepackage{minibox}
+\usepackage[square,numbers]{natbib}
+\usepackage{nicefrac}
+\usepackage{pgf}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{tocloft}
+\usepackage{url}
+\usepackage{xpatch}
+\usepackage{microtype}
+\usepackage{pgfplots}
+\usepackage{minibox}
+\usepackage{xcolor}
+\usepackage{sgame} % Game theory packages
+\usepackage{subfig} % Manipulation and reference of small or sub figures and tables
+
+\makesavenoteenv{tabular}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{patterns}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{calc, intersections}
+\usetikzlibrary{trees, calc} % For extensive form games
+\pgfplotsset{compat=1.7}
+\usetikzlibrary{calc}	
+\usetikzlibrary{matrix}	
+
+% Options
+\makeatletter%%  
+  % Linkfarbe, {0,0.35,0.35} für Türkis, {0,0,0} für Schwarz 
+  \definecolor{linkcolor}{rgb}{0,0.35,0.35}
+  % Zeilenabstand für bessere Leserlichkeit
+  \def\mystretch{1.5} 
+  % Publisher definieren
+  \newcommand\publishers[1]{\newcommand\@publishers{#1}} 
+  % Enumerate im 1. Level: \alph für a), b), ...
+  \renewcommand{\labelenumi}{\alph{enumi})} 
+  % Enumerate im 2. Level: \roman für (i), (ii), ...
+  \renewcommand{\labelenumii}{(\roman{enumii})}
+  % Zeileneinrückung am Anfang des Absatzes
+  \setlength{\parindent}{0pt} 
+  % Verweise auf Enumerate, z.B.: 3.2 a)
+  \setlist[enumerate,1]{ref={\thesatz ~ \alph*)}}
+  % Für das Proof-Environment: 'Beweis:' anstatt 'Beweis.'
+  \xpatchcmd{\proof}{\@addpunct{.}}{\@addpunct{:}}{}{} 
+  % Nummerierung der Bilder, z.B.: Abbildung 4.1
+  \@ifundefined{thechapter}{}{\def\thefigure{\thechapter.\arabic{figure}}} 
+\makeatother%
+
+% Meta Setup (Für Titelblatt und Metadaten im PDF)
+\title{Auktionstheorie}
+\author{Prof. Dr. Karl-Martin Ehrhart}
+\date{(inoffizielles Skript) ~\vspace{0.2cm} \\ Wintersemester 2016/17}
+\publishers{Karlsruher Institut für Technologie}
+
+%% Math. Definitions
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+
+%% Theorems (unnamedtheorem = Theorem ohne Namen)
+\newtheoremstyle{named}{}{}{\normalfont}{}{\bfseries}{:}{0.25em}{#2 \thmnote{#3}}
+\newtheoremstyle{nnamed}{}{}{\normalfont}{}{\bfseries}{:}{0.25em}{\thmnote{#3}}
+\newtheoremstyle{itshape}{}{}{\itshape}{}{\bfseries}{:}{ }{}
+\newtheoremstyle{normal}{}{}{\normalfont}{}{\bfseries}{:}{ }{}
+\renewcommand*{\qed}{\hfill\ensuremath{\square}}
+
+\theoremstyle{named}
+\newtheorem{unnamedtheorem}{Theorem} \counterwithin{unnamedtheorem}{chapter}
+\theoremstyle{nnamed}
+\newtheorem*{unnamedtheorem*}{Theorem} 
+
+\theoremstyle{itshape}
+\newtheorem{satz}[unnamedtheorem]{Satz}	
+\newtheorem*{definition}{Definition}
+
+\theoremstyle{normal}
+\newtheorem{beispiel}[unnamedtheorem]{Beispiel}
+\newtheorem{folgerung}[unnamedtheorem]{Folgerung}
+\newtheorem{hilfssatz}[unnamedtheorem]{Hilfssatz}
+\newtheorem{anwendung}[unnamedtheorem]{Anwendung}
+\newtheorem{anwendungen}[unnamedtheorem]{Anwendungen}
+\newtheorem*{anwendunen*}{Anwendungen}
+\newtheorem*{beispiel*}{Beispiel}
+\newtheorem*{beispiele}{Beispiele}
+\newtheorem*{bemerkung}{Bemerkung} 
+\newtheorem*{bemerkungen}{Bemerkungen}
+\newtheorem*{bezeichnung}{Bezeichnung}
+\newtheorem*{eigenschaften}{Eigenschaften}
+\newtheorem*{erinnerung}{Erinnerung}
+\newtheorem*{folgerung*}{Folgerung}
+\newtheorem*{folgerungen}{Folgerungen}
+\newtheorem*{hilfssatz*}{Hilfssatz}
+\newtheorem*{regeln}{Regeln}
+\newtheorem*{schreibweise}{Schreibweise}
+\newtheorem*{schreibweisen}{Schreibweisen}
+\newtheorem*{uebung}{übung}
+\newtheorem*{vereinbarung}{Vereinbarung}
+
+%% Template
+\makeatletter%
+\DeclareUnicodeCharacter{00A0}{ } \pgfplotsset{compat=1.7} \hypersetup{colorlinks,breaklinks, urlcolor=linkcolor, linkcolor=linkcolor, pdftitle=\@title, pdfauthor=\@author, pdfsubject=\@title, pdfcreator=\@publishers}\DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}} \ProcessOptions \def\baselinestretch{\mystretch} \setlength{\oddsidemargin}{0.125in} \setlength{\evensidemargin}{0.125in} \setlength{\topmargin}{0.5in} \setlength{\textwidth}{6.25in} \setlength{\textheight}{8in} \addtolength{\topmargin}{-\headheight} \addtolength{\topmargin}{-\headsep} \def\pulldownheader{ \addtolength{\topmargin}{\headheight} \addtolength{\topmargin}{\headsep} \addtolength{\textheight}{-\headheight} \addtolength{\textheight}{-\headsep} } \def\pullupfooter{ \addtolength{\textheight}{-\footskip} } \def\ps@headings{\let\@mkboth\markboth \def\@oddfoot{} \def\@evenfoot{} \def\@oddhead{\hbox {}\sl \rightmark \hfil \rm\thepage} \def\chaptermark##1{\markright {\uppercase{\ifnum \c@secnumdepth >\m@ne \@chapapp\ \thechapter. \ \fi ##1}}} \pulldownheader } \def\ps@myheadings{\let\@mkboth\@gobbletwo \def\@oddfoot{} \def\@evenfoot{} \def\sectionmark##1{} \def\subsectionmark##1{}  \def\@evenhead{\rm \thepage\hfil\sl\leftmark\hbox {}} \def\@oddhead{\hbox{}\sl\rightmark \hfil \rm\thepage} \pulldownheader }	\def\chapter{\cleardoublepage  \thispagestyle{plain} \global\@topnum\z@ \@afterindentfalse \secdef\@chapter\@schapter} \def\@makeschapterhead#1{ {\parindent \z@ \raggedright \normalfont \interlinepenalty\@M \Huge \bfseries  #1\par\nobreak \vskip 40\p@ }} \newcommand{\indexsection}{chapter} \patchcmd{\@makechapterhead}{\vspace*{50\p@}}{}{}{}
+	% Titlepage
+	\def\maketitle{ \begin{titlepage} 
+			~\vspace{3cm} 
+		\begin{center} {\Huge \@title} \end{center} 
+	 		\vspace*{1cm} 
+	 	\begin{center} {\large \@author} \end{center} 
+	 	\begin{center} \@date \end{center} 
+	 		\vspace*{7cm} 
+	 	\begin{center} \@publishers \end{center} 
+	 		\vfill 
+	\end{titlepage} }
+\makeatother%
+
+% Indexdatei erstellen
+\makeindex 
+
+\begin{document}
+
+%\subsection*{Aufgabe 5}
+%
+%Ein Versteigerer möchte mit Hilfe einer Auktion ein Gut veräußern. An der Auktion nehmen n risikoneutrale und (a priori) symmetrische Bieter teil. Die Signale der Bieter für den Wert des Gutes können als $n$ unabhängige Realisationen einer im Intervall $[0, 1]$ gleichverteilten Zufallsvariablen X aufgefasst werden. Die Wertschätzungen aller Bieter entsprechen ihren Signalen. Dies ist alles Allgemeinwissen.
+%
+%\begin{enumerate} \setcounter{enumi}{1}
+%	\item Wie lautet das Entscheidungskalkül von Bieter $i$ mit dem Signal $x_i \in [0, 1]$, wenn der Versteigerer eine Simultane Erstpreisauktion (FA) durchführt, in der er keinen Limitpreis für das Gut setzt ($r = 0$)?
+%		\begin{proof}
+%			\begin{align*}
+%				\max \pi_i & = \max \left( \left( v_i - b \right) \cdot \mathds{P} \left(B_{(1,n)} \leq b \right) \right) \\
+%					& = \max \left( \left(x_i - b \right) \cdot F_{(1,n-1)}(\beta^{-1}(b)) \right)
+%			\end{align*}
+%		\end{proof}
+%	\item Wie lautet die Bietfunktion $\beta^{FA}(x_i)$ von Bieter $i$ aus dem symmetrischen Bayes-Gleichgewicht der FA? In welcher Weise hängt das Gebot von Bieter $i$ von der Anzahl der Bieter $n$ ab?
+%		\begin{proof}
+%			\begin{align*}
+%				\beta^{FA}(x_i) & = x_i - \frac{\int_{r=0}^{x_i} F^{(n-1)}(x) dx}{F^{(n-1)}(x_i) } \\
+%				& = x_i - \frac{\frac{1}{n} x_i^{n}}{x_i^{n-1}} \\
+%				& = \left(1 - \frac{1}{n} \right) x_i
+%			\end{align*}
+%			D.h. mit steigender Anzahl der Bieter strebt das Gebot gegen $x_i$, ist bei zwei Bietern bei der Hälfte der Wertschätzung und dazwischen streng monoton steigend
+%		\end{proof}
+%	\item Zeigen Sie für die Bietstrategie $\beta^{FA}$ des symmetrischen Bayes-Gleichgewichts der FA, dass $\mathds{E}\left[ \beta^{FA}(X_{(1,n)}) \right] = \mathds{E}[X_{(2,n)}]$ gilt.
+%		\begin{proof}
+%			\begin{align*}
+%				\mathds{E}\left[ \beta^{FA}(X_{(1,n)} ) \right] & = \mathds{E}\left[  \left(1 - \frac{1}{n} \right)  X_{(1,n)} \right] \\
+%				& = \left(1 - \frac{1}{n} \right)  \mathds{E}\left[ X_{(1,n)} \right] \\
+%				& = \left(1 - \frac{1}{n} \right)  \int_0^1 1 - F_{(1,n)}(x) dx \\
+%				& = \left(1 - \frac{1}{n} \right) \left( 1 - \frac{1}{n+1} \right) \\
+%				& = \frac{n-1}{n} \cdot \frac{n}{n+1} = \frac{n-1}{n+1}  ~\\  ~\\
+%				\mathds{E}\left[ X_{(2,n)}  \right] & = \int_0^1 \left(1 - F_{(2,n)} \right) dx \\ 
+%				& = \int_0^1 \left( 1 - \left( x^n + n \left( (1-x) x^{n-1} \right) \right) \right) dx \\
+%				& = \left[ x- \frac{1}{n+1} x^{n+1} - n \left( \frac{1}{n} x^{n} - \frac{1}{n+1} x^{n+1} \right) \right]_0^1 \\
+%				& = \frac{n}{n+1}-\frac{1}{n+1} = \frac{n-1}{n+1}
+%			\end{align*}
+%		\end{proof}
+%	\item Welchen Verkaufserlös darf der Versteigerer in der FA erwarten?
+%		\begin{proof}
+%			Das höchste Gebot bekommt den Zuschlag und nach d) ist dessen Erwartungswert gleich $\frac{n-1}{n+1}$.
+%		\end{proof}
+%	\item Bestimmen Sie die erwartete Rente eines Bieters $i$ mit dem Signal $x_i$ im symmetrischen Bayes-Gleichgewicht der FA. Ist das Auktionsergebnis effizient?
+%		\begin{proof}
+%			Das Ergebnis ist effizient, da für $x_i < x_j$:
+%				$$ \beta^{FA}(x_i) = \left( 1 - \frac{1}{n} \right) x_i < \left( 1 - \frac{1}{n} \right) x_j = \beta^{FA}(x_j) $$
+%			Somit der Bieter mit der höchsten Wertschätzung das höchste Gebot abgibt und nach dem Design der Auktion auch den Zuschlag erhält. Die erwartete Rente ergibt sich zu:
+%			\begin{align*}
+%				\mathds{E}[\pi_i] & = \left( x_i - \left(1 - \frac{1}{n} \right) x_i \right) \cdot \mathds{P} \left( X_{(2,n)} \leq  x_i \right) \\
+%				& = \frac{x_i}{n} \cdot F_{(2,n)}(x_i) = \frac{x_i^n}{n} \left( n + (1-n) x_i  \right) 
+%			\end{align*}
+%		\end{proof}
+%\end{enumerate}
+%\newpage
+%\subsection*{Aufgabe 7}
+%
+%Ein Auktionator beabsichtigt ein Gut mittels einer Simultanen Zweitpreisauktion (SA) zu verkaufen, in der er einen Limitpreis $r > 0$ setzt. An der Auktion nehmen zwei risikoneutrale Bieter teil, für die der IPV-Ansatz gilt. Die Signale der Bieter entstammen aus der Gleichverteilung über dem Intervall $[0, 1]$, sind private Information und stimmen mit der Wertschätzung der Bieter für das Gut überein.
+%\begin{enumerate}
+%	\item Welcher Gefahr setzt sich der Versteigerer durch das Setzen einen positiven Limitpreis $r > 0$ aus?
+%		\begin{proof}
+%			Durch Festsetzen eines Limitpreises setzt sich der Auktionator der Gefahr aus, dass er das Gut nicht versteigert bekommt, obwohl es Bieter gibt, die bereit wären das Gut zu einem gewissen Preis zu ersteigern und zwar, falls der Reservationspreis über den beiden Wertschätzungen liegt.
+%		\end{proof}
+%	\item Formulieren Sie den Optimierungsansatz zur Bestimmung des Limitpreis $r^*$, der den erwarteten Erlös des Versteigerers maximiert. Berechnen Sie $r^*$ unter der Annahme, dass der Versteigerer dem Gut keinen Wert beimisst, d.h. $v_0 = 0$.
+%		\begin{proof}
+%			\begin{align*}
+%				\pi_0 & = r \cdot \mathds{P}(X_{(2,2)} \leq r \leq X_{(1,2)}) + \mathds{E}[X_{(2,2)}] \cdot \mathds{P}(r < X_{(2,2)}) \\
+%					& = r \cdot 2 \cdot r (1 - r) + \left(r + \frac{1}{3}(1-r) \right) \cdot \left(1 - r\right)^2 
+%			\end{align*}
+%			F.O.C
+%			$$ \frac{\partial \pi_0}{\partial r} = 4 r - 6 r^2 + \frac{2}{3} (1 - r)^2  -2 (\frac{2}{3} r + \frac{1}{3}) (1 - r) \overset{!}{=} 0 $$
+%			\begin{align*}
+%				0 & = 4 r - 6 r^2 + \frac{2}{3} -  \frac{4}{3}r + \frac{2}{3} r^2  - 2 (\frac{2}{3} r + \frac{1}{3})  + 2 (\frac{2}{3} r^2 + \frac{1}{3}r) \\
+%				& =  - 4 r^2 + \frac{6}{3}r
+%			\end{align*}
+%			$$ \iff 4 r = \frac{6}{12} \iff r = \frac{1}{2} $$
+%		\end{proof}
+%	\item Bestimmen Sie den erwarteten Erlös des Versteigerers für den Fall, dass er einen Limitpreis in Höhe von $r^*$ setzt. Zeigen Sie, dass dies zu einem höheren erwarteten Erlös des Versteigerers führt als als die klassische Zweitpreisauktion ohne Limitpreis
+%		\begin{proof}
+%			\begin{align*}
+%				\pi_0 & = 2 \cdot r^2 (1 - r) + \left(r + \frac{1}{3}(1-r) \right) \cdot \left(1 - r\right)^2 \\
+%				& =\frac{1}{4} + \frac{1}{4} \left( \frac{1}{2} + \frac{1}{6} \right) = \frac{5}{12}
+%			\end{align*}			
+%			\begin{align*}
+%				 \pi_0 & = \mathds{E}[X_{(2,2)}] = \int 1 - x^2 - 2 x (1-x) dx \\
+%				 & = 1 - \frac{1}{3} - 1 + \frac{2}{3} = \frac{4}{12} <\frac{5}{12}
+%			\end{align*}
+%		\end{proof}
+%\end{enumerate} 
+%\newpage
+%\subsection*{Aufgabe 8}
+%
+%Ein Auktionator beabsichtigt ein Gut mittels einer Simultanen Erstpreisauktion (FA) zu verkaufen, in der er keinen Limitpreis setzt ($r = 0$). An der Auktion nehmen n risikoaverse Bieter teil, die alle dieselbe Nutzenfunktion besitzen. Für die Wertschätzungen der Bieter für das Gut gilt der IPV-Ansatz, wobei die Signale der Bieter aus der Gleichverteilung über dem Intervall [0, 1] stammen und mit den Wertschätzungen übereinstimmen.
+%\begin{enumerate}
+%	\item Worin besteht das Risiko eines Bieters in einer FA und auf welche Weise kann er dieses Risiko vermindern? Macht Ihre Argumentation für die FA auch für die Simultane Zweitpreisauktion (SA) Sinn?
+%		\begin{proof}
+%			Bid-shading, Gut nicht erhalten, bid-shading verringern, nur sinnvoll für FA, in SA existiert dominante Strategie.
+%		\end{proof}
+%	\item In welchem Intervall liegt das Gebot eines Bieter im symmetrischen Bayes-Gleichgewicht der FA?
+%		\begin{proof}
+%			Zwischen $x_0$ und $\beta^{FA}_{rn}(x_0) = x_0 - \frac{\int_{r=0}^{x-0} F^{n-1}(s) ds}{F^{n-1}(x_0)}$
+%		\end{proof}
+%	\item In welchem Intervall liegt der erwartete Verkaufserlös des Versteigerers im symmetrischen Bayes-Gleichgewicht der FA mit risikoaversen Bietern? Vergleichen Sie diesen Wert mit dem entsprechenden erwarteten Verkaufserlös in einer SA.
+%		\begin{proof}
+%			$\mathds{E}[X_{(2,n)}] \leq \mathds{E}[\pi] \leq \mathds{E}[X_{(1,n)}]$
+%		\end{proof}
+%\end{enumerate}
+%\newpage
+%\subsection*{Aufgabe 9}
+%
+%An einer simultanen Erstpreisauktion (FA) nehmen zwei asymmetrische Bieter teil, wobei für die Verteilungen der Signale der beiden Bieter $X_1 \tilde U[0, \frac{4}{3} ]$ bzw. $X_2 \tilde U[0, \frac{5}{4} ]$ gelte. Ansonsten gelten die Annahmen des IPV-Grundmodells.
+%
+%\begin{enumerate}
+%	\item Zeigen Sie, dass die folgende Strategienkombination ein Bayes-Nash-Gleichgewicht dieser FA konstituiert. 
+%		\begin{align*}
+%			\beta_1(x_1)&  = \begin{cases}
+%				\frac{1}{x_1} \left( \sqrt{1 + x^2} - 1 \right), & x_1 \neq 0 \\ 0 & x_1 = 0
+%			\end{cases} \\
+%			\beta_2(x_2) & = \begin{cases}
+%				\frac{1}{x_2} \left( 1 - \sqrt{1 - x^2} \right), & x_1 \neq 0 \\ 0 & x_1 = 0
+%			\end{cases} \\
+%		\end{align*}
+%		\begin{proof}
+%			\begin{align*}
+%				\mathds{E}[\beta_1] = (x_1 - \beta_1) \cdot \mathds{P}[ \beta_2(X_2) <  \beta_1(x_1)]
+%			\end{align*}
+%		\end{proof}
+%	\item Zeigen Sie, dass das obige Gleichgewicht ineffiziente Auktionsergebnisse ermöglicht.
+%\end{enumerate}
+%
+%\newpage
+%\subsection*{Aufgabe 10}
+%
+%
+%\begin{enumerate}
+%	\item Geben Sie die wesentliche Charakteristik eines Common Value-Gutes an. Wie kann dabei der Wert des Gutes modelltechnisch umgesetzt werden?
+%		\begin{proof}
+%			Bei einem common value Gut ist der Wert des Gutes unbekannt aber für alle Gleich, modelltechnisch bedeutet das, dass die Wertschätzung $v_i(X_i, X_{-i}, S) = v(X_i, X_{-i}, S)$
+%		\end{proof}
+%	\item Aus welchem Grund ist das Kriterium der Effizienz in Auktionen von CV-Gütern nicht von Bedeutung?
+%		\begin{proof}
+%			Effizienz bedeute, dass der Bieter mit der höchsten Wertschätzung das Gut erhält, aber alle Bieter haben die gleiche.
+%		\end{proof}
+%	\item Erläutern Sie, was man unter dem so genannten Fluch des Gewinners versteht, und wie rationale Bieter diesem entgegenwirken.
+%		\begin{proof}
+%			Der Fluch des Gewinners ist ein Phänomen, das häufig bei Gütern mit hoher CV-Komponente zu beobachten ist, bei dem der Gewinner der Auktion mehr für das Gut zahlt, als es wert ist. Grund ist, dass in der Regel der Bieter den Zuschlag erhält, der den Wert des Gutes \underline{am meisten} überschätzt hat.
+%		Rationale Bieter berücksichtigen genau dies bei ihrem Gebot.
+%		\end{proof}
+%\end{enumerate}
+%
+%\newpage
+
+\subsection*{Aufgabe 11}
+
+An einer Zweitpreisauktion nehmen zwei (a priori) symmetrische und risikoneutrale Bieter teil. Versteigert wird der Geldbetrag, der sich als Summe des Bargelds in den beiden Geld- beuteln der Bieter ergibt, wobei aber jeder Bieter nur den Inhalt des eigenen Geldbeutels kennt. Jedoch sei allgemein bekannt, dass beide Geldbeutel einen Geldbetrag zwischen 0 und 100 Euro enthalten.
+
+\begin{enumerate}
+	\item Bestimmen Sie das symmetrische Bayes-Nash-Gleichgewicht der obigen Auktion.
+		\begin{proof}
+			Unter der Annahme von Monotonie der Bietfunktion gilt für den erwarteten Erlös:
+			\begin{align*}
+				\mathds{E}[\pi_i] & = \mathds{E} \big[ \left(x_i + X_j\right) - \beta(X_j) \big] \cdot \mathds{1}_{x_i > x_j}\\
+				& = \int_0^{x_i}  \left( \left(x_i + s\right) - \beta(s) \right) \cdot f_{X_j}(s) ds \\
+				& = \int_0^{\beta^{-1}(b_i)}  \left( \left(x_i + s\right) - \beta(s) \right) \cdot f_{X_j}(s) ds,
+			\end{align*}
+			wobei wir davon ausgehen, dass sowohl Spieler $i$ als auch $j$ dieselbe Bietfunktion $\beta$ aufgrund der Symmetriebedingung verwenden. Außerdem ist die obere Integralgrenze durch $\beta^{-1}(b_i)$ gegeben, da für $X_j > x_i$ Bieter $j$ den Zuschlag bekommt und damit für Bieter $i$ die Rente identisch 0 ist. ~\\
+			
+			 Im Bayes-Nash-Gleichgewicht darf das einseitige Abweichen von der Bietstrategie den Spieler nicht besser stellen, d.h. die erwartete Rente muss unter $\beta$ maximal sein. Die F.O.C. lautet daher:
+			\begin{align*}
+				\frac{\partial}{\partial \beta} \mathds{E}[\pi_i] &= \frac{\partial}{\partial \beta}  \left( \int_0^{\beta^{-1}(b_i)}  \left( \left(x_i + s\right) - \beta(s) \right) \cdot f(s | X_i = x_i) ds \right) \\
+				& \overset{Leibnitz}{\underset{Regel}{=}} \frac{\partial}{\partial \beta} \Big( \left( \left( \left(x_i + \beta^{-1}(b_i) \right) - \beta(\beta^{-1}(b_i)) \right) \cdot f(\beta^{-1}(b_i) | X_i = x_i) \right) \\
+				& ~\qquad \qquad \quad - \left( \left( \big(x_i + \beta^{-1}(0) \big) - \beta(\beta^{-1}(0)) \right) \cdot f(\beta^{-1}(0) | X_i = x_i) \right) \Big) \\
+				& = \frac{\partial}{\partial \beta} \Big( \left( \left(x_i + \beta^{-1}(b_i) \right) - b_i \right) \cdot f(\beta^{-1}(b_i) | X_i = x_i)  - x_i \cdot f(\beta^{-1}(0) | X_i = x_i) \Big) \\
+				& = \frac{\partial}{\partial \beta} \Big( \left( 2 \cdot x_i - b_i \right) \cdot f_{X_j}(\beta^{-1}(b_i))  - x_i \cdot f_{X_j}(\beta^{-1}(0)) \Big) \\
+				& = \frac{\partial}{\partial \beta} \Big( \left( 2 \cdot x_i - b_i \right) \cdot f\big(\beta^{-1}(b_i) | X_i = x_i \big)  \Big) \\
+				& = \frac{\partial}{\partial \beta} \Big( \big( 2 \cdot x_i - \beta(x_i) \big) \cdot f\big(\beta^{-1}(b_i) | X_i = x_i\big) \Big) \\
+				& = \left(\beta^{-1}(b_i) \right)' \big( 2 \cdot x_i - \beta(x_i) \big) \cdot f\big(\beta^{-1}(b_i) | X_i \big) \overset{!}{=} 0 
+			\end{align*}	
+			Damit ergibt sich für die mögliche optimale Bietstrategie:
+			$$ 0 = \frac{1}{\beta'(b_i)} \big( 2 \cdot x_i - \beta(x_i) \big) \cdot f\big(\beta^{-1}(b_i) | X_i \big)  $$
+			$$ \iff \beta(x_i) = 2 \cdot x_i = \mathds{E}\left[v(X,Y) \big| X = x, Y = x\right] $$
+		\end{proof}
+	\item Ist dieses Gleichgewicht ein Gleichgewicht in dominanten Strategien?
+		\begin{proof}
+			Nein, denn ist $x_j > x_i$, und bietet $j$ zum Beispiel $2 x_i$, so lohnt es sich für $i$ sein Gebot um maximal $x_j - x_i$ zu erhöhen, um den Zuschlag zu erhalten und damit seinen Gewinn zu erhöhen.
+		\end{proof}
+	\item Analysieren Sie, ob der Fluch des Gewinners im Gleichgewicht (ex ante und ex post) auftreten kann.
+		\begin{proof}
+			Ex ante kann der Fluch des Gewinners nicht auftreten, da $\beta$ gewählt mit der Antizipation des Fluch des Gewinners. Ex post kann dieser Effekt allerdings im Gleichgewicht auch nicht auftreten, denn 
+				$$ \beta(x_i) > \beta(x_j) \iff x_i > x_j. $$
+				Für den zu ersteigernden Geldbetrag gilt damit:
+				$$ x_i + x_j > 2 \cdot x_j = \beta(x_j) = \rho(X_i). $$
+				$\Rightarrow \pi = x_i + x_j - \rho(X_i) > 0$. Argumentativ: Zuschlag erhält derjenige mit dem höheren Anteil im Geldtopf den Zuschlag und zahlt nur zwei mal den kleineren Betrag, falls ein Bieter also den Zuschlag erhält, wird er immer Gewinn einstreichen.
+		\end{proof}
+\end{enumerate}
+%
+%\newpage
+%
+%\subsection*{Aufgabe 12}
+%
+%Stellen Sie sich vor, Sie möchten einen Waldbesitz erwerben, der im Rahmen einer Auktion versteigert wird. An der Auktion nehmen insgesamt vier Bieter teil. Der Wert des Waldes ist durch den Holzbestand des Waldes genau gegeben. Dabei ist Ihnen, ebenso wie den anderen Bietern, der genaue Wert zunächst nicht bekannt. Der Wert kann jedoch durch eine Erhebung des Baumbestandes (Anzahl, Grö{\ss}e, Alter, usw.) exakt bestimmt werden. Der tatsächliche Wert ist außerdem für alle Bieter gleich. ~\\
+%
+%Im Vorfeld der Auktion ermitteln Sie nun den exakten Wert von genau einem Viertel der Waldfläche. Auch die anderen Bieter ermitteln jeweils den Wert eines Viertels des Waldes. Dabei gibt es keine Überschneidungen der untersuchten Waldflächen. Außerdem können die einzelnen Erhebungen als unabhängige Wertsignale aufgefasst werden. Die von Ihnen untersuchte Waldfläche hat einen Wert von 30.000,- Euro. Zur Auktion versammelt der Auktionator alle Bieter in einem Raum und die Auktion beginnt mit einem Startpreis on 0 Euro, der kontinuierlich erhöht und für alle Bieter sichtbar im Raum angezeigt wird. Will ein Bieter aus der Auktion aussteigen, verlässt er den Raum, was von allen anderen Bietern beobachtet werden kann. Die Auktion endet, wenn der vorletzte Bieter den Raum verlässt. Der letzte verbleibende Bieter erhält dann den Zuschlag zum aktuell angezeigten Preis. ~\\
+%
+%Geben Sie Ihre Bietstrategie im Gleichgewicht an.
+%
+%	\begin{proof}
+%		\begin{align*}
+%			\mathds{E}[\pi] & = \int_0^{\beta^{-1}(x_1)} \int_0^{\beta^{-1}(x_1)} \int_0^{\beta^{-1}(x_1)} \left( x_1 + r + s + t - \beta(x_1) \right) \cdot f\left( x_{1} \right) dr ds dt \\
+%			\frac{\partial}{\partial \beta}	\mathds{E}[\pi] & = a
+%		\end{align*} 
+%	\end{proof}
+
+\end{document}
